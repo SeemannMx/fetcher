@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textField"> 32sp </dimen>
+    <dimen name="textField"> 12sp </dimen>
     <dimen name="imageView"> 60dp </dimen>
+    <dimen name="textView"> 80dp </dimen>
     <dimen name="marginRight"> 32dp </dimen>
-    <dimen name="marginLeft"> 32dp </dimen>
+    <dimen name="marginLeft"> 12dp </dimen>
     <dimen name="mainPadding"> 24dp </dimen>
-
 </resources>
