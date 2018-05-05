@@ -6,307 +6,302 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <LinearLayout
+
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/mainPadding">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <ImageView
-                    android:id="@+id/imageGold"
-                    android:layout_width="@dimen/imageView"
-                    android:layout_height="@dimen/imageView"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/gold_icon"
-                    android:layout_weight="0.5"
-                    />
-
-                <TextView
-                    android:id="@+id/dataGold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/imageView"
-                    android:text="Gold"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_weight="0.5"
-                    android:layout_marginRight="@dimen/marginRight"
-                   />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <ImageView
-                    android:id="@+id/imageSilber"
-                    android:layout_width="@dimen/imageView"
-                    android:layout_height="@dimen/imageView"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/silber_icon"
-                    />
-
-                <TextView
-                    android:id="@+id/dataSilber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/imageView"
-                    android:text="Silber"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/marginRight"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/mainPadding">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <ImageView
-                    android:id="@+id/imagePalladium"
-                    android:layout_width="@dimen/imageView"
-                    android:layout_height="@dimen/imageView"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/palladium_icon"
-                    android:layout_weight="0.5"
-                    />
-
-                <TextView
-                    android:id="@+id/dataPalladium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/imageView"
-                    android:text="Palladium"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_weight="0.5"
-                    android:layout_marginRight="@dimen/marginRight"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <ImageView
-                    android:id="@+id/imagePlatin"
-                    android:layout_width="@dimen/imageView"
-                    android:layout_height="@dimen/imageView"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/plation_icon"
-                    />
-
-                <TextView
-                    android:id="@+id/dataPlatin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/imageView"
-                    android:text="Platin"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/marginRight"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/mainPadding">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <ImageView
-                    android:id="@+id/imageRhodium"
-                    android:layout_width="@dimen/imageView"
-                    android:layout_height="@dimen/imageView"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/rhodium_icon"
-                    android:layout_weight="0.5"
-                    />
-
-                <TextView
-                    android:id="@+id/dataRhodium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/imageView"
-                    android:text="Rhodium"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_weight="0.5"
-                    android:layout_marginRight="@dimen/marginRight"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <ImageView
-                    android:id="@+id/imageSAP"
-                    android:layout_width="@dimen/imageView"
-                    android:layout_height="@dimen/imageView"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/plation_icon"
-                    android:visibility="gone"
-                    />
-
-                <TextView
-                    android:id="@+id/dataSAP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/imageView"
-                    android:text="SAP"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/marginRight"
-                    android:visibility="gone"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/mainPadding"
-            android:paddingRight="@dimen/mainPadding">
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/mainPadding">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imageGold"
+                        android:layout_width="@dimen/imageView"
+                        android:layout_height="@dimen/imageView"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/gold_icon"
+                        android:layout_weight="0.5" />
+
+                    <TextView
+                        android:id="@+id/dataGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/imageView"
+                        android:text="Gold"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/marginRight"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imageSilber"
+                        android:layout_width="@dimen/imageView"
+                        android:layout_height="@dimen/imageView"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/silber_icon" />
+
+                    <TextView
+                        android:id="@+id/dataSilber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/imageView"
+                        android:text="Silber"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/marginRight" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/mainPadding">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imagePalladium"
+                        android:layout_width="@dimen/imageView"
+                        android:layout_height="@dimen/imageView"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/palladium_icon"
+                        android:layout_weight="0.5" />
+
+                    <TextView
+                        android:id="@+id/dataPalladium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/imageView"
+                        android:text="Palladium"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/marginRight" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imagePlatin"
+                        android:layout_width="@dimen/imageView"
+                        android:layout_height="@dimen/imageView"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/plation_icon"/>
+
+                    <TextView
+                        android:id="@+id/dataPlatin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/imageView"
+                        android:text="Platin"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/marginRight"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/mainPadding">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imageRhodium"
+                        android:layout_width="@dimen/imageView"
+                        android:layout_height="@dimen/imageView"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/rhodium_icon"
+                        android:layout_weight="0.5"/>
+
+                    <TextView
+                        android:id="@+id/dataRhodium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/imageView"
+                        android:text="Rhodium"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/marginRight"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imageSAP"
+                        android:layout_width="@dimen/imageView"
+                        android:layout_height="@dimen/imageView"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/plation_icon"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/dataSAP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/imageView"
+                        android:text="SAP"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <TextView
-                    android:id="@+id/imageGoldmark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/textField"
-                    android:text="Goldmünzen: "
-                    android:layout_weight="0.5"
-                    />
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/mainPadding"
+                android:paddingRight="@dimen/mainPadding">
 
-                <TextView
-                    android:id="@+id/dataGoldmark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:text="Gold"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_weight="0.5"
-                    android:layout_marginRight="@dimen/mainPadding"
-                    />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/imageGoldmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/textField"
+                        android:text="Goldmünzen: "
+                        android:layout_weight="0.5"/>
 
-            <RelativeLayout
+                    <TextView
+                        android:id="@+id/dataGoldmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:text="Gold"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/mainPadding"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/imageSilbermark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentLeft="true"
+                        android:text="Silbermünzen: "/>
+
+                    <TextView
+                        android:id="@+id/dataSilbermark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:text="Silber"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/mainPadding"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <TextView
-                    android:id="@+id/imageSilbermark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentLeft="true"
-                    android:text="Silbermünzen: "
-                    />
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/mainPadding"
+                android:paddingRight="@dimen/mainPadding">
 
-                <TextView
-                    android:id="@+id/dataSilbermark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:text="Silber"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/mainPadding"
-                    />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textPalladiumMunzen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/textField"
+                        android:text="Pldünzen: "
+                        android:layout_weight="0.5"/>
+
+                    <TextView
+                        android:id="@+id/dataPalladiummunzen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:text="Palladium"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/mainPadding"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textPlatinMunzen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentLeft="true"
+                        android:text="Platinmünzen: "/>
+
+                    <TextView
+                        android:id="@+id/dataPlatinMunzen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:text="Platin"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/mainPadding"/>
+
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/mainPadding"
-            android:paddingRight="@dimen/mainPadding">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <TextView
-                    android:id="@+id/textPalladiumMunzen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/textField"
-                    android:text="Pldünzen: "
-                    android:layout_weight="0.5"
-                    />
-
-                <TextView
-                    android:id="@+id/dataPalladiummunzen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:text="Palladium"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_weight="0.5"
-                    android:layout_marginRight="@dimen/mainPadding"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
-                <TextView
-                    android:id="@+id/textPlatinMunzen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentLeft="true"
-                    android:text="Platinmünzen: "
-                    />
-
-                <TextView
-                    android:id="@+id/dataPlatinMunzen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/mainPadding"
-                    android:text="Platin"
-                    android:textSize="@dimen/textField"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/mainPadding"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
