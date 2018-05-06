@@ -349,9 +349,9 @@
             android:text="get equity"
             android:paddingRight="8dp"
             android:paddingLeft="8dp"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:layout_marginTop="@dimen/mainPadding"
-            android:layout_marginBottom="@dimen/mainPadding"
+            android:layout_marginBottom="26dp"
             />
     </LinearLayout>
 </RelativeLayout>

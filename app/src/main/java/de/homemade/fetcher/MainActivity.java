@@ -93,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
-        dbHelper = DatabaseHelper.getInstance(context);
+        dbHelper = new DatabaseHelper(context);
+        dbHelper.deletePriceTable();
 
         initAllViews();
         fetchDataFromESG();
-
         getEquity();
 
     }
@@ -334,18 +334,22 @@ public class MainActivity extends AppCompatActivity {
             date = df.format(today);
 
             dbHelper.insertDataIntoPriceTable(
-                    gold,
-                    silber,
-                    palladium,
-                    platin,
-                    rhodium,
-                    goldMark,
-                    goldMunze,
-                    silberMark,
-                    palladiumMunze,
-                    platinMunze,
+                    setDot(gold),
+                    setDot(silber),
+                    setDot(palladium),
+                    setDot(platin),
+                    setDot(rhodium),
+                    setDot(goldMark),
+                    setDot(goldMunze),
+                    setDot(silberMark),
+                    setDot(palladiumMunze),
+                    setDot(platinMunze),
                     date);
 
+        }
+        // find and replace komme with dot
+        private String setDot(String stringWithKomma){
+            return stringWithKomma = stringWithKomma.replace(",",".");
         }
     }
 }

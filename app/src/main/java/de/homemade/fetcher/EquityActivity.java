@@ -46,19 +46,29 @@ public class EquityActivity extends AppCompatActivity {
     String platinMunze = "";
     String date = "";
 
+    String purchasedValue;
+    String tax;
+
     String goldPerKroegerRand;
     String silberPerKroegerRand;
     String palladiumPerKroegerRand;
     String platinPerKroegerRand;
     String rhodiumPerKroegerRand;
 
+    String totalEquity = "";
+
     RelativeLayout equityRelativLayout;
     RelativeLayout layoutPurchased;
     RelativeLayout layoutPresent;
+    RelativeLayout layoutTax;
+
     TextView textPurchased;
     TextView dataPurchased;
     TextView textPresentValue;
     TextView dataPresentValue;
+    TextView textTax;
+    TextView dataTax;
+
     TextView equityGoldText;
     TextView equityGoldProzent;
     TextView equitySilberText;
@@ -80,9 +90,10 @@ public class EquityActivity extends AppCompatActivity {
 
         portfolio = new HashMap<>();
 
-        createPortfolio();
         initAllViews();
-        // fillView();
+        createPortfolio();
+        getSumOfEquity();
+        fillView();
 
     }
 
@@ -126,6 +137,11 @@ public class EquityActivity extends AppCompatActivity {
         // Noble 1
         portfolio.put("Platinmuenze", 1.00);
 
+        purchasedValue = "37332,75 €";
+        dataPurchased.setText(purchasedValue);
+        tax = "3918,47 €";
+        dataTax.setText(tax);
+
         // Log portfolio
         Gson g = new Gson();
         String json = g.toJson(portfolio);
@@ -138,10 +154,17 @@ public class EquityActivity extends AppCompatActivity {
         equityRelativLayout = findViewById(R.id.equityRelativLayout);
         layoutPurchased = findViewById(R.id.layoutPurchased);
         layoutPresent = findViewById(R.id.layoutPresent);
+        layoutTax = findViewById(R.id.layoutTax);
+
         textPurchased = findViewById(R.id.textPurchased);
         dataPurchased = findViewById(R.id.dataPurchased);
+
         textPresentValue = findViewById(R.id.textPresentValue);
         dataPresentValue = findViewById(R.id.dataPresentValue);
+
+        textTax = findViewById(R.id.textTax);
+        dataTax = findViewById(R.id.dataTax);
+
         equityGoldText = findViewById(R.id.equityGoldText);
         equityGoldProzent = findViewById(R.id.equityGoldProzent);
 
@@ -162,7 +185,8 @@ public class EquityActivity extends AppCompatActivity {
     // get total sum of Equity
     private void getSumOfEquity(){
 
-        Cursor cursor = dbHelper.getAllDataFromDatabase("Investment_Database");
+        Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
+        cursor.moveToFirst();
 
         // Value of Ingots
         double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
@@ -205,6 +229,19 @@ public class EquityActivity extends AppCompatActivity {
         double ptmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
         double ptmuenzeTresure = ptmuenzePerPiece * portfolio.get("Platinmuenze");
         Log.i(TAG, "Platinmuenze Tresure: " + ptmuenzeTresure);
+
+        double sumIgnots = goldTresure + silberTresure + palladiumTresure + platinTresure + rhodiumTresure;
+        double sumCoins = goldmarkTresure + goldmuenzeTresure + silbermuenzeTresure + pldmuenzeTresure + ptmuenzeTresure;
+
+        double sumEquity = sumIgnots + sumCoins;
+
+        String tempTotalEquity = new DecimalFormat("##.##").format(sumEquity);
+
+        totalEquity =  tempTotalEquity + " €";
+        Log.i(TAG, "TOTAL EQUITY: " + totalEquity);
+
+        dataPresentValue.setText(totalEquity);
+
     }
 
     // calculate kroegerrand
@@ -220,19 +257,17 @@ public class EquityActivity extends AppCompatActivity {
         return result = new DecimalFormat("##.##").format(valuePerGroger);
     }
 
+
+    private void fillView(){
+
+        Log.i(TAG, "fill view");
+
+    }
+
+
     // find and replace komme with dot
     private String setDot(String stringWithKomma){
         return stringWithKomma = stringWithKomma.replace(",",".");
-    }
-
-    private void fillView(){
-        goldPerKroegerRand = calcKroegerRand(gold);
-        silberPerKroegerRand = calcKroegerRand(silber);
-        palladiumPerKroegerRand = calcKroegerRand(palladium);
-        platinPerKroegerRand = calcKroegerRand(platin);
-        rhodiumPerKroegerRand = calcKroegerRand(rhodium);
-
-
     }
 
 }

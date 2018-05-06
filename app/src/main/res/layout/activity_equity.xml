@@ -71,11 +71,41 @@
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/layoutTax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutPresent"
+        >
+        <TextView
+            android:id="@+id/textTax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tax on investment"
+            android:gravity="center"
+            android:textSize="@dimen/equityTextSize"
+            android:paddingTop="@dimen/equityPadding"
+            android:paddingBottom="@dimen/equityPadding"
+            android:layout_alignParentLeft="true"
+            />
+
+        <TextView
+            android:id="@+id/dataTax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10000 €"
+            android:gravity="center"
+            android:textSize="@dimen/equityTextSize"
+            android:paddingTop="@dimen/equityPadding"
+            android:paddingBottom="@dimen/equityPadding"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
     <!-- Prozentualle Auflistung von allen Investments -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutPresent"
+        android:layout_below="@+id/layoutTax"
         android:orientation="horizontal"
         android:layout_centerInParent="true"
         >

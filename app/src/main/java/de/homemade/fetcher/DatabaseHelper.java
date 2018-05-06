@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String ACTIVITY_CLASS = " ";
 
     public static final String DATABASE_NAME = "Investment_Database";
-    public static final String TABLE_NAME ="price_table";
+    public static final String TABLE_NAME = "price_table";
     public static final int DATABASE_VERSION = 1;
     public static final String COLUMN_0 = "_ID";
     public static final String COLUMN_1 = "GOLD";
@@ -208,8 +208,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 output = result.getString(result.getColumnIndex(COLUMN_0)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_11)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_1)) + " "
-                        + result.getString(result.getColumnIndex(COLUMN_1)) + " "
-                        + result.getString(result.getColumnIndex(COLUMN_11)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_2)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_3)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_4)) + " "
@@ -220,7 +218,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + result.getString(result.getColumnIndex(COLUMN_9)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_10));
 
-                // Log.i(TAG, ACTIVITY_CLASS + " " + output);
+                Log.i(TAG, ACTIVITY_CLASS + " " + output);
             }
 
         } else if(tableName.equals(TABLE_NAME_PORTFOLIO)){
