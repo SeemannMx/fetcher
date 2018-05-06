@@ -11,8 +11,10 @@
 
     <!-- equity activity -->
     <dimen name="equityPadding"> 12dp </dimen>
+    <dimen name="equityMiniPadding"> 4dp </dimen>
     <dimen name="equityMargin"> 18dp </dimen>
     <dimen name="equityTextSize"> 20dp </dimen>
+    <dimen name="equityMiniMargin"> 8dp </dimen>
 
 
 </resources>
