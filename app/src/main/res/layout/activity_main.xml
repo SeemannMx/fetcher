@@ -296,6 +296,7 @@
                         android:layout_weight="0.5"
                         android:layout_marginRight="@dimen/mainPadding"
                         android:textColor="@color/grey"
+
                         />
 
                 </RelativeLayout>
