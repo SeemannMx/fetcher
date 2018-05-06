@@ -17,6 +17,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+                // 43200000 = 12hrs
             }
         }, 0, 43200000);
     }
@@ -249,6 +251,30 @@ public class MainActivity extends AppCompatActivity {
                     "Palladiummark: " + palladiumMunze + " "    + "\n" +
                     "Platinmark:    " + platinMunze);
 
+            String goldPerKroegerRand = calcKroegerRand(gold);
+            String silberPerKroegerRand = calcKroegerRand(silber);
+            String palladiumPerKroegerRand = calcKroegerRand(palladium);
+            String platinPerKroegerRand = calcKroegerRand(platin);
+            String rhodiumPerKroegerRand = calcKroegerRand(rhodium);
+
+        }
+
+        // calculate kroegerrand
+        private String calcKroegerRand(String valueProGramm){
+            String result = "";
+
+            valueProGramm = setDot(valueProGramm);
+            double valuePerGroger = Double.parseDouble(valueProGramm) * 31.10;
+
+            Log.i(TAG, "Krögerrand 31.10gr: " + valuePerGroger);
+
+            // return string in double digit format
+            return result = new DecimalFormat("##.##").format(valuePerGroger);
+        }
+
+        // find and replace komme with dot
+        private String setDot(String stringWithKomma){
+            return stringWithKomma = stringWithKomma.replace(",",".");
         }
     }
 }
