@@ -1,10 +1,13 @@
 package de.homemade.fetcher;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +21,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,24 +76,24 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout bottomLine;
     Button getEquityButtom;
 
-    HashMap <String, Double >portfolio;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = getApplicationContext();
+
         initAllViews();
         fetchDataFromESG();
 
+        getEquity();
 
     }
 
     // initalize all views
     private void initAllViews(){
-
-        portfolio = new HashMap<>();
-        createPortfolio();
 
         mainRelativLayout = findViewById(R.id.mainRelativLayout);
         scrollView = findViewById(R.id.scrollView);
@@ -100,77 +102,38 @@ public class MainActivity extends AppCompatActivity {
         dataGold = findViewById(R.id.dataGold);
 
         imageSilber = findViewById(R.id.imageSilber);
-        dataSilber= findViewById(R.id.dataSilber);
+        dataSilber = findViewById(R.id.dataSilber);
 
-        imagePalladium= findViewById(R.id.imagePalladium);
-        dataPalladium= findViewById(R.id.dataPalladium);
+        imagePalladium = findViewById(R.id.imagePalladium);
+        dataPalladium = findViewById(R.id.dataPalladium);
 
-        imagePlatin= findViewById(R.id.imagePlatin);
-        dataPlatin= findViewById(R.id.dataPlatin);
+        imagePlatin = findViewById(R.id.imagePlatin);
+        dataPlatin = findViewById(R.id.dataPlatin);
 
-        imageRhodium= findViewById(R.id.imageRhodium);
-        dataRhodium= findViewById(R.id.dataRhodium);
+        imageRhodium = findViewById(R.id.imageRhodium);
+        dataRhodium = findViewById(R.id.dataRhodium);
 
-        imageSAP= findViewById(R.id.imageSAP);
-        dataSAP= findViewById(R.id.dataSAP);
+        imageSAP = findViewById(R.id.imageSAP);
+        dataSAP = findViewById(R.id.dataSAP);
 
-        textGoldmark= findViewById(R.id.textGoldmark);
-        dataGoldmark= findViewById(R.id.dataGoldmark);
+        textGoldmark = findViewById(R.id.textGoldmark);
+        dataGoldmark = findViewById(R.id.dataGoldmark);
 
-        textSilbermark= findViewById(R.id.textSilbermark);
-        dataSilberMark= findViewById(R.id.dataSilbermark);
+        textSilbermark = findViewById(R.id.textSilbermark);
+        dataSilberMark = findViewById(R.id.dataSilbermark);
 
-        textPalladiummark= findViewById(R.id.textPalladiummark);
-        dataPalladiummark= findViewById(R.id.dataPalladiummark);
+        textPalladiummark = findViewById(R.id.textPalladiummark);
+        dataPalladiummark = findViewById(R.id.dataPalladiummark);
 
-        textPlatinmark= findViewById(R.id.textPlatinmark);
-        dataPlatinmark= findViewById(R.id.dataPlatinmark);
+        textPlatinmark = findViewById(R.id.textPlatinmark);
+        dataPlatinmark = findViewById(R.id.dataPlatinmark);
 
         bottomLine = findViewById(R.id.bottomLine);
-        getEquityButtom= findViewById(R.id.getEquityButtom);
+        getEquityButtom = findViewById(R.id.getEquityButtom);
 
     }
 
-    // create portfolio
-    private void createPortfolio(){
 
-        // Gold in Gramm 1 + 100 + 25 + 50
-        portfolio.put("Gold", 176.00);
-
-        // Silber in Gramm 1 + 100 + 25 + 250
-        portfolio.put("Silber", 376.00);
-
-        // Palladium in Gramm 1 + 100 + 100 + 25
-        portfolio.put("Palladium", 226.00);
-
-        // Platin in Gramm 1 + 100 + 25 + 100 + 100
-        portfolio.put("Platin", 326.00);
-
-        // Rhodium in Gramm 31.10
-        portfolio.put("Rhodium", 31.10);
-
-        // Goldmark in Stueck 1 + 4 + 5
-        portfolio.put("Goldmark", 10.00);
-
-        // Goldmuenze in Stueck
-        // Fichte   1
-        // Kiefer   1
-        // Linde    3
-        portfolio.put("Goldmuenze", 5.00);
-
-        // Silbermuenze in Stueck
-        // Wiener Philharmoniker 20 + 20
-        // Cook Island 1 + 20
-        portfolio.put("Silbermuenze", 61.00);
-
-        // Palladiummuenze in Stueck
-        // Cook Island 1
-        portfolio.put("Palladiummuenze", 1.00);
-
-        // Platinmuenze in Stueck
-        // Noble 1
-        portfolio.put("Platinmuenze", 1.00);
-    }
 
     //Every 43200000 ms = 12hrs
     private void fetchDataFromESG() {
@@ -324,5 +287,20 @@ public class MainActivity extends AppCompatActivity {
         private String setDot(String stringWithKomma){
             return stringWithKomma = stringWithKomma.replace(",",".");
         }
+    }
+
+    // calculate equity by fetched data and portfolio
+    private void getEquity(){
+
+        getEquityButtom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, EquityActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 }

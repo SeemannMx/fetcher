@@ -36,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="48" />
+                                                <entry key="scalingPercent" value="56" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -46,12 +46,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="9497a6" />
+                                      <entry key="backgroundImage" value="$USER_HOME$/Desktop/big_547neue-abenteuer-auf-der-schatzinsel.jpg" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
                                       <entry key="foregroundImage" value="$USER_HOME$/Desktop/images/icon_truhe.png" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="outputName" value="ic_fetcher" />
+                                      <entry key="outputName" value="ic_fetcher_design" />
                                     </map>
                                   </option>
                                 </PersistentState>
