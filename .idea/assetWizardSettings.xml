@@ -36,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="68" />
+                                                <entry key="scalingPercent" value="48" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -46,10 +46,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="9497a6" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="$USER_HOME$/Desktop/images/goldmark.jpg" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Desktop/images/icon_truhe.png" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="outputName" value="ic_goldmark" />
+                                      <entry key="outputName" value="ic_fetcher" />
                                     </map>
                                   </option>
                                 </PersistentState>

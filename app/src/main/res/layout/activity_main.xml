@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/carbon_background"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -44,6 +45,7 @@
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
                         android:layout_weight="0.5"
+                        android:textColor="@color/grey"
                         android:layout_marginRight="@dimen/marginRight"/>
 
                 </RelativeLayout>
@@ -67,7 +69,8 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/marginRight" />
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:textColor="@color/grey"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -99,7 +102,9 @@
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
                         android:layout_weight="0.5"
-                        android:layout_marginRight="@dimen/marginRight" />
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
 
@@ -122,7 +127,9 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/marginRight"/>
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -154,7 +161,9 @@
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
                         android:layout_weight="0.5"
-                        android:layout_marginRight="@dimen/marginRight"/>
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
 
@@ -179,7 +188,9 @@
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:visibility="gone"/>
+                        android:visibility="gone"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -203,7 +214,9 @@
                         android:gravity="center_vertical"
                         android:textSize="@dimen/textField"
                         android:text="Goldmünzen: "
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.5"
+                        android:textColor="@color/grey"
+                        />
 
                     <TextView
                         android:id="@+id/dataGoldmark"
@@ -214,7 +227,9 @@
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
                         android:layout_weight="0.5"
-                        android:layout_marginRight="@dimen/mainPadding"/>
+                        android:layout_marginRight="@dimen/mainPadding"
+                        android:textColor="@color/grey"
+                        />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -228,7 +243,9 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentLeft="true"
-                        android:text="Silbermünzen: "/>
+                        android:text="Silbermünzen: "
+                        android:textColor="@color/grey"
+                        />
 
                     <TextView
                         android:id="@+id/dataSilbermark"
@@ -238,7 +255,9 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/mainPadding"/>
+                        android:layout_marginRight="@dimen/mainPadding"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -262,7 +281,9 @@
                         android:gravity="center_vertical"
                         android:textSize="@dimen/textField"
                         android:text="Pldünzen: "
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.5"
+                        android:textColor="@color/grey"
+                        />
 
                     <TextView
                         android:id="@+id/dataPalladiummunzen"
@@ -273,7 +294,9 @@
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
                         android:layout_weight="0.5"
-                        android:layout_marginRight="@dimen/mainPadding"/>
+                        android:layout_marginRight="@dimen/mainPadding"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
 
@@ -288,7 +311,9 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentLeft="true"
-                        android:text="Platinmünzen: "/>
+                        android:text="Platinmünzen: "
+                        android:textColor="@color/grey"
+                        />
 
                     <TextView
                         android:id="@+id/dataPlatinMunzen"
@@ -298,7 +323,9 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/mainPadding"/>
+                        android:layout_marginRight="@dimen/mainPadding"
+                        android:textColor="@color/grey"
+                        />
 
                 </RelativeLayout>
             </LinearLayout>
