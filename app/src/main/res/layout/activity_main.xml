@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainRelativLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/carbon_background"
@@ -206,13 +207,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5">
                     <TextView
-                        android:id="@+id/imageGoldmark"
+                        android:id="@+id/textGoldmark"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/mainPadding"
                         android:layout_alignParentLeft="true"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/textField"
-                        android:text="Goldmünzen: "
+                        android:text="Au Münzen: "
                         android:layout_weight="0.5"
                         android:textColor="@color/grey"
                         />
@@ -236,13 +237,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5">
                     <TextView
-                        android:id="@+id/imageSilbermark"
+                        android:id="@+id/textSilbermark"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/mainPadding"
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentLeft="true"
-                        android:text="Silbermünzen: "
+                        android:text="Ag Münzen: "
                         android:textColor="@color/grey"
                         />
 
@@ -273,19 +274,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5">
                     <TextView
-                        android:id="@+id/textPalladiumMunzen"
+                        android:id="@+id/textPalladiummark"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/mainPadding"
                         android:layout_alignParentLeft="true"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/textField"
-                        android:text="Pldünzen: "
+                        android:text="Pd Münzen: "
                         android:layout_weight="0.5"
                         android:textColor="@color/grey"
                         />
 
                     <TextView
-                        android:id="@+id/dataPalladiummunzen"
+                        android:id="@+id/dataPalladiummark"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/mainPadding"
                         android:text="Palladium"
@@ -305,18 +306,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5">
                     <TextView
-                        android:id="@+id/textPlatinMunzen"
+                        android:id="@+id/textPlatinmark"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/mainPadding"
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentLeft="true"
-                        android:text="Platinmünzen: "
+                        android:text="Pt Münzen: "
                         android:textColor="@color/grey"
                         />
 
                     <TextView
-                        android:id="@+id/dataPlatinMunzen"
+                        android:id="@+id/dataPlatinmark"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/mainPadding"
                         android:text="Platin"

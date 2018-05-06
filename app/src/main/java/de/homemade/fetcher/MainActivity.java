@@ -5,6 +5,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -20,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     String TAG = "FETCHER ";
     String CLASS = "MAIN ";
 
-    TextView data;
     String gold = "";
     String silber = "";
     String palladium = "";
@@ -32,19 +36,93 @@ public class MainActivity extends AppCompatActivity {
     String palladiumMunze = "";
     String platinMunze = "";
 
+    RelativeLayout mainRelativLayout;
+    ScrollView scrollView;
+
+    ImageView imageGold;
+    TextView dataGold;
+
+    ImageView imageSilber;
+    TextView dataSilber;
+
+    ImageView imagePalladium;
+    TextView dataPalladium;
+
+    ImageView imagePlatin;
+    TextView dataPlatin;
+
+    ImageView imageRhodium;
+    TextView dataRhodium;
+
+    ImageView imageSAP;
+    TextView dataSAP;
+
+    TextView textGoldmark;
+    TextView dataGoldmark;
+
+    TextView textSilbermark;
+    TextView dataSilberMark;
+
+    TextView textPalladiummark;
+    TextView dataPalladiummark;
+
+    TextView textPlatinmark;
+    TextView dataPlatinmark;
+
+    LinearLayout bottomLine;
+    Button getEquityButtom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        data = findViewById(R.id.data);
-
+        initAllViews();
         fetchDataFromESG();
 
 
     }
 
+    // initalize all views
+    private void initAllViews(){
+
+        mainRelativLayout = findViewById(R.id.mainRelativLayout);
+        scrollView = findViewById(R.id.scrollView);
+
+        imageGold = findViewById(R.id.imageGold);
+        dataGold = findViewById(R.id.dataGold);
+
+        imageSilber = findViewById(R.id.imageSilber);
+        dataSilber= findViewById(R.id.dataSilber);
+
+        imagePalladium= findViewById(R.id.imagePalladium);
+        dataPalladium= findViewById(R.id.dataPalladium);
+
+        imagePlatin= findViewById(R.id.imagePlatin);
+        dataPlatin= findViewById(R.id.dataPlatin);
+
+        imageRhodium= findViewById(R.id.imageRhodium);
+        dataRhodium= findViewById(R.id.dataRhodium);
+
+        imageSAP= findViewById(R.id.imageSAP);
+        dataSAP= findViewById(R.id.dataSAP);
+
+        textGoldmark= findViewById(R.id.textGoldmark);
+        dataGoldmark= findViewById(R.id.dataGoldmark);
+
+        textSilbermark= findViewById(R.id.textSilbermark);
+        dataSilberMark= findViewById(R.id.dataSilbermark);
+
+        textPalladiummark= findViewById(R.id.textPalladiummark);
+        dataPalladiummark= findViewById(R.id.dataPalladiummark);
+
+        textPlatinmark= findViewById(R.id.textPlatinmark);
+        dataPlatinmark= findViewById(R.id.dataPlatinmark);
+
+        bottomLine = findViewById(R.id.bottomLine);
+        getEquityButtom= findViewById(R.id.getEquityButtom);
+
+    }
     //Every 43200000 ms = 12hrs
     private void fetchDataFromESG() {
 
@@ -143,11 +221,22 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            data.setText(gold + "€");
-
             // goldmark title exist twice string needs to be corrected
             String correctedGoldMark = goldMark.substring(0, Math.min(goldMark.length(), 7));
             goldMark = correctedGoldMark;
+
+            // Barren Preis pro gramm
+            dataGold.setText(gold + " €");
+            dataSilber.setText(silber + " €");
+            dataPalladium.setText(palladium + " €");
+            dataPlatin.setText(platin + " €");
+            dataRhodium.setText(rhodium + " €");
+
+            // Muenzen
+            dataGoldmark.setText(goldMark + " €");
+            dataSilberMark.setText(silberMark + " €");
+            dataPalladiummark.setText(palladiumMunze + " €");
+            dataPlatinmark.setText(platinMunze + " €");
 
             Log.i(TAG, CLASS + " \n" +
                     "Gold:          " + gold + " "              + "\n" +
