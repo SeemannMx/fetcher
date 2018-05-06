@@ -18,6 +18,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout bottomLine;
     Button getEquityButtom;
 
+    HashMap <String, Double >portfolio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
     // initalize all views
     private void initAllViews(){
+
+        portfolio = new HashMap<>();
+        createPortfolio();
 
         mainRelativLayout = findViewById(R.id.mainRelativLayout);
         scrollView = findViewById(R.id.scrollView);
@@ -124,6 +130,48 @@ public class MainActivity extends AppCompatActivity {
         getEquityButtom= findViewById(R.id.getEquityButtom);
 
     }
+
+    // create portfolio
+    private void createPortfolio(){
+
+        // Gold in Gramm 1 + 100 + 25 + 50
+        portfolio.put("Gold", 176.00);
+
+        // Silber in Gramm 1 + 100 + 25 + 250
+        portfolio.put("Silber", 376.00);
+
+        // Palladium in Gramm 1 + 100 + 100 + 25
+        portfolio.put("Palladium", 226.00);
+
+        // Platin in Gramm 1 + 100 + 25 + 100 + 100
+        portfolio.put("Platin", 326.00);
+
+        // Rhodium in Gramm 31.10
+        portfolio.put("Rhodium", 31.10);
+
+        // Goldmark in Stueck 1 + 4 + 5
+        portfolio.put("Goldmark", 10.00);
+
+        // Goldmuenze in Stueck
+        // Fichte   1
+        // Kiefer   1
+        // Linde    3
+        portfolio.put("Goldmuenze", 5.00);
+
+        // Silbermuenze in Stueck
+        // Wiener Philharmoniker 20 + 20
+        // Cook Island 1 + 20
+        portfolio.put("Silbermuenze", 61.00);
+
+        // Palladiummuenze in Stueck
+        // Cook Island 1
+        portfolio.put("Palladiummuenze", 1.00);
+
+        // Platinmuenze in Stueck
+        // Noble 1
+        portfolio.put("Platinmuenze", 1.00);
+    }
+
     //Every 43200000 ms = 12hrs
     private void fetchDataFromESG() {
 
