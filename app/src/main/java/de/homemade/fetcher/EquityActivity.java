@@ -1,14 +1,28 @@
 package de.homemade.fetcher;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_1;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_10;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_2;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_3;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_4;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_5;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_7;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
 
 public class EquityActivity extends AppCompatActivity {
 
@@ -17,6 +31,7 @@ public class EquityActivity extends AppCompatActivity {
 
     Context context;
     HashMap<String, Double > portfolio;
+    DatabaseHelper dbHelper;
 
     String gold = "";
     String silber = "";
@@ -37,6 +52,23 @@ public class EquityActivity extends AppCompatActivity {
     String platinPerKroegerRand;
     String rhodiumPerKroegerRand;
 
+    RelativeLayout equityRelativLayout;
+    RelativeLayout layoutPurchased;
+    RelativeLayout layoutPresent;
+    TextView textPurchased;
+    TextView dataPurchased;
+    TextView textPresentValue;
+    TextView dataPresentValue;
+    TextView equityGoldText;
+    TextView equityGoldProzent;
+    TextView equitySilberText;
+    TextView equitySilberProzent;
+    TextView equityPalladiumText;
+    TextView equityPalladiumProzent;
+    TextView equityPlatinText;
+    TextView equityPlatinProzent;
+    TextView equityRhodiumText;
+    TextView equityRhodiumProzent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +76,12 @@ public class EquityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_equity);
 
         context = getApplicationContext();
+        dbHelper = DatabaseHelper.getInstance(context);
 
         portfolio = new HashMap<>();
 
         createPortfolio();
+        initAllViews();
         // fillView();
 
     }
@@ -99,6 +133,80 @@ public class EquityActivity extends AppCompatActivity {
 
     }
 
+    // initalize all views
+    private void initAllViews(){
+        equityRelativLayout = findViewById(R.id.equityRelativLayout);
+        layoutPurchased = findViewById(R.id.layoutPurchased);
+        layoutPresent = findViewById(R.id.layoutPresent);
+        textPurchased = findViewById(R.id.textPurchased);
+        dataPurchased = findViewById(R.id.dataPurchased);
+        textPresentValue = findViewById(R.id.textPresentValue);
+        dataPresentValue = findViewById(R.id.dataPresentValue);
+        equityGoldText = findViewById(R.id.equityGoldText);
+        equityGoldProzent = findViewById(R.id.equityGoldProzent);
+
+        equitySilberText = findViewById(R.id.equitySilberText);
+        equitySilberProzent = findViewById(R.id.equitySilberProzent);
+
+        equityPalladiumText = findViewById(R.id.equityPalladiumText);
+        equityPalladiumProzent = findViewById(R.id.equityPalladiumProzent);
+
+        equityPlatinText = findViewById(R.id.equityPlatinText );
+        equityPlatinProzent = findViewById(R.id.equityPlatinProzent );
+
+        equityRhodiumText = findViewById(R.id.equityRhodiumText);
+        equityRhodiumProzent = findViewById(R.id.equityRhodiumProzent);
+
+    }
+
+    // get total sum of Equity
+    private void getSumOfEquity(){
+
+        Cursor cursor = dbHelper.getAllDataFromDatabase("Investment_Database");
+
+        // Value of Ingots
+        double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
+        double goldTresure = goldPerGramm * portfolio.get("Gold");
+        Log.i(TAG, "Gold Tresure: " + goldTresure);
+
+        double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
+        double silberTresure = silberPerGramm * portfolio.get("Silber");
+        Log.i(TAG, "Silber Tresure: " + silberTresure);
+
+        double palladiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
+        double palladiumTresure = palladiumPerGramm * portfolio.get("Palladium");
+        Log.i(TAG, "Palladium Tresure: " + palladiumTresure);
+
+        double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
+        double platinTresure = platinPerGramm * portfolio.get("Platin");
+        Log.i(TAG, "Platin Tresure: " + platinTresure);
+
+        double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
+        double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
+        Log.i(TAG, "Rhodium Tresure: " + rhodiumTresure);
+
+        // Value of Coins
+        double goldmarkPerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
+        double goldmarkTresure = goldmarkPerPiece * portfolio.get("Goldmark");
+        Log.i(TAG, "Goldmark Tresure: " + goldmarkTresure);
+
+        double goldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
+        double goldmuenzeTresure = goldmuenzePerPiece * portfolio.get("Goldmuenze");
+        Log.i(TAG, "Goldmuenze Tresure: " + goldmuenzeTresure);
+
+        double silbermuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));
+        double silbermuenzeTresure = silbermuenzePerPiece * portfolio.get("Silbermuenze");
+        Log.i(TAG, "Goldmuenze Tresure: " + silbermuenzeTresure);
+
+        double pldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));
+        double pldmuenzeTresure = pldmuenzePerPiece * portfolio.get("Palladiummuenze");
+        Log.i(TAG, "Palladiummuenze Tresure: " + pldmuenzeTresure);
+
+        double ptmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
+        double ptmuenzeTresure = ptmuenzePerPiece * portfolio.get("Platinmuenze");
+        Log.i(TAG, "Platinmuenze Tresure: " + ptmuenzeTresure);
+    }
+
     // calculate kroegerrand
     private String calcKroegerRand(String valueProGramm){
         String result = "";
@@ -123,6 +231,8 @@ public class EquityActivity extends AppCompatActivity {
         palladiumPerKroegerRand = calcKroegerRand(palladium);
         platinPerKroegerRand = calcKroegerRand(platin);
         rhodiumPerKroegerRand = calcKroegerRand(rhodium);
+
+
     }
 
 }
