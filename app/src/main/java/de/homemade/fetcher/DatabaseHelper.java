@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Investment_Database";
     public static final String TABLE_NAME ="price_table";
-    public static final int DATABASE_VERSION = 0;
+    public static final int DATABASE_VERSION = 1;
     public static final String COLUMN_0 = "_ID";
     public static final String COLUMN_1 = "GOLD";
     public static final String COLUMN_2 = "SILBER";

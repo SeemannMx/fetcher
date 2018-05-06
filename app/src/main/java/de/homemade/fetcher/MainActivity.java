@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,13 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
     String rhodium = "";
 
     String goldMark = "";
+    String goldMunze = "";
     String silberMark = "";
     String palladiumMunze = "";
     String platinMunze = "";
+    String date = "";
 
     RelativeLayout mainRelativLayout;
     ScrollView scrollView;
@@ -77,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     Button getEquityButtom;
 
     Context context;
+    DatabaseHelper dbHelper;
+    FetchAsyncTask task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
+        dbHelper = DatabaseHelper.getInstance(context);
 
         initAllViews();
         fetchDataFromESG();
@@ -146,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 try{
 
                     // fetch data via async task
-                    new FetchAsyncTask().execute();
+                    task = (FetchAsyncTask) new FetchAsyncTask().execute();
 
                 }
                 catch (Exception e) {
@@ -160,6 +170,53 @@ public class MainActivity extends AppCompatActivity {
         }, 0, 43200000);
     }
 
+    // calculate equity by fetched data and portfolio
+    private void getEquity() {
+
+        Log.i(TAG, " async task finished");
+        getEquityButtom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(task.getStatus() == AsyncTask.Status.FINISHED) {
+                    Log.i(TAG, " asynctask finished and data ready");
+                    isValueEmpty();
+                    Intent intent = new Intent(MainActivity.this, EquityActivity.class);
+                    startActivity(intent);
+                } else {
+                    Log.i(TAG, " asynctask NOT finished and data NOT ready");
+                    Toast toast = Toast.makeText(context, "data not ready jet", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    // check if value is empty
+    private void isValueEmpty(){
+        if(gold == null) {
+            gold = "0";
+        } else if(silber == null){
+            silber = "0";
+        } else if(palladium == null){
+            palladium = "0";
+        } else if(platin == null){
+            platin = "0";
+        } else if(rhodium == null){
+            rhodium = "0";
+        } else if(goldMark == null){
+            goldMark = "0";
+        } else if(goldMunze == null){
+            goldMunze = "150";
+        } else if(silberMark == null){
+            silberMark = "0";
+        } else if(palladiumMunze == null){
+            palladiumMunze = "0";
+        } else if(platinMunze == null){
+            platinMunze = "0";
+        }
+    }
 
 
     // inner class to fetch data
@@ -169,7 +226,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-
 
             try {
                 Document document = Jsoup.connect("https://www.scheideanstalt.de/gold-ankaufskurse/").get();
@@ -181,6 +237,10 @@ public class MainActivity extends AppCompatActivity {
                 // 1 x Goldmark
                 Document documentEgold = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreis-goldmuenzen/").get();
                 Elements eGoldMark = documentEgold.select("[title=10000101-otc]");
+
+                // 1 x Goldmunze !!not valid
+                // Document documentEgoldmuenze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreis-goldmuenzen/").get();
+                // Elements eGoldMuenze = documentEgoldmuenze.select("[title=10000101-otc]");
 
                 // 1g handelsfaehiges Silber
                 Document documentEsilber = Jsoup.connect("https://www.scheideanstalt.de/silber-ankaufskurse/").get();
@@ -195,19 +255,19 @@ public class MainActivity extends AppCompatActivity {
                 Elements ePalladium = documentEpalladium.select("[title=00001300-mail]");
 
                 // 1 x Palladium Muenze 1oz = 31,10gr (Feinunze)
-                Document documentEpalladiumMunze= Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-palladiummuenzen/").get();
+                Document documentEpalladiumMunze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-palladiummuenzen/").get();
                 Elements ePalladiumMunze = documentEpalladiumMunze.select("[title=04020120-otc]");
 
                 // 1 x Platin
-                Document documentEplatin= Jsoup.connect("https://www.scheideanstalt.de/platin-ankaufskurse/").get();
+                Document documentEplatin = Jsoup.connect("https://www.scheideanstalt.de/platin-ankaufskurse/").get();
                 Elements ePlatin = documentEplatin.select("[title=00001200-otc]");
 
                 // 1 x Platin Muenze 1oz = 31,10gr (Feinunze)
-                Document documentEplatinMunze= Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-platinmuenzen/").get();
+                Document documentEplatinMunze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-platinmuenzen/").get();
                 Elements ePlatinMunze = documentEplatinMunze.select("[title=10000068-otc]");
 
                 // 1g Rhodium 1oz = 31,10gr (Feinunze)
-                Document documentErhodium= Jsoup.connect("https://www.scheideanstalt.de/rhodium-ankaufskurse/").get();
+                Document documentErhodium = Jsoup.connect("https://www.scheideanstalt.de/rhodium-ankaufskurse/").get();
                 Elements eRhodium = documentErhodium.select("[title=00001600-mail]");
 
                 gold = eGold.text();
@@ -217,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
                 rhodium = eRhodium.text();
 
                 goldMark = eGoldMark.text();
+                goldMunze = "150.00";
                 silberMark = eSilberMunze.text();
                 palladiumMunze = ePalladiumMunze.text();
                 platinMunze = ePlatinMunze.text();
@@ -225,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             return gold;
         }
@@ -252,55 +312,40 @@ public class MainActivity extends AppCompatActivity {
             dataPlatinmark.setText(platinMunze + " €");
 
             Log.i(TAG, CLASS + " \n" +
-                    "Gold:          " + gold + " "              + "\n" +
-                    "Silber:        " + silber + " "            + "\n" +
-                    "Palladium:     " + palladium + " "         + "\n" +
-                    "Platin:        " + platin + " "            + "\n" +
-                    "Rhodium:       " + rhodium + " "           + "\n" +
-                    "Goldmark:      " + goldMark + " "          + "\n" +
-                    "Silbermark:    " + silberMark + " "        + "\n" +
-                    "Palladiummark: " + palladiumMunze + " "    + "\n" +
+                    "Gold:          " + gold + " " + "\n" +
+                    "Silber:        " + silber + " " + "\n" +
+                    "Palladium:     " + palladium + " " + "\n" +
+                    "Platin:        " + platin + " " + "\n" +
+                    "Rhodium:       " + rhodium + " " + "\n" +
+                    "Goldmark:      " + goldMark + " " + "\n" +
+                    "Goldmuenze:    " + goldMunze + " " + "\n" +
+                    "Silbermark:    " + silberMark + " " + "\n" +
+                    "Palladiummark: " + palladiumMunze + " " + "\n" +
                     "Platinmark:    " + platinMunze);
 
-            String goldPerKroegerRand = calcKroegerRand(gold);
-            String silberPerKroegerRand = calcKroegerRand(silber);
-            String palladiumPerKroegerRand = calcKroegerRand(palladium);
-            String platinPerKroegerRand = calcKroegerRand(platin);
-            String rhodiumPerKroegerRand = calcKroegerRand(rhodium);
+            // Create an instance of SimpleDateFormat used for formatting
+            // the string representation of date (month/day/year)
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+            // Get the date today using Calendar object.
+            Date today = Calendar.getInstance().getTime();
+            // Using DateFormat format method we can create a string
+            // representation of a date with the defined format.
+            date = df.format(today);
+
+            dbHelper.insertDataIntoPriceTable(
+                    gold,
+                    silber,
+                    palladium,
+                    platin,
+                    rhodium,
+                    goldMark,
+                    goldMunze,
+                    silberMark,
+                    palladiumMunze,
+                    platinMunze,
+                    date);
 
         }
-
-        // calculate kroegerrand
-        private String calcKroegerRand(String valueProGramm){
-            String result = "";
-
-            valueProGramm = setDot(valueProGramm);
-            double valuePerGroger = Double.parseDouble(valueProGramm) * 31.10;
-
-            Log.i(TAG, "Krögerrand 31.10gr: " + valuePerGroger);
-
-            // return string in double digit format
-            return result = new DecimalFormat("##.##").format(valuePerGroger);
-        }
-
-        // find and replace komme with dot
-        private String setDot(String stringWithKomma){
-            return stringWithKomma = stringWithKomma.replace(",",".");
-        }
-    }
-
-    // calculate equity by fetched data and portfolio
-    private void getEquity(){
-
-        getEquityButtom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.this, EquityActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
     }
 }

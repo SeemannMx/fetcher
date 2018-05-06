@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class EquityActivity extends AppCompatActivity {
@@ -16,6 +17,25 @@ public class EquityActivity extends AppCompatActivity {
 
     Context context;
     HashMap<String, Double > portfolio;
+
+    String gold = "";
+    String silber = "";
+    String palladium = "";
+    String platin = "";
+    String rhodium = "";
+
+    String goldMark = "";
+    String goldMunze = "";
+    String silberMark = "";
+    String palladiumMunze = "";
+    String platinMunze = "";
+    String date = "";
+
+    String goldPerKroegerRand;
+    String silberPerKroegerRand;
+    String palladiumPerKroegerRand;
+    String platinPerKroegerRand;
+    String rhodiumPerKroegerRand;
 
 
     @Override
@@ -28,6 +48,7 @@ public class EquityActivity extends AppCompatActivity {
         portfolio = new HashMap<>();
 
         createPortfolio();
+        // fillView();
 
     }
 
@@ -74,7 +95,34 @@ public class EquityActivity extends AppCompatActivity {
         // Log portfolio
         Gson g = new Gson();
         String json = g.toJson(portfolio);
-        Log.i(TAG, "Portfolio: \n" + json);
+        Log.i(TAG, "\n\nPortfolio:\n" + json + "\n\n");
 
     }
+
+    // calculate kroegerrand
+    private String calcKroegerRand(String valueProGramm){
+        String result = "";
+
+        valueProGramm = setDot(valueProGramm);
+        double valuePerGroger = Double.parseDouble(valueProGramm) * 31.10;
+
+        Log.i(TAG, "Krögerrand 31.10gr: " + valuePerGroger);
+
+        // return string in double digit format
+        return result = new DecimalFormat("##.##").format(valuePerGroger);
+    }
+
+    // find and replace komme with dot
+    private String setDot(String stringWithKomma){
+        return stringWithKomma = stringWithKomma.replace(",",".");
+    }
+
+    private void fillView(){
+        goldPerKroegerRand = calcKroegerRand(gold);
+        silberPerKroegerRand = calcKroegerRand(silber);
+        palladiumPerKroegerRand = calcKroegerRand(palladium);
+        platinPerKroegerRand = calcKroegerRand(platin);
+        rhodiumPerKroegerRand = calcKroegerRand(rhodium);
+    }
+
 }
