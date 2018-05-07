@@ -3,6 +3,8 @@ package de.homemade.fetcher;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -101,19 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         initAllViews();
         fetchDataFromESG();
-        // getEquity();
-
-
-        getEquityButtom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DiagrammActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        getEquityButtom.performClick();
-
+        getEquity();
 
     }
 
@@ -160,29 +150,41 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //Every 43200000 ms = 12hrs
+    //fetch data from website every 43200000 ms = 12hrs and online check
     private void fetchDataFromESG() {
 
-        // Start timer
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate( new TimerTask() {
-            public void run() {
-
-                try{
-
-                    // fetch data via async task
-                    task = (FetchAsyncTask) new FetchAsyncTask().execute();
-
+        if(isOnline()) {
+            // Start timer
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                public void run() {
+                    try {
+                        // fetch data via async task
+                        task = (FetchAsyncTask) new FetchAsyncTask().execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    // 43200000 = 12hrs
                 }
-                catch (Exception e) {
+            }, 0, 43200000);
+        } else {
+            Log.i(TAG, "device is not online");
+            Toast toast = Toast.makeText(context, "device is not online / flightmode", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
 
-                    e.printStackTrace();
 
-                }
 
-                // 43200000 = 12hrs
-            }
-        }, 0, 43200000);
+        }
+    }
+
+    // check if device has internet connection and if is filghtmode
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     // calculate equity by fetched data and portfolio
@@ -203,6 +205,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, "data not ready jet", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                    gold = "0";
+                    silber = "0";
+                    palladium = "0";
+                    platin = "0";
+                    rhodium = "0";
+                    goldMark = "0";
+                    goldMunze = "0";
+                    silberMark = "0";
+                    palladiumMunze = "0";
+                    platinMunze = "0";
                 }
             }
         });

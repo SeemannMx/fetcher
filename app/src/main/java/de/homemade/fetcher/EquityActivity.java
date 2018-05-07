@@ -1,10 +1,13 @@
 package de.homemade.fetcher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -61,6 +64,7 @@ public class EquityActivity extends AppCompatActivity {
     RelativeLayout layoutPurchased;
     RelativeLayout layoutPresent;
     RelativeLayout layoutTax;
+    LinearLayout layouTable;
 
     TextView textPurchased;
     TextView dataPurchased;
@@ -94,6 +98,7 @@ public class EquityActivity extends AppCompatActivity {
         createPortfolio();
         getSumOfEquity();
         fillView();
+        showDiagramm();
 
 
 
@@ -157,6 +162,7 @@ public class EquityActivity extends AppCompatActivity {
         layoutPurchased = findViewById(R.id.layoutPurchased);
         layoutPresent = findViewById(R.id.layoutPresent);
         layoutTax = findViewById(R.id.layoutTax);
+        layouTable = findViewById(R.id.layouTable);
 
         textPurchased = findViewById(R.id.textPurchased);
         dataPurchased = findViewById(R.id.dataPurchased);
@@ -270,6 +276,17 @@ public class EquityActivity extends AppCompatActivity {
     // find and replace komme with dot
     private String setDot(String stringWithKomma){
         return stringWithKomma = stringWithKomma.replace(",",".");
+    }
+
+    // shift to diagramm activoty on click of table
+    private void showDiagramm(){
+        layouTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DiagrammActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

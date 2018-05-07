@@ -21,7 +21,7 @@
             android:id="@+id/textPurchased"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="purchased Value"
+            android:text="purchased value"
             android:gravity="center"
             android:textSize="@dimen/equityTextSize"
             android:paddingTop="@dimen/equityPadding"
@@ -51,7 +51,7 @@
             android:id="@+id/textPresentValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="present Value"
+            android:text="present value"
             android:gravity="center"
             android:textSize="@dimen/equityTextSize"
             android:paddingTop="@dimen/equityPadding"
@@ -103,11 +103,13 @@
 
     <!-- Prozentualle Auflistung von allen Investments -->
     <LinearLayout
+        android:id="@+id/layouTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layoutTax"
         android:orientation="horizontal"
         android:layout_centerInParent="true"
+        android:background="?attr/selectableItemBackground"
         >
 
         <LinearLayout

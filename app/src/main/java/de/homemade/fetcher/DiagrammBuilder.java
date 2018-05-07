@@ -25,16 +25,18 @@ public class DiagrammBuilder {
     }
 
 
-    public GraphicalView testDiagramm(Context context, GraphicalView chartView){
+    public GraphicalView testDiagramm(Context context){
+
+        GraphicalView chartView;
 
         List <Double> myList = new ArrayList<>();
 
-        myList.add(1, -1.0);
-        myList.add(2,4.0);
-        myList.add(3,6.0);
-        myList.add(4,-8.0);
-        myList.add(5,10.0);
-        myList.add(6, 12.0);
+        myList.add(0, -1.0);
+        myList.add(1,4.0);
+        myList.add(2,6.0);
+        myList.add(3,-8.0);
+        myList.add(4,10.0);
+        myList.add(5, 12.0);
 
         // populate the series
         XYSeries series = new XYSeries("diagramm of things");

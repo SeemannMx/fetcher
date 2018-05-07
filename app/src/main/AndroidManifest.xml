@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.homemade.fetcher">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,9 @@
             android:name=".EquityActivity"
             android:label="Total Equity"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".DiagrammActivity"></activity>
+        <activity
+            android:name=".DiagrammActivity"
+            android:parentActivityName=".EquityActivity"></activity>
     </application>
 
 </manifest>

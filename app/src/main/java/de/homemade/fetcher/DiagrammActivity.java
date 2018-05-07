@@ -34,8 +34,10 @@ public class DiagrammActivity extends AppCompatActivity {
         chartLayout = findViewById(R.id.chart);
 
         DiagrammBuilder diagrammBuilder = new DiagrammBuilder(context);
+        chartView = diagrammBuilder.testDiagramm(context);
+        chartLayout.addView(chartView);
 
-        testDiagramm();
+        //chartViewtestDiagramm();
 
     }
 
