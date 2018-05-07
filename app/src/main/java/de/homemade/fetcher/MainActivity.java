@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
     FetchAsyncTask task;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +101,19 @@ public class MainActivity extends AppCompatActivity {
 
         initAllViews();
         fetchDataFromESG();
-        getEquity();
+        // getEquity();
+
+
+        getEquityButtom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DiagrammActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        getEquityButtom.performClick();
+
 
     }
 

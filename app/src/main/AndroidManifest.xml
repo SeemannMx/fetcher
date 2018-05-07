@@ -17,10 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity   android:name=".EquityActivity"
-                    android:parentActivityName="de.homemade.fetcher.MainActivity"
-                    android:label="Total Equity">
-        </activity>
+        <activity
+            android:name=".EquityActivity"
+            android:label="Total Equity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".DiagrammActivity"></activity>
     </application>
 
 </manifest>

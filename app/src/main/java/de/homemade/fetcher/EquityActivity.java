@@ -95,6 +95,8 @@ public class EquityActivity extends AppCompatActivity {
         getSumOfEquity();
         fillView();
 
+
+
     }
 
     // create portfolio
