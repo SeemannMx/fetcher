@@ -2,9 +2,6 @@ package de.homemade.fetcher;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
 
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
@@ -15,42 +12,9 @@ import org.achartengine.renderer.XYSeriesRenderer;
 
 import java.util.ArrayList;
 
-public class DiagrammActivity extends AppCompatActivity {
+public class LineChartView {
 
-    String TAG = "FETCHER ";
-    String CLASS = "DIAGRAM ACTY ";
-
-    Context context;
-    LinearLayout main_diagramm_layout;
-    LinearLayout chartPie;
-    LinearLayout chartLayout;
-    GraphicalView chartView;
-    GraphicalView chartViewPie;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diagramm);
-
-        context = getApplicationContext();
-
-        main_diagramm_layout = findViewById(R.id.main_diagramm_layout);
-        chartLayout = findViewById(R.id.chart);
-        chartPie = findViewById(R.id.chartPie);
-
-        // DiagrammBuilder diagrammBuilder = new DiagrammBuilder(context);
-        // chartView = diagrammBuilder.testDiagramm(context);
-        // chartLayout.addView(chartView);
-
-        chartViewPie = PieChartView.getNewInstance(context,100,80);
-        chartPie.addView(chartViewPie);
-
-        LineChartView lcv = new LineChartView();
-        chartView = lcv.lineDiagramm(context);
-        chartLayout.addView(chartView);
-    }
-
-    public void lineDiagramm(){
+    public GraphicalView lineDiagramm(Context context){
 
         ArrayList<Double> myList = new ArrayList<>();
 
@@ -100,7 +64,8 @@ public class DiagrammActivity extends AppCompatActivity {
         // show grid
         mRenderer.setShowGrid(true); // we show the grid
 
-        GraphicalView chartViewX = ChartFactory.getLineChartView(context,dataset,mRenderer);
-        chartLayout.addView(chartViewX);
+        return ChartFactory.getLineChartView(context,dataset,mRenderer);
+
     }
+
 }
