@@ -8,6 +8,7 @@
     <dimen name="marginRight"> 32dp </dimen>
     <dimen name="marginLeft"> 12dp </dimen>
     <dimen name="mainPadding"> 24dp </dimen>
+    <dimen name="mainElevation"> 4px </dimen>
 
     <!-- equity activity -->
     <dimen name="equityPadding"> 12dp </dimen>

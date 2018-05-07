@@ -8,13 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- *
  * Databasehelper simplyfies work with SQLitedatabases be autocreating
- * onCreate(.....) and onUpgrade(.....)
- *
- * Created by tkallinich on 09.08.17.
  */
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "SQL HELPER";
@@ -73,6 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // creates database with tables
+    // sqLiteDatabase.execSQL(create table table_name(COL_1 int primary key auto not null, ....);)
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table " + TABLE_NAME + "("
@@ -97,7 +93,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                 + PORTFOLIO_VALUE + " TEXT,"
                 + DATE + " TEXT"
-
                 + ");");
 
         Log.i(TAG,ACTIVITY_CLASS + " " + TABLE_NAME_PORTFOLIO + " " + "created");

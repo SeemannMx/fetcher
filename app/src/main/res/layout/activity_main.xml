@@ -36,7 +36,8 @@
                         android:layout_height="@dimen/imageView"
                         android:layout_alignParentLeft="true"
                         android:background="@drawable/gold_icon"
-                        android:layout_weight="0.5" />
+                        android:layout_weight="0.5"
+                        android:elevation="@dimen/mainElevation"/>
 
                     <TextView
                         android:id="@+id/dataGold"
@@ -61,7 +62,8 @@
                         android:layout_width="@dimen/imageView"
                         android:layout_height="@dimen/imageView"
                         android:layout_alignParentLeft="true"
-                        android:background="@drawable/silber_icon" />
+                        android:background="@drawable/silber_icon"
+                        android:elevation="@dimen/mainElevation"/>
 
                     <TextView
                         android:id="@+id/dataSilber"
@@ -93,7 +95,8 @@
                         android:layout_height="@dimen/imageView"
                         android:layout_alignParentLeft="true"
                         android:background="@drawable/palladium_icon"
-                        android:layout_weight="0.5" />
+                        android:layout_weight="0.5"
+                        android:elevation="@dimen/mainElevation"/>
 
                     <TextView
                         android:id="@+id/dataPalladium"
@@ -119,7 +122,8 @@
                         android:layout_width="@dimen/imageView"
                         android:layout_height="@dimen/imageView"
                         android:layout_alignParentLeft="true"
-                        android:background="@drawable/plation_icon"/>
+                        android:background="@drawable/plation_icon"
+                        android:elevation="@dimen/mainElevation"/>
 
                     <TextView
                         android:id="@+id/dataPlatin"
@@ -152,7 +156,8 @@
                         android:layout_height="@dimen/imageView"
                         android:layout_alignParentLeft="true"
                         android:background="@drawable/rhodium_icon"
-                        android:layout_weight="0.5"/>
+                        android:layout_weight="0.5"
+                        android:elevation="@dimen/mainElevation"/>
 
                     <TextView
                         android:id="@+id/dataRhodium"
@@ -179,7 +184,8 @@
                         android:layout_height="@dimen/imageView"
                         android:layout_alignParentLeft="true"
                         android:background="@drawable/plation_icon"
-                        android:visibility="gone"/>
+                        android:visibility="gone"
+                        android:elevation="@dimen/mainElevation"/>
 
                     <TextView
                         android:id="@+id/dataSAP"
