@@ -11,17 +11,68 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/chart"
+        android:id="@+id/top_diagramm_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="0.5"/>
+        android:orientation="horizontal"
+        android:layout_weight="0.5">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/textChartPie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.65">
+
+            <RelativeLayout
+                android:id="@+id/layout_index00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/diagrammMargin"
+                android:layout_marginLeft="@dimen/equityMargin"
+                >
+                <TextView
+                    android:id="@+id/diagTextGold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gold"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+                <TextView
+                    android:id="@+id/diagDataGold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="10000 €"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/chartPie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.35"/>
+        </LinearLayout>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/chartPie"
+        android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
