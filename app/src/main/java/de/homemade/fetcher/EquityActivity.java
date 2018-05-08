@@ -3,13 +3,17 @@ package de.homemade.fetcher;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -97,10 +101,7 @@ public class EquityActivity extends AppCompatActivity {
         initAllViews();
         createPortfolio();
         getSumOfEquity();
-        fillView();
         showDiagramm();
-
-
 
     }
 
@@ -188,68 +189,83 @@ public class EquityActivity extends AppCompatActivity {
         equityRhodiumText = findViewById(R.id.equityRhodiumText);
         equityRhodiumProzent = findViewById(R.id.equityRhodiumProzent);
 
+        // init status of views
+        layouTable.setClickable(false);
+
     }
 
     // get total sum of Equity
     private void getSumOfEquity(){
 
         Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
-        cursor.moveToFirst();
 
-        // Value of Ingots
-        double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
-        double goldTresure = goldPerGramm * portfolio.get("Gold");
-        Log.i(TAG, "Gold Tresure: " + goldTresure);
+        if(dbHelper.tableIsEmpty("price_table")) {
 
-        double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
-        double silberTresure = silberPerGramm * portfolio.get("Silber");
-        Log.i(TAG, "Silber Tresure: " + silberTresure);
+            cursor.moveToFirst();
+            // Value of Ingots
+            double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
+            double goldTresure = goldPerGramm * portfolio.get("Gold");
+            Log.i(TAG, "Gold Tresure: " + goldTresure);
 
-        double palladiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
-        double palladiumTresure = palladiumPerGramm * portfolio.get("Palladium");
-        Log.i(TAG, "Palladium Tresure: " + palladiumTresure);
+            double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
+            double silberTresure = silberPerGramm * portfolio.get("Silber");
+            Log.i(TAG, "Silber Tresure: " + silberTresure);
 
-        double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
-        double platinTresure = platinPerGramm * portfolio.get("Platin");
-        Log.i(TAG, "Platin Tresure: " + platinTresure);
+            double palladiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
+            double palladiumTresure = palladiumPerGramm * portfolio.get("Palladium");
+            Log.i(TAG, "Palladium Tresure: " + palladiumTresure);
 
-        double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
-        double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
-        Log.i(TAG, "Rhodium Tresure: " + rhodiumTresure);
+            double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
+            double platinTresure = platinPerGramm * portfolio.get("Platin");
+            Log.i(TAG, "Platin Tresure: " + platinTresure);
 
-        // Value of Coins
-        double goldmarkPerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
-        double goldmarkTresure = goldmarkPerPiece * portfolio.get("Goldmark");
-        Log.i(TAG, "Goldmark Tresure: " + goldmarkTresure);
+            double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
+            double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
+            Log.i(TAG, "Rhodium Tresure: " + rhodiumTresure);
 
-        double goldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
-        double goldmuenzeTresure = goldmuenzePerPiece * portfolio.get("Goldmuenze");
-        Log.i(TAG, "Goldmuenze Tresure: " + goldmuenzeTresure);
+            // Value of Coins
+            double goldmarkPerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
+            double goldmarkTresure = goldmarkPerPiece * portfolio.get("Goldmark");
+            Log.i(TAG, "Goldmark Tresure: " + goldmarkTresure);
 
-        double silbermuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));
-        double silbermuenzeTresure = silbermuenzePerPiece * portfolio.get("Silbermuenze");
-        Log.i(TAG, "Goldmuenze Tresure: " + silbermuenzeTresure);
+            double goldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
+            double goldmuenzeTresure = goldmuenzePerPiece * portfolio.get("Goldmuenze");
+            Log.i(TAG, "Goldmuenze Tresure: " + goldmuenzeTresure);
 
-        double pldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));
-        double pldmuenzeTresure = pldmuenzePerPiece * portfolio.get("Palladiummuenze");
-        Log.i(TAG, "Palladiummuenze Tresure: " + pldmuenzeTresure);
+            double silbermuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));
+            double silbermuenzeTresure = silbermuenzePerPiece * portfolio.get("Silbermuenze");
+            Log.i(TAG, "Goldmuenze Tresure: " + silbermuenzeTresure);
 
-        double ptmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
-        double ptmuenzeTresure = ptmuenzePerPiece * portfolio.get("Platinmuenze");
-        Log.i(TAG, "Platinmuenze Tresure: " + ptmuenzeTresure);
+            double pldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));
+            double pldmuenzeTresure = pldmuenzePerPiece * portfolio.get("Palladiummuenze");
+            Log.i(TAG, "Palladiummuenze Tresure: " + pldmuenzeTresure);
 
-        double sumIgnots = goldTresure + silberTresure + palladiumTresure + platinTresure + rhodiumTresure;
-        double sumCoins = goldmarkTresure + goldmuenzeTresure + silbermuenzeTresure + pldmuenzeTresure + ptmuenzeTresure;
+            double ptmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
+            double ptmuenzeTresure = ptmuenzePerPiece * portfolio.get("Platinmuenze");
+            Log.i(TAG, "Platinmuenze Tresure: " + ptmuenzeTresure);
 
-        double sumEquity = sumIgnots + sumCoins;
+            double sumIgnots = goldTresure + silberTresure + palladiumTresure + platinTresure + rhodiumTresure;
+            double sumCoins = goldmarkTresure + goldmuenzeTresure + silbermuenzeTresure + pldmuenzeTresure + ptmuenzeTresure;
 
-        String tempTotalEquity = new DecimalFormat("##.##").format(sumEquity);
+            double sumEquity = sumIgnots + sumCoins;
 
-        totalEquity =  tempTotalEquity + " €";
-        Log.i(TAG, "TOTAL EQUITY: " + totalEquity);
+            String tempTotalEquity = new DecimalFormat("##.##").format(sumEquity);
 
-        dataPresentValue.setText(totalEquity);
+            totalEquity = tempTotalEquity + " €";
+            Log.i(TAG, "TOTAL EQUITY: " + totalEquity);
 
+            dataPresentValue.setText(totalEquity);
+            layouTable.setClickable(true);
+
+
+        } else {
+            Log.i(TAG, "Database is empty");
+            Toast toast = Toast.makeText(context, "no data in database", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            layouTable.setClickable(false);
+
+        }
     }
 
     // calculate kroegerrand
@@ -263,13 +279,6 @@ public class EquityActivity extends AppCompatActivity {
 
         // return string in double digit format
         return result = new DecimalFormat("##.##").format(valuePerGroger);
-    }
-
-
-    private void fillView(){
-
-        Log.i(TAG, "fill view");
-
     }
 
 
@@ -288,5 +297,16 @@ public class EquityActivity extends AppCompatActivity {
             }
         });
     }
+
+    // check if device has internet connection and if is filghtmode
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+
 
 }

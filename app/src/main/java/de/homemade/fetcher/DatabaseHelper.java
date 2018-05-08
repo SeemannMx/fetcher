@@ -358,4 +358,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    // check if database is empty
+    public boolean tableIsEmpty(String tableName){
+        boolean result = true;
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
+
+        if (cursor.moveToFirst()) {
+            // table is not empty
+            result = false;
+
+        } else {
+            // table is empty
+            result = true;
+        }
+        cursor.close();
+        return result;
+    }
+
 }

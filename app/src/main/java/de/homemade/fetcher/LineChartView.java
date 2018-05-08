@@ -14,6 +14,15 @@ import java.util.ArrayList;
 
 public class LineChartView {
 
+    public static final int COLOR_GREEN = Color.parseColor("#62c51a");
+    public static final int COLOR_ORANGE = Color.parseColor("#ff6c0a");
+    public static final int COLOR_BLUE = Color.parseColor("#23bae9");
+    public static final int COLOR_PETROL = Color.parseColor("#61e2d1");
+    public static final int COLOR_VIOLETT = Color.parseColor("#ac82bc");
+    public static final int COLOR_PLUM = Color.parseColor("#9999cc");
+    public static final int COLOR_ULTRA_VIOLETT = Color.parseColor("#b26490");
+    public static final int COLOR_DEEP_PETROL = Color.parseColor("#577681");
+
     public GraphicalView lineDiagramm(Context context){
 
         ArrayList<Double> myList = new ArrayList<>();
@@ -36,7 +45,7 @@ public class LineChartView {
         // create renderer
         XYSeriesRenderer renderer = new XYSeriesRenderer();
         renderer.setLineWidth(2);
-        renderer.setColor(Color.RED);
+        renderer.setColor(COLOR_PLUM);
 
         // create low max value
         renderer.setDisplayBoundingPoints(true);

@@ -190,31 +190,39 @@ public class MainActivity extends AppCompatActivity {
     // calculate equity by fetched data and portfolio
     private void getEquity() {
 
+
         Log.i(TAG, " async task finished");
         getEquityButtom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(task.getStatus() == AsyncTask.Status.FINISHED) {
-                    Log.i(TAG, " asynctask finished and data ready");
-                    isValueEmpty();
-                    Intent intent = new Intent(MainActivity.this, EquityActivity.class);
-                    startActivity(intent);
+                if(isOnline()) {
+                    if (task.getStatus() == AsyncTask.Status.FINISHED && task.getStatus() != AsyncTask.Status.PENDING) {
+                        Log.i(TAG, " asynctask finished and data ready");
+                        isValueEmpty();
+                        Intent intent = new Intent(MainActivity.this, EquityActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Log.i(TAG, " asynctask NOT finished and data NOT ready");
+                        Toast toast = Toast.makeText(context, "data not ready jet", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        gold = "0";
+                        silber = "0";
+                        palladium = "0";
+                        platin = "0";
+                        rhodium = "0";
+                        goldMark = "0";
+                        goldMunze = "0";
+                        silberMark = "0";
+                        palladiumMunze = "0";
+                        platinMunze = "0";
+                    }
                 } else {
-                    Log.i(TAG, " asynctask NOT finished and data NOT ready");
-                    Toast toast = Toast.makeText(context, "data not ready jet", Toast.LENGTH_SHORT);
+                    Log.i(TAG, " phone is not online");
+                    Toast toast = Toast.makeText(context, "phone is not onlie", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    gold = "0";
-                    silber = "0";
-                    palladium = "0";
-                    platin = "0";
-                    rhodium = "0";
-                    goldMark = "0";
-                    goldMunze = "0";
-                    silberMark = "0";
-                    palladiumMunze = "0";
-                    platinMunze = "0";
                 }
             }
         });
