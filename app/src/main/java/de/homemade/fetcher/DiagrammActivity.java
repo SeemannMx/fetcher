@@ -1,19 +1,16 @@
 package de.homemade.fetcher;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
-import org.achartengine.GraphicalView;
-import org.achartengine.chart.PointStyle;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
+import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import org.achartengine.GraphicalView;
+
+import java.util.HashMap;
 
 public class DiagrammActivity extends AppCompatActivity {
 
@@ -21,6 +18,9 @@ public class DiagrammActivity extends AppCompatActivity {
     String CLASS = "DIAGRAM ACTY ";
 
     Context context;
+    DatabaseHelper dbHelper;
+    HashMap<String, Double >portfolio;
+
     LinearLayout main_diagramm_layout;
     LinearLayout chartPie;
     LinearLayout chartLayout;
@@ -33,74 +33,35 @@ public class DiagrammActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diagramm);
 
         context = getApplicationContext();
+        dbHelper = DatabaseHelper.getInstance(context);
+
+        prepareForDiagramm();
+        fillPieChart();
 
         main_diagramm_layout = findViewById(R.id.main_diagramm_layout);
         chartLayout = findViewById(R.id.chart);
         chartPie = findViewById(R.id.chartPie);
 
-        // DiagrammBuilder diagrammBuilder = new DiagrammBuilder(context);
-        // chartView = diagrammBuilder.testDiagramm(context);
-        // chartLayout.addView(chartView);
-
-        chartViewPie = PieChartView.getNewInstance(context,5000,2500);
-        chartPie.addView(chartViewPie);
 
         LineChartView lcv = new LineChartView();
         chartView = lcv.lineDiagramm(context);
         chartLayout.addView(chartView);
     }
 
-    public void lineDiagramm(){
-
-        ArrayList<Double> myList = new ArrayList<>();
-
-        myList.add(0, -1.0);
-        myList.add(1,4.0);
-        myList.add(2,6.0);
-        myList.add(3,-8.0);
-        myList.add(4,10.0);
-        myList.add(5, 12.0);
-
-        // populate the series
-        XYSeries series = new XYSeries("diagramm of things");
-
-        for(int i = 0;i < myList.size(); i++){
-            Double value = myList.get(i);
-            series.add(i,value);
-        }
-
-        // create renderer
-        XYSeriesRenderer renderer = new XYSeriesRenderer();
-        renderer.setLineWidth(2);
-        renderer.setColor(Color.RED);
-
-        // create low max value
-        renderer.setDisplayBoundingPoints(true);
-
-        // add oint markers
-        renderer.setPointStyle(PointStyle.CIRCLE);
-        renderer.setPointStrokeWidth(3);
-
-        // create renderer that controls each single renderer for each series
-        XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-        mRenderer.addSeriesRenderer(renderer);
-
-        // layout diagramm
-        // transparent margins
-        mRenderer.setMarginsColor(Color.argb(0x00, 0xff, 0x00, 0x00));
-
-        // disable pan on two axis
-        mRenderer.setPanEnabled(false, false);
-        mRenderer.setYAxisMax(35);
-        mRenderer.setYAxisMin(0);
-
-        XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        dataset.addSeries(series);
-
-        // show grid
-        mRenderer.setShowGrid(true); // we show the grid
-
-        GraphicalView chartViewX = ChartFactory.getLineChartView(context,dataset,mRenderer);
-        chartLayout.addView(chartViewX);
+    // prepera and log for diagramm
+    private void prepareForDiagramm(){
+        Intent intent = getIntent();
+        portfolio = (HashMap<String, Double>) intent.getSerializableExtra("portfolio");
+        Gson g = new Gson();
+        g.toJson(portfolio);
     }
+
+    // fill pie chart from database
+    private void fillPieChart(){
+
+        chartViewPie = PieChartView.getNewInstance(context, portfolio);
+        chartPie.addView(chartViewPie);
+
+    }
+
 }

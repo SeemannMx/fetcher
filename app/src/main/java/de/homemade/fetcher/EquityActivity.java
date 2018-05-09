@@ -288,6 +288,7 @@ public class EquityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DiagrammActivity.class);
+                intent.putExtra("portfolio", portfolio);
                 startActivity(intent);
             }
         });

@@ -556,7 +556,9 @@ public class ChartFactory {
      *           series renderers or number of chart types
      */
     public static final Intent getCombinedXYChartIntent(Context context,
-                                                        XYMultipleSeriesDataset dataset, XYMultipleSeriesRenderer renderer, XYCombinedChartDef[] types,
+                                                        XYMultipleSeriesDataset dataset,
+                                                        XYMultipleSeriesRenderer renderer,
+                                                        XYCombinedChartDef[] types,
                                                         String activityTitle) {
         checkParameters(dataset, renderer);
         Intent intent = new Intent(context, DiagrammActivity.class);
