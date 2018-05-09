@@ -42,7 +42,7 @@ public class DiagrammActivity extends AppCompatActivity {
         // chartView = diagrammBuilder.testDiagramm(context);
         // chartLayout.addView(chartView);
 
-        chartViewPie = PieChartView.getNewInstance(context,100,80);
+        chartViewPie = PieChartView.getNewInstance(context,5000,2500);
         chartPie.addView(chartViewPie);
 
         LineChartView lcv = new LineChartView();

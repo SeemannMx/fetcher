@@ -3,4 +3,10 @@
     <string name="income">Fetcher</string>
     <string name="costs">Fetcher</string>
     <string name="total">Fetcher</string>
+
+    <string name="Gold">Fetcher</string>
+    <string name="Silber">Fetcher</string>
+    <string name="Palladium">Fetcher</string>
+    <string name="Platin">Fetcher</string>
+    <string name="Rhodium">Fetcher</string>
 </resources>

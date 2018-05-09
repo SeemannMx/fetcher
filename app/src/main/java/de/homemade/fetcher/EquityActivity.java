@@ -8,12 +8,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -260,9 +258,6 @@ public class EquityActivity extends AppCompatActivity {
 
         } else {
             Log.i(TAG, "Database is empty");
-            Toast toast = Toast.makeText(context, "no data in database", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
             layouTable.setClickable(false);
 
         }

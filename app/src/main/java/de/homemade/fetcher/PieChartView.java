@@ -2,6 +2,9 @@ package de.homemade.fetcher;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
+
+import com.google.gson.Gson;
 
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.AbstractChart;
@@ -53,9 +56,18 @@ public class PieChartView extends GraphicalView {
      * @return a renderer for the pie chart
      */
     private static DefaultRenderer getRenderer() {
-        int[] colors = new int[] { COLOR_GREEN, COLOR_ORANGE, COLOR_BLUE,
-                                    COLOR_PETROL, COLOR_DEEP_PETROL, COLOR_VIOLETT,
-                                    COLOR_ULTRA_VIOLETT, COLOR_PLUM };
+
+        int[] colors = new int[] {  COLOR_GREEN,
+                                    COLOR_ORANGE,
+                                    COLOR_BLUE,
+                                    COLOR_PETROL,
+                                    COLOR_DEEP_PETROL,
+                                    COLOR_VIOLETT,
+                                    COLOR_ULTRA_VIOLETT,
+                                    COLOR_PLUM
+        };
+
+        // int[] colors = new int[] { COLOR_GREEN, COLOR_ORANGE, COLOR_BLUE};
 
         DefaultRenderer defaultRenderer = new DefaultRenderer();
         for (int color : colors) {
@@ -67,6 +79,11 @@ public class PieChartView extends GraphicalView {
         defaultRenderer.setShowLegend(false);
         defaultRenderer.setPanEnabled(false);
         defaultRenderer.setZoomEnabled(false);
+
+        Gson g = new Gson();
+        String gson = g.toJson(defaultRenderer);
+        Log.i("PIE CHART VIEW","default Render: " + gson);
+
         return defaultRenderer;
     }
 
@@ -87,6 +104,11 @@ public class PieChartView extends GraphicalView {
         series.add(context.getString(R.string.income), income);
         series.add(context.getString(R.string.costs), costs);
         series.add(context.getString(R.string.total), income - costs);
+        series.add(context.getString(R.string.Gold), 1000);
+        series.add(context.getString(R.string.Silber), 1000);
+        series.add(context.getString(R.string.Palladium), 1000);
+        series.add(context.getString(R.string.Platin), 1000);
+        series.add(context.getString(R.string.Rhodium), 1000);
         return series;
     }
 
