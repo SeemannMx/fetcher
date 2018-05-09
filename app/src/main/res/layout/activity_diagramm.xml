@@ -9,23 +9,20 @@
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/top_diagramm_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="0.5">
+        android:layout_weight="0.45"
+        >
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/textChartPie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.65">
+            android:layout_weight="0.6">
 
             <RelativeLayout
                 android:id="@+id/layout_index00"
@@ -38,7 +35,7 @@
                     android:id="@+id/diagTextGold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gold"
+                    android:text="@string/Gold"
                     android:layout_alignParentLeft="true"
                     android:padding="@dimen/diagrammTextPadding"
                     android:textSize="@dimen/diagrammTextSize"
@@ -52,30 +49,193 @@
                     android:padding="@dimen/diagrammTextPadding"
                     android:textSize="@dimen/diagrammTextSize"
                     />
-
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/layout_index01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/diagrammMargin"
+                android:layout_marginLeft="@dimen/equityMargin"
+                >
+                <TextView
+                    android:id="@+id/diagTextSilber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Silber"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+                <TextView
+                    android:id="@+id/diagDataSilber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="10000 €"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_index02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/diagrammMargin"
+                android:layout_marginLeft="@dimen/equityMargin"
+                >
+                <TextView
+                    android:id="@+id/diagTextPalladium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Palladium"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+                <TextView
+                    android:id="@+id/diagDataPalladium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="10000 €"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_index03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/diagrammMargin"
+                android:layout_marginLeft="@dimen/equityMargin"
+                >
+                <TextView
+                    android:id="@+id/diagTextPlatin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Platin"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+                <TextView
+                    android:id="@+id/diagDataPlatin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="10000 €"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_index04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/diagrammMargin"
+                android:layout_marginLeft="@dimen/equityMargin"
+                >
+                <TextView
+                    android:id="@+id/diagTextRhodium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Rhodium"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+                <TextView
+                    android:id="@+id/diagDataRhodium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="10000 €"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_index05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/diagrammMargin"
+                android:layout_marginLeft="@dimen/equityMargin"
+                >
+                <TextView
+                    android:id="@+id/diagTextCoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Coins"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+                <TextView
+                    android:id="@+id/diagDataCoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="10000 €"
+                    android:padding="@dimen/diagrammTextPadding"
+                    android:textSize="@dimen/diagrammTextSize"
+                    />
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/chartPie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.35"/>
+            android:layout_weight="0.4"/>
         </LinearLayout>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="0.5"/>
+        android:padding="@dimen/diagrammChartPadding"
+        android:gravity="bottom"
+        android:layout_weight="0.55"
+        >
+
+        <RelativeLayout
+            android:id="@+id/bottom_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/diagrammMiniMargin"
+            >
+
+            <TextView
+                android:id="@+id/diagTextPortfolio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="portfolio value"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/diagrammTextMargin"
+                android:padding="@dimen/diagrammTextPadding"
+                android:textSize="@dimen/diagrammTextSize"
+                />
+
+            <TextView
+                android:id="@+id/diagDataPortfolioValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20000"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/diagrammTextMargin"
+                android:padding="@dimen/diagrammTextPadding"
+                android:textSize="@dimen/diagrammTextSize"
+                />
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

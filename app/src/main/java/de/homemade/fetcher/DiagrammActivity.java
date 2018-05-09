@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -21,7 +23,41 @@ public class DiagrammActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
     HashMap<String, Double >portfolio;
 
+    // general views
     LinearLayout main_diagramm_layout;
+    LinearLayout top_diagramm_layout;
+    LinearLayout textChartPie;
+
+    RelativeLayout layout_index00;
+    TextView diagTextGold;
+    TextView diagDataGold;
+
+    RelativeLayout layout_index01;
+    TextView diagTextSilber;
+    TextView diagDataSilber;
+
+    RelativeLayout layout_index02;
+    TextView diagTextPalladium;
+    TextView diagDataPalladium;
+
+    RelativeLayout layout_index03;
+    TextView diagTextPlatin;
+    TextView diagDataPlatin;
+
+    RelativeLayout layout_index04;
+    TextView diagTextRhodium;
+    TextView diagDataRhodium;
+
+    RelativeLayout layout_index05;
+    TextView diagTextCoin;
+    TextView diagDataCoin;
+
+    RelativeLayout bottom_text_layout;
+    TextView diagTextPortfolio;
+    TextView diagDataPortfolioValue;
+
+
+    // diagramm view
     LinearLayout chartPie;
     LinearLayout chartLayout;
     GraphicalView chartView;
@@ -35,17 +71,14 @@ public class DiagrammActivity extends AppCompatActivity {
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
 
+        // prepare and init
+        initAllViews();
         prepareForDiagramm();
+
+        // get content
         fillPieChart();
 
-        main_diagramm_layout = findViewById(R.id.main_diagramm_layout);
-        chartLayout = findViewById(R.id.chart);
-        chartPie = findViewById(R.id.chartPie);
 
-
-        LineChartView lcv = new LineChartView();
-        chartView = lcv.lineDiagramm(context);
-        chartLayout.addView(chartView);
     }
 
     // prepera and log for diagramm
@@ -64,4 +97,47 @@ public class DiagrammActivity extends AppCompatActivity {
 
     }
 
+    // initalize all views
+    private void initAllViews(){
+
+        // general views
+        main_diagramm_layout = findViewById(R.id.main_diagramm_layout);
+        layout_index00 = findViewById(R.id.layout_index00);
+        diagTextGold = findViewById(R.id.diagTextGold);
+        diagDataGold = findViewById(R.id.diagDataGold);
+
+        layout_index01 = findViewById(R.id.layout_index01);
+        diagTextSilber  = findViewById(R.id.diagTextSilber);
+        diagDataSilber  = findViewById(R.id.diagDataSilber);
+
+        layout_index02  = findViewById(R.id.layout_index02);;
+        diagTextPalladium = findViewById(R.id.diagTextPalladium);
+        diagDataPalladium = findViewById(R.id.diagDataPalladium);
+
+        layout_index03  = findViewById(R.id.layout_index03);
+        diagTextPlatin = findViewById(R.id.diagTextPlatin);
+        diagDataPlatin = findViewById(R.id.diagDataPlatin);
+
+        layout_index04 = findViewById(R.id.layout_index04);
+        diagTextRhodium = findViewById(R.id.diagTextRhodium);
+        diagDataRhodium = findViewById(R.id.diagDataRhodium);
+
+        layout_index05 = findViewById(R.id.layout_index05);;
+        diagTextCoin = findViewById(R.id.diagTextCoin);
+        diagDataCoin = findViewById(R.id.diagDataCoin);;
+
+        bottom_text_layout = findViewById(R.id.bottom_text_layout);
+        diagTextPortfolio = findViewById(R.id.diagTextPortfolio);
+        diagDataPortfolioValue = findViewById(R.id.diagDataPortfolioValue);
+
+        // get and set pie chart diagramm
+        chartLayout = findViewById(R.id.chart);
+        chartPie = findViewById(R.id.chartPie);
+
+        // get and set line chart diagramm
+        LineChartView lcv = new LineChartView();
+        chartView = lcv.lineDiagramm(context);
+        chartLayout.addView(chartView);
+
+    }
 }
