@@ -203,7 +203,9 @@ public class EquityActivity extends AppCompatActivity {
             // Value of Ingots
             double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
             double goldTresure = goldPerGramm * portfolio.get("Gold");
-            Log.i(TAG, "Gold Tresure: " + goldTresure);
+
+            String tempGl = new DecimalFormat("##.##").format(goldTresure);
+            Log.i(TAG, "Gold Tresure: " + tempGl);
 
             double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
             double silberTresure = silberPerGramm * portfolio.get("Silber");
@@ -215,16 +217,22 @@ public class EquityActivity extends AppCompatActivity {
 
             double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
             double platinTresure = platinPerGramm * portfolio.get("Platin");
-            Log.i(TAG, "Platin Tresure: " + platinTresure);
+
+            String tempPL = new DecimalFormat("##.##").format(platinTresure);
+            Log.i(TAG, "Platin Tresure: " + tempPL);
 
             double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
             double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
-            Log.i(TAG, "Rhodium Tresure: " + rhodiumTresure);
+
+            String tempRh = new DecimalFormat("##.##").format(rhodiumTresure);
+            Log.i(TAG, "Rhodium Tresure: " + tempRh);
 
             // Value of Coins
             double goldmarkPerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
             double goldmarkTresure = goldmarkPerPiece * portfolio.get("Goldmark");
-            Log.i(TAG, "Goldmark Tresure: " + goldmarkTresure);
+
+            String tempGlmrk = new DecimalFormat("##.##").format(goldmarkTresure);
+            Log.i(TAG, "Goldmark Tresure: " + tempGlmrk);
 
             double goldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
             double goldmuenzeTresure = goldmuenzePerPiece * portfolio.get("Goldmuenze");
@@ -257,7 +265,7 @@ public class EquityActivity extends AppCompatActivity {
 
 
         } else {
-            Log.i(TAG, "Database is empty");
+            Log.i(TAG, CLASS + " Database is empty");
             layouTable.setClickable(false);
 
         }

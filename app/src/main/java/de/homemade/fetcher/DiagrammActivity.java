@@ -140,4 +140,22 @@ public class DiagrammActivity extends AppCompatActivity {
         chartLayout.addView(chartView);
 
     }
+
+    // set total equity per item
+    private void setTotalPerItem(){
+
+        Double totalGold = portfolio.get("Gold");                   // 176
+        Double totalSilber = portfolio.get("Silber");               // 376
+        Double totalPlatin = portfolio.get("Platin");               // 326
+        Double totalPalladium = portfolio.get("Palladium");         // 226
+        Double totalRhodium = portfolio.get("Rhodium");             // 31.1
+        Double totalGoldmark = portfolio.get("Goldmark");           // 10
+        Double totalGoldmuenze = portfolio.get("Goldmuenze");       // 5
+        Double totalSilberMuenze = portfolio.get("Silbermuenze");   // 61
+        Double totalPldMuenze = portfolio.get("Palladiummuenze");   // 1
+        Double totalPtMuenze = portfolio.get("Platinmuenze");       // 1
+
+
+
+    }
 }

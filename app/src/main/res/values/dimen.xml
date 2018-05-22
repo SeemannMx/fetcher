@@ -23,6 +23,6 @@
     <dimen name="diagrammMargin"> 12dp </dimen>
     <dimen name="diagrammTextMargin"> 64dp </dimen>
     <dimen name="diagrammMiniMargin"> 8dp </dimen>
-    <dimen name="diagrammTextSize"> 14sp </dimen>
+    <dimen name="diagrammTextSize"> 12sp </dimen>
 
 </resources>

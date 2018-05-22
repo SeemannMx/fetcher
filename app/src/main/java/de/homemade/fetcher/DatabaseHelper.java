@@ -154,10 +154,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // -1 means not data insterted
         if (result == -1){
             Log.i(TAG, ACTIVITY_CLASS+ " " + TABLE_NAME +
-                                " DB on insterData " + reslutforLog + " false");
+                                " DB on insterData " + reslutforLog + " not instered");
             return false;
         }
 
+        Log.i(TAG, ACTIVITY_CLASS+ " " + TABLE_NAME +
+                " DB on insterData " + reslutforLog + " isterted");
         return true;
     }
 
@@ -366,13 +368,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
 
-        if (cursor.moveToFirst()) {
+        cursor.moveToFirst();
+        if (cursor.getString(cursor.getColumnIndex(COLUMN_0)) != null) {
             // table is not empty
-            result = false;
+
+            Log.i(TAG,ACTIVITY_CLASS + "Tablename:             " + tableName);
+            Log.i(TAG,ACTIVITY_CLASS + "Info / PlatinMuneze:   " + cursor.getString(cursor.getColumnIndex(COLUMN_10)));
 
         } else {
             // table is empty
-            result = true;
+            result = false;
         }
         cursor.close();
         return result;
