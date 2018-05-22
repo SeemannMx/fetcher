@@ -18,6 +18,15 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_1;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_10;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_2;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_3;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_4;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_5;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_7;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
 
 public class DiagrammActivity extends AppCompatActivity {
 
@@ -169,8 +178,8 @@ public class DiagrammActivity extends AppCompatActivity {
         cursor.moveToLast();
 
         // sum of gold
-        double presentGoldPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
-        double result = totalGold * presentGoldPrice;
+        double presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
+        double result = totalGold * presentPrice;
 
         // convert double in doubledigit number
         String goldToView = String.valueOf(new DecimalFormat("##.##").format(result));
@@ -178,8 +187,64 @@ public class DiagrammActivity extends AppCompatActivity {
         // set data in view
         diagDataGold.setText(goldToView);
 
+        // sum of silber
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
+        result = totalSilber * presentPrice;
+
+        // convert double in doubledigit number
+        String silberToView = String.valueOf(new DecimalFormat("##.##").format(result));
+
+        // sum of palladium
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
+        result = totalPalladium * presentPrice;
+
+        // convert double in doubledigit number
+        String pldToView = String.valueOf(new DecimalFormat("##.##").format(result));
+
+        // sum of platin
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
+        result = totalPlatin * presentPrice;
+
+        // convert double in doubledigit number
+        String ptToView = String.valueOf(new DecimalFormat("##.##").format(result));
+
+        // sum of rhodium
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
+        result = totalRhodium * presentPrice;
+
+        // convert double in doubledigit number
+        String rhdToView = String.valueOf(new DecimalFormat("##.##").format(result));
+
+        // sum of coins
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
+        result = totalGoldmark * presentPrice;
+
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
+        result = result + totalGoldmuenze * presentPrice;
+
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));
+        result = result + totalSilberMuenze * presentPrice;
+
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));
+        result = result + totalPldMuenze * presentPrice;
+
+        presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
+        result = result + totalPtMuenze * presentPrice;
+
+        // convert double in doubledigit number
+        String coinToView = String.valueOf(new DecimalFormat("##.##").format(result));
+
+        // set data in view
+        diagDataGold.setText(goldToView);
+        diagDataSilber.setText(silberToView);
+        diagDataPalladium.setText(pldToView);
+        diagDataPlatin.setText(ptToView);
+        diagDataRhodium.setText(rhdToView);
+        diagDataCoin.setText(coinToView);
+
         // log what happend
         Log.i(TAG,CLASS + " set gold in view: " + goldToView);
+        Log.i(TAG,CLASS + " index gold: " + cursor.getColumnIndex(COLUMN_2));
 
     }
 }

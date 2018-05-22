@@ -240,7 +240,7 @@ public class EquityActivity extends AppCompatActivity {
 
             double silbermuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));
             double silbermuenzeTresure = silbermuenzePerPiece * portfolio.get("Silbermuenze");
-            Log.i(TAG, "Goldmuenze Tresure: " + silbermuenzeTresure);
+            Log.i(TAG, "Silbermuenze Tresure: " + silbermuenzeTresure);
 
             double pldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));
             double pldmuenzeTresure = pldmuenzePerPiece * portfolio.get("Palladiummuenze");
