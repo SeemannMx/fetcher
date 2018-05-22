@@ -2,8 +2,10 @@ package de.homemade.fetcher;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,7 +14,10 @@ import com.google.gson.Gson;
 
 import org.achartengine.GraphicalView;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
+
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_1;
 
 public class DiagrammActivity extends AppCompatActivity {
 
@@ -77,6 +82,9 @@ public class DiagrammActivity extends AppCompatActivity {
 
         // get content
         fillPieChart();
+
+        // fill textviews
+        setTotalPerItem();
 
 
     }
@@ -144,6 +152,7 @@ public class DiagrammActivity extends AppCompatActivity {
     // set total equity per item
     private void setTotalPerItem(){
 
+        // get data from portfolio
         Double totalGold = portfolio.get("Gold");                   // 176
         Double totalSilber = portfolio.get("Silber");               // 376
         Double totalPlatin = portfolio.get("Platin");               // 326
@@ -155,7 +164,22 @@ public class DiagrammActivity extends AppCompatActivity {
         Double totalPldMuenze = portfolio.get("Palladiummuenze");   // 1
         Double totalPtMuenze = portfolio.get("Platinmuenze");       // 1
 
+        // prepere database table
+        Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
+        cursor.moveToLast();
 
+        // sum of gold
+        double presentGoldPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
+        double result = totalGold * presentGoldPrice;
+
+        // convert double in doubledigit number
+        String goldToView = String.valueOf(new DecimalFormat("##.##").format(result));
+
+        // set data in view
+        diagDataGold.setText(goldToView);
+
+        // log what happend
+        Log.i(TAG,CLASS + " set gold in view: " + goldToView);
 
     }
 }
