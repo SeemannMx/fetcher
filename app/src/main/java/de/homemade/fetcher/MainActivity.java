@@ -43,6 +43,7 @@ import static de.homemade.fetcher.DatabaseHelper.COLUMN_5;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
+import static de.homemade.fetcher.DatabaseHelper.TABLE_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -110,12 +111,11 @@ public class MainActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
-        // dbHelper.deletePriceTable();
-        // dbHelper.deletePortfolioTable();
 
         initAllViews();
         fetchDataFromESG();
         getEquity();
+        setDataFromTableIfAny();
 
     }
 
@@ -208,33 +208,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(isOnline()) {
-                    if (task.getStatus() == AsyncTask.Status.FINISHED && task.getStatus() != AsyncTask.Status.PENDING) {
-                        Log.i(TAG, " asynctask finished and data ready");
-                        isValueEmpty();
-                        Intent intent = new Intent(MainActivity.this, EquityActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Log.i(TAG, " asynctask NOT finished and data NOT ready");
-                        Toast toast = Toast.makeText(context, "data not ready jet", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        gold = "0";
-                        silber = "0";
-                        palladium = "0";
-                        platin = "0";
-                        rhodium = "0";
-                        goldMark = "0";
-                        goldMunze = "0";
-                        silberMark = "0";
-                        palladiumMunze = "0";
-                        platinMunze = "0";
-                    }
+                // refernce check if async task is finished
+                // task.getStatus() == AsyncTask.Status.FINISHED && task.getStatus() != AsyncTask.Status.PENDING
+
+                if (!dbHelper.isTableEmpty(TABLE_NAME) || isOnline()) {
+                    Log.i(TAG, " asynctask finished and data ready");
+                    isValueEmpty();
+                    Intent intent = new Intent(MainActivity.this, EquityActivity.class);
+                    startActivity(intent);
                 } else {
-                    Log.i(TAG, " phone is not online");
-                    Toast toast = Toast.makeText(context, "phone is not onlie", Toast.LENGTH_SHORT);
+                    Log.i(TAG, "data NOT ready");
+                    Toast toast = Toast.makeText(context, "data not ready", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                    gold = "0";
+                    silber = "0";
+                    palladium = "0";
+                    platin = "0";
+                    rhodium = "0";
+                    goldMark = "0";
+                    goldMunze = "0";
+                    silberMark = "0";
+                    palladiumMunze = "0";
+                    platinMunze = "0";
                 }
             }
         });
@@ -393,6 +389,10 @@ public class MainActivity extends AppCompatActivity {
                     setDot(platinMunze),
                     date);
 
+            Toast toast = Toast.makeText(context, "async task completed", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
         }
         // find and replace komme with dot
         private String setDot(String stringWithKomma){
@@ -438,7 +438,10 @@ public class MainActivity extends AppCompatActivity {
             dataPlatinmark.setText(platinMunze  + " €");
 
 
-        }
+        } else {
 
+            Log.i(TAG,CLASS + " database is empty or offline" );
+
+        }
     }
 }
