@@ -268,6 +268,7 @@ public class EquityActivity extends AppCompatActivity {
             // todo remove instert in DB
             dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
 
+            cursor.close();
 
 
         } else {

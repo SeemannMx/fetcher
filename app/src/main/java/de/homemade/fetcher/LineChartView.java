@@ -9,12 +9,10 @@ import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import static de.homemade.fetcher.DatabaseHelper.DATE;
@@ -61,9 +59,7 @@ public class LineChartView {
 
         }
 
-
-
-
+        /*
         ArrayList<Double> myList = new ArrayList<>();
 
         myList.add(0, -1.0);
@@ -80,8 +76,7 @@ public class LineChartView {
             Double value = myList.get(i);
             series.add(i,value);
         }
-
-
+        */
 
         // create renderer
         XYSeriesRenderer renderer = new XYSeriesRenderer();
@@ -109,7 +104,8 @@ public class LineChartView {
         mRenderer.setYAxisMin(0);
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        dataset.addSeries(series);
+        // dataset.addSeries(series);
+        dataset.addSeries(seriesS);
 
         // show grid
         mRenderer.setShowGrid(true); // we show the grid

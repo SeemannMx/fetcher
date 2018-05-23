@@ -49,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+
     }
 
     /**
@@ -71,6 +72,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // sqLiteDatabase.execSQL(create table table_name(COL_1 int primary key auto not null, ....);)
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+        // drop table for teststage - remove in produktive stage
+        // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PORTFOLIO);
+
         sqLiteDatabase.execSQL("create table " + TABLE_NAME + "("
                 + COLUMN_0 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                 + COLUMN_1 + " TEXT,"
@@ -109,7 +115,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 
-        // Todo remove one db is productive
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PORTFOLIO);
 
