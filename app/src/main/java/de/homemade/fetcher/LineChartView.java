@@ -88,7 +88,7 @@ public class LineChartView {
 
         // add oint markers
         renderer.setPointStyle(PointStyle.CIRCLE);
-        renderer.setPointStrokeWidth(3);
+        renderer.setPointStrokeWidth(8);
 
         // create renderer that controls each single renderer for each series
         XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
@@ -100,8 +100,8 @@ public class LineChartView {
 
         // disable pan on two axis
         mRenderer.setPanEnabled(false, false);
-        mRenderer.setYAxisMax(35);
-        mRenderer.setYAxisMin(0);
+        mRenderer.setYAxisMax(50000);
+        mRenderer.setYAxisMin(-5000);
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
         // dataset.addSeries(series);

@@ -265,8 +265,12 @@ public class EquityActivity extends AppCompatActivity {
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
 
-            // todo remove instert in DB
             dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
+            dbHelper.insertDataIntoPortfolioTable("20000","11.05.1984");
+            dbHelper.insertDataIntoPortfolioTable("15000","12.05.1984");
+            dbHelper.insertDataIntoPortfolioTable("15000","13.05.1984");
+            dbHelper.insertDataIntoPortfolioTable("25000","14.05.1984");
+            dbHelper.insertDataIntoPortfolioTable("30000","15.05.1984");
 
             cursor.close();
 
