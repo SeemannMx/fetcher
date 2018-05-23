@@ -59,14 +59,14 @@ public class PieChartView extends GraphicalView {
      */
     private static DefaultRenderer getRenderer() {
 
-        int[] colors = new int[] {  COLOR_GREEN,
-                                    COLOR_ORANGE,
+        // count of color has to be same as count of input values for the diagramms
+        int[] colors = new int[] {
                                     COLOR_BLUE,
-                                    COLOR_PETROL,
+                                    COLOR_ULTRA_VIOLETT,
                                     COLOR_DEEP_PETROL,
                                     COLOR_VIOLETT,
-                                    COLOR_ULTRA_VIOLETT,
-                                    COLOR_PLUM
+                                    COLOR_PETROL,
+                                    COLOR_GREEN
         };
 
         // int[] colors = new int[] { COLOR_GREEN, COLOR_ORANGE, COLOR_BLUE};
@@ -92,22 +92,16 @@ public class PieChartView extends GraphicalView {
      * @param context the context
      * @return a CategorySeries instance with the data supplied
      */
-    private static CategorySeries getDataSet(Context context, HashMap<String, Double> portfolio) {
-
-
-
-        int income = 5000;
-        int costs = 2500;
+    private static CategorySeries getDataSet(Context context, HashMap<String, Double> sumOfItems) {
 
         CategorySeries series = new CategorySeries("Chart");
-        series.add(context.getString(R.string.income), income);
-        series.add(context.getString(R.string.costs), costs);
-        series.add(context.getString(R.string.total), income - costs);
-        series.add(context.getString(R.string.Gold), 1000);
-        series.add(context.getString(R.string.Silber), 1000);
-        series.add(context.getString(R.string.Palladium), 1000);
-        series.add(context.getString(R.string.Platin), 1000);
-        series.add(context.getString(R.string.Rhodium), 1000);
+        series.add(context.getString(R.string.Gold),sumOfItems.get("sumGold"));
+        series.add(context.getString(R.string.Silber), sumOfItems.get("sumSilber"));
+        series.add(context.getString(R.string.Palladium), sumOfItems.get("sumPalladium"));
+        series.add(context.getString(R.string.Platin), sumOfItems.get("sumPlatin"));
+        series.add(context.getString(R.string.Rhodium), sumOfItems.get("sumRhodium"));
+        series.add(context.getString(R.string.Coins), sumOfItems.get("sumCoins"));
+
         return series;
     }
 

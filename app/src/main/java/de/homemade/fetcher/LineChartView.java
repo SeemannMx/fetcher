@@ -1,18 +1,29 @@
 package de.homemade.fetcher;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.util.Log;
 
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
+import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static de.homemade.fetcher.DatabaseHelper.DATE;
+import static de.homemade.fetcher.DatabaseHelper.PORTFOLIO_VALUE;
 
 public class LineChartView {
+
+    String TAG = "FETCHER ";
+    String CLASS = "LINE DIAGR ";
 
     public static final int COLOR_GREEN = Color.parseColor("#62c51a");
     public static final int COLOR_ORANGE = Color.parseColor("#ff6c0a");
@@ -23,7 +34,35 @@ public class LineChartView {
     public static final int COLOR_ULTRA_VIOLETT = Color.parseColor("#b26490");
     public static final int COLOR_DEEP_PETROL = Color.parseColor("#577681");
 
-    public GraphicalView lineDiagramm(Context context){
+    DatabaseHelper dbHelper;
+
+    public GraphicalView lineDiagramm(Context context) {
+
+        dbHelper = DatabaseHelper.getInstance(context);
+        Cursor cursor = dbHelper.getAllDataFromDatabase("portfolio_table");
+        cursor.moveToFirst();
+
+        // todo continuee
+        // populate the series  with date and value
+        TimeSeries seriesS = new TimeSeries("diagramm of portfolio value");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        while(cursor.moveToNext()){
+
+            try{
+                Double value = cursor.getDouble(cursor.getColumnIndex(PORTFOLIO_VALUE));
+                Date date = dateFormat.parse(cursor.getString(cursor.getColumnIndex(DATE)));
+                seriesS.add(date,value);
+                Log.i( TAG, CLASS + " >>>>>>>>>> date: " + date + " value: " + value);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
+
+
 
         ArrayList<Double> myList = new ArrayList<>();
 
@@ -41,6 +80,8 @@ public class LineChartView {
             Double value = myList.get(i);
             series.add(i,value);
         }
+
+
 
         // create renderer
         XYSeriesRenderer renderer = new XYSeriesRenderer();

@@ -103,6 +103,7 @@ public class EquityActivity extends AppCompatActivity {
 
     }
 
+
     // create portfolio
     private void createPortfolio(){
 
@@ -205,50 +206,50 @@ public class EquityActivity extends AppCompatActivity {
             double goldTresure = goldPerGramm * portfolio.get("Gold");
 
             String tempGl = new DecimalFormat("##.##").format(goldTresure);
-            Log.i(TAG, "Gold Tresure: " + tempGl);
+            Log.i(TAG, "Gold Tresure:               " + tempGl);
 
             double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
             double silberTresure = silberPerGramm * portfolio.get("Silber");
-            Log.i(TAG, "Silber Tresure: " + silberTresure);
+            Log.i(TAG, "Silber Tresure:             " + silberTresure);
 
             double palladiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
             double palladiumTresure = palladiumPerGramm * portfolio.get("Palladium");
-            Log.i(TAG, "Palladium Tresure: " + palladiumTresure);
+            Log.i(TAG, "Palladium Tresure:          " + palladiumTresure);
 
             double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
             double platinTresure = platinPerGramm * portfolio.get("Platin");
 
             String tempPL = new DecimalFormat("##.##").format(platinTresure);
-            Log.i(TAG, "Platin Tresure: " + tempPL);
+            Log.i(TAG, "Platin Tresure:             " + tempPL);
 
             double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
             double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
 
             String tempRh = new DecimalFormat("##.##").format(rhodiumTresure);
-            Log.i(TAG, "Rhodium Tresure: " + tempRh);
+            Log.i(TAG, "Rhodium Tresure:            " + tempRh);
 
             // Value of Coins
             double goldmarkPerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
             double goldmarkTresure = goldmarkPerPiece * portfolio.get("Goldmark");
 
             String tempGlmrk = new DecimalFormat("##.##").format(goldmarkTresure);
-            Log.i(TAG, "Goldmark Tresure: " + tempGlmrk);
+            Log.i(TAG, "Goldmark Tresure:           " + tempGlmrk);
 
             double goldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
             double goldmuenzeTresure = goldmuenzePerPiece * portfolio.get("Goldmuenze");
-            Log.i(TAG, "Goldmuenze Tresure: " + goldmuenzeTresure);
+            Log.i(TAG, "Goldmuenze Tresure:         " + goldmuenzeTresure);
 
             double silbermuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));
             double silbermuenzeTresure = silbermuenzePerPiece * portfolio.get("Silbermuenze");
-            Log.i(TAG, "Silbermuenze Tresure: " + silbermuenzeTresure);
+            Log.i(TAG, "Silbermuenze Tresure:       " + silbermuenzeTresure);
 
             double pldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));
             double pldmuenzeTresure = pldmuenzePerPiece * portfolio.get("Palladiummuenze");
-            Log.i(TAG, "Palladiummuenze Tresure: " + pldmuenzeTresure);
+            Log.i(TAG, "Palladiummuenze Tresure:    " + pldmuenzeTresure);
 
             double ptmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
             double ptmuenzeTresure = ptmuenzePerPiece * portfolio.get("Platinmuenze");
-            Log.i(TAG, "Platinmuenze Tresure: " + ptmuenzeTresure);
+            Log.i(TAG, "Platinmuenze Tresure:       " + ptmuenzeTresure);
 
             double sumIgnots = goldTresure + silberTresure + palladiumTresure + platinTresure + rhodiumTresure;
             double sumCoins = goldmarkTresure + goldmuenzeTresure + silbermuenzeTresure + pldmuenzeTresure + ptmuenzeTresure;
@@ -258,10 +259,15 @@ public class EquityActivity extends AppCompatActivity {
             String tempTotalEquity = new DecimalFormat("##.##").format(sumEquity);
 
             totalEquity = tempTotalEquity + " €";
-            Log.i(TAG, "TOTAL EQUITY: " + totalEquity);
+            Log.i(TAG, "TOTAL EQUITY:               " + totalEquity);
+
 
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
+
+            // todo remove instert in DB
+            dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
+
 
 
         } else {
@@ -270,6 +276,7 @@ public class EquityActivity extends AppCompatActivity {
 
         }
     }
+
 
     // calculate kroegerrand
     private String calcKroegerRand(String valueProGramm){

@@ -108,6 +108,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     // @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+
+        // Todo remove one db is productive
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PORTFOLIO);
 

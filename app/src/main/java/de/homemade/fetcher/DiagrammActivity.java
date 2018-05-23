@@ -36,6 +36,7 @@ public class DiagrammActivity extends AppCompatActivity {
     Context context;
     DatabaseHelper dbHelper;
     HashMap<String, Double >portfolio;
+    HashMap<String, Double >sumOfItems;
 
     // general views
     LinearLayout main_diagramm_layout;
@@ -89,12 +90,11 @@ public class DiagrammActivity extends AppCompatActivity {
         initAllViews();
         prepareForDiagramm();
 
-        // get content
+        // fill ie chart
         fillPieChart();
 
-        // fill textviews
-        setTotalPerItem();
-
+        // fill line chart
+        fillLineChart();
 
     }
 
@@ -104,15 +104,32 @@ public class DiagrammActivity extends AppCompatActivity {
         portfolio = (HashMap<String, Double>) intent.getSerializableExtra("portfolio");
         Gson g = new Gson();
         g.toJson(portfolio);
+
+        sumOfItems = new HashMap<String, Double>();
+
+        // fill textviews and create new hashmap for pie chart
+        setTotalPerItem();
+
     }
 
     // fill pie chart from database
     private void fillPieChart(){
 
-        chartViewPie = PieChartView.getNewInstance(context, portfolio);
+        chartViewPie = PieChartView.getNewInstance(context, sumOfItems);
         chartPie.addView(chartViewPie);
 
     }
+
+    // fill line chart from database
+    private void fillLineChart(){
+        // get and set line chart diagramm
+
+        LineChartView lcv = new LineChartView();
+        chartView = lcv.lineDiagramm(context);
+        chartLayout.addView(chartView);
+
+    }
+
 
     // initalize all views
     private void initAllViews(){
@@ -151,10 +168,7 @@ public class DiagrammActivity extends AppCompatActivity {
         chartLayout = findViewById(R.id.chart);
         chartPie = findViewById(R.id.chartPie);
 
-        // get and set line chart diagramm
-        LineChartView lcv = new LineChartView();
-        chartView = lcv.lineDiagramm(context);
-        chartLayout.addView(chartView);
+
 
     }
 
@@ -181,6 +195,9 @@ public class DiagrammActivity extends AppCompatActivity {
         double presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
         double result = totalGold * presentPrice;
 
+        // add to Hash map, for a later use in pie chart
+        sumOfItems.put("sumGold", result);
+
         // convert double in doubledigit number
         String goldToView = String.valueOf(new DecimalFormat("##.##").format(result));
 
@@ -191,12 +208,18 @@ public class DiagrammActivity extends AppCompatActivity {
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
         result = totalSilber * presentPrice;
 
+        // add to Hash map, for a later use in pie chart
+        sumOfItems.put("sumSilber", result);
+
         // convert double in doubledigit number
         String silberToView = String.valueOf(new DecimalFormat("##.##").format(result));
 
         // sum of palladium
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
         result = totalPalladium * presentPrice;
+
+        // add to Hash map, for a later use in pie chart
+        sumOfItems.put("sumPalladium", result);
 
         // convert double in doubledigit number
         String pldToView = String.valueOf(new DecimalFormat("##.##").format(result));
@@ -205,12 +228,18 @@ public class DiagrammActivity extends AppCompatActivity {
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
         result = totalPlatin * presentPrice;
 
+        // add to Hash map, for a later use in pie chart
+        sumOfItems.put("sumPlatin", result);
+
         // convert double in doubledigit number
         String ptToView = String.valueOf(new DecimalFormat("##.##").format(result));
 
         // sum of rhodium
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
         result = totalRhodium * presentPrice;
+
+        // add to Hash map, for a later use in pie chart
+        sumOfItems.put("sumRhodium", result);
 
         // convert double in doubledigit number
         String rhdToView = String.valueOf(new DecimalFormat("##.##").format(result));
@@ -231,6 +260,9 @@ public class DiagrammActivity extends AppCompatActivity {
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));
         result = result + totalPtMuenze * presentPrice;
 
+        // add to Hash map, for a later use in pie chart
+        sumOfItems.put("sumCoins", result);
+
         // convert double in doubledigit number
         String coinToView = String.valueOf(new DecimalFormat("##.##").format(result));
 
@@ -242,9 +274,9 @@ public class DiagrammActivity extends AppCompatActivity {
         diagDataRhodium.setText(rhdToView);
         diagDataCoin.setText(coinToView);
 
-        // log what happend
-        Log.i(TAG,CLASS + " set gold in view: " + goldToView);
-        Log.i(TAG,CLASS + " index gold: " + cursor.getColumnIndex(COLUMN_2));
+        Gson g = new Gson();
+        Log.i(TAG, CLASS + "sumOfItems: \n" + g.toJson(sumOfItems));
 
+        cursor.close();
     }
 }
