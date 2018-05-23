@@ -28,7 +28,7 @@ public class Timestamp {
         Long timestamp = System.currentTimeMillis()/1000;
         this.TIME_STAMP = timestamp;
 
-        Log.e(TAG, CLASS + " TIME STAMP - createTimeStamp "+ timestamp);
+        Log.i(TAG, CLASS + " TIME STAMP - createTimeStamp "+ timestamp);
 
         return timestamp;
     }
@@ -42,7 +42,7 @@ public class Timestamp {
     public Long whatIsTheTime(){
         Long whatIsTheTime = System.currentTimeMillis()/1000;
 
-        Log.e(TAG, CLASS + " WHAT IS THE TIME STAMP "+ whatIsTheTime);
+        Log.i(TAG, CLASS + " WHAT IS THE TIME STAMP "+ whatIsTheTime);
 
         return whatIsTheTime;
 
@@ -87,7 +87,7 @@ public class Timestamp {
 
         // t0l is default return value if no data is found with "TIME_STAMP"
         Long time = sharedprefCall.getLong("TIME_STAMP", 0L);
-        Log.e(TAG, CLASS + " WHAT IS THE TIME STAMP CALL "+ time);
+        Log.i(TAG, CLASS + " LAST TIME STAMP: "+ time);
 
         return time;
 
@@ -112,7 +112,7 @@ public class Timestamp {
 
         // apply changed to shared preferences
         editor.apply();
-        Log.e(TAG, CLASS + " WHAT IS THE TIME STAMP SAVE "+ 0L);
+        Log.e(TAG, CLASS + " TIME STAMP RESETED");
 
     }
 

@@ -215,7 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + result.getString(result.getColumnIndex(COLUMN_9)) + " "
                         + result.getString(result.getColumnIndex(COLUMN_10));
 
-                Log.i(TAG, ACTIVITY_CLASS + " " + output);
+                // Log.i(TAG, ACTIVITY_CLASS + " get all data from database \n" + output);
             }
 
         } else if(tableName.equals(TABLE_NAME_PORTFOLIO)){
@@ -226,7 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + result.getString(result.getColumnIndex(PORTFOLIO_VALUE)) + " "
                         + result.getString(result.getColumnIndex(DATE));
 
-                // Log.i(TAG, ACTIVITY_CLASS + " " + output);
+                // Log.i(TAG, ACTIVITY_CLASS + " get all data from database \n" + output);
             }
         }
 
