@@ -27,6 +27,12 @@ import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_7;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
+import static de.homemade.fetcher.PieChartView.COLOR_BLUE;
+import static de.homemade.fetcher.PieChartView.COLOR_DEEP_PETROL;
+import static de.homemade.fetcher.PieChartView.COLOR_GREEN;
+import static de.homemade.fetcher.PieChartView.COLOR_PETROL;
+import static de.homemade.fetcher.PieChartView.COLOR_ULTRA_VIOLETT;
+import static de.homemade.fetcher.PieChartView.COLOR_VIOLETT;
 
 public class DiagrammActivity extends AppCompatActivity {
 
@@ -111,6 +117,9 @@ public class DiagrammActivity extends AppCompatActivity {
 
         // fill textviews and create new hashmap for pie chart
         setTotalPerItem();
+
+        // set appropiate colors for text
+        setTextColor();
 
     }
 
@@ -293,5 +302,17 @@ public class DiagrammActivity extends AppCompatActivity {
         Log.i(TAG, CLASS + "sumOfItems: \n" + g.toJson(sumOfItems));
 
         cursor.close();
+    }
+
+    // set color of first char in text
+    private void setTextColor(){
+
+        diagTextGold.setTextColor(COLOR_BLUE);
+        diagTextSilber.setTextColor(COLOR_ULTRA_VIOLETT);
+        diagTextPalladium.setTextColor(COLOR_DEEP_PETROL);
+        diagTextPlatin.setTextColor(COLOR_VIOLETT);
+        diagTextRhodium.setTextColor(COLOR_PETROL);
+        diagTextCoin.setTextColor(COLOR_GREEN);
+
     }
 }

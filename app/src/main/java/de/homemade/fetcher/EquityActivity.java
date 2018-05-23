@@ -28,6 +28,12 @@ import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_7;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
+import static de.homemade.fetcher.DatabaseHelper.TABLE_NAME;
+import static de.homemade.fetcher.PieChartView.COLOR_BLUE;
+import static de.homemade.fetcher.PieChartView.COLOR_DEEP_PETROL;
+import static de.homemade.fetcher.PieChartView.COLOR_PETROL;
+import static de.homemade.fetcher.PieChartView.COLOR_ULTRA_VIOLETT;
+import static de.homemade.fetcher.PieChartView.COLOR_VIOLETT;
 
 public class EquityActivity extends AppCompatActivity {
 
@@ -99,6 +105,8 @@ public class EquityActivity extends AppCompatActivity {
         initAllViews();
         createPortfolio();
         getSumOfEquity();
+        setTextColor();
+        setContentinProzent();
         showDiagramm();
 
     }
@@ -275,9 +283,6 @@ public class EquityActivity extends AppCompatActivity {
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
 
-            // dbHelper.deletePortfolioTable();
-            // dbHelper.deletePriceTable();
-
             dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
             dbHelper.insertDataIntoPortfolioTable("20000","11.05.1984");
             dbHelper.insertDataIntoPortfolioTable("15000","12.05.1984");
@@ -337,5 +342,64 @@ public class EquityActivity extends AppCompatActivity {
     }
 
 
+    // set color of first char in text
+    private void setTextColor(){
 
+        equityGoldText.setTextColor(COLOR_BLUE);
+        equitySilberText.setTextColor(COLOR_ULTRA_VIOLETT);
+        equityPalladiumText.setTextColor(COLOR_DEEP_PETROL);
+        equityPlatinText.setTextColor(COLOR_VIOLETT);
+        equityRhodiumText.setTextColor(COLOR_PETROL);
+
+    }
+
+    // set data in prozent per view
+    private void setContentinProzent(){
+
+        Cursor cursor = dbHelper.getAllDataFromDatabase(TABLE_NAME);
+        cursor.moveToLast();
+
+        String goldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_1)); // gold
+        Double goldProzentDouble = Double.parseDouble(goldProzentString);
+
+        String silberProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_2)); // silber
+        Double silberProzentDouble = Double.parseDouble(silberProzentString);
+
+        String pldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_3)); // palladium
+        Double pldProzentDouble = Double.parseDouble(pldProzentString);
+
+        String ptProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_4)); // platin
+        Double ptProzentDouble = Double.parseDouble(ptProzentString);
+
+        String rhdProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_5)); // rhodium
+        Double rhdProzentDouble = Double.parseDouble(rhdProzentString);
+
+        Double total =  goldProzentDouble +
+                        silberProzentDouble +
+                        pldProzentDouble +
+                        ptProzentDouble +
+                        rhdProzentDouble;
+
+        goldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * goldProzentDouble) / total)) + " %";
+        silberProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * silberProzentDouble) / total)) + " %";
+        pldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * pldProzentDouble) / total)) + " %";
+        ptProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * ptProzentDouble) / total)) + " %";
+        rhdProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * rhdProzentDouble) / total)) + " %";
+
+        Log.i(TAG, CLASS + "GOLDDDDD: " + goldProzentString);
+
+        Log.i(TAG,CLASS + "\n" +
+                                goldProzentString + " \n" +
+                                silberProzentString +  " \n" +
+                                pldProzentString +  " \n" +
+                                ptProzentString +  " \n" +
+                                rhdProzentString +  " \n");
+
+        equityGoldProzent.setText(goldProzentString);
+        equitySilberProzent.setText(silberProzentString);
+        equityPalladiumProzent.setText(pldProzentString);
+        equityPlatinProzent.setText(ptProzentString);
+        equityRhodiumProzent.setText(rhdProzentString);
+
+    }
 }
