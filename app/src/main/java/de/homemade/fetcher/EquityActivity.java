@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -92,6 +94,8 @@ public class EquityActivity extends AppCompatActivity {
     TextView equityRhodiumText;
     TextView equityRhodiumProzent;
 
+    ImageButton callImageButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +112,7 @@ public class EquityActivity extends AppCompatActivity {
         setTextColor();
         setContentinProzent();
         showDiagramm();
+        makeCallToESG();
 
     }
 
@@ -208,6 +213,8 @@ public class EquityActivity extends AppCompatActivity {
 
         // init status of views
         layouTable.setClickable(false);
+
+        callImageButton = findViewById(R.id.callImageButton);
 
     }
 
@@ -386,8 +393,6 @@ public class EquityActivity extends AppCompatActivity {
         ptProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * ptProzentDouble) / total)) + " %";
         rhdProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * rhdProzentDouble) / total)) + " %";
 
-        Log.i(TAG, CLASS + "GOLDDDDD: " + goldProzentString);
-
         Log.i(TAG,CLASS + "\n" +
                                 goldProzentString + " \n" +
                                 silberProzentString +  " \n" +
@@ -400,6 +405,28 @@ public class EquityActivity extends AppCompatActivity {
         equityPalladiumProzent.setText(pldProzentString);
         equityPlatinProzent.setText(ptProzentString);
         equityRhodiumProzent.setText(rhdProzentString);
+
+    }
+
+    // make call to ESG Rheinstetten
+    private void makeCallToESG(){
+
+        callImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // ESG Rheinstetten
+                String phoneNr = "+4972429535177";
+
+                // Test Nummer
+                String testPhoneNr = "+491729083152";
+
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", testPhoneNr, null));
+                startActivity(intent);
+
+                Log.i(TAG, CLASS + " make phone call to " + testPhoneNr);
+            }
+        });
 
     }
 }

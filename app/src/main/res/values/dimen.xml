@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- general -->
+    <dimen name="mainElevation"> 4px </dimen>
+
+
     <!-- main activity -->
     <dimen name="textField"> 12sp </dimen>
     <dimen name="imageView"> 60dp </dimen>
@@ -8,12 +12,12 @@
     <dimen name="marginRight"> 32dp </dimen>
     <dimen name="marginLeft"> 12dp </dimen>
     <dimen name="mainPadding"> 24dp </dimen>
-    <dimen name="mainElevation"> 4px </dimen>
+    <dimen name="mainMargin"> 24dp </dimen>
 
     <!-- equity activity -->
     <dimen name="equityPadding"> 12dp </dimen>
     <dimen name="equityMiniPadding"> 4dp </dimen>
-    <dimen name="equityMargin"> 18dp </dimen>
+    <dimen name="equityMargin"> 24dp </dimen>
     <dimen name="equityTextSize"> 20dp </dimen>
     <dimen name="equityMiniMargin"> 8dp </dimen>
 

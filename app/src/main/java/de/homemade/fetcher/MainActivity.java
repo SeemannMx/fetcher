@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     DatabaseHelper dbHelper;
     FetchAsyncTask task;
+    Timestamp timestamp;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
+        timestamp = new Timestamp();
 
         initAllViews();
         fetchDataFromESG();
@@ -165,27 +167,37 @@ public class MainActivity extends AppCompatActivity {
     //fetch data from website every 43200000 ms = 12hrs and online check
     private void fetchDataFromESG() {
 
-        if(isOnline()) {
-            // Start timer
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                public void run() {
-                    try {
-                        // fetch data via async task
-                        task = (FetchAsyncTask) new FetchAsyncTask().execute();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        Long timeSinceLastTask = (System.currentTimeMillis()/1000) - timestamp.callLastTimeStamp(context);
+        Log.i(TAG, CLASS + "  << time since last task " + "[ "+ timeSinceLastTask +" ] >>");
+
+        // exceute task only if last task has been exceuted min 12hr before
+        if(timeSinceLastTask < 43200) {
+
+            if (isOnline()) {
+                // Start timer
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    public void run() {
+                        try {
+
+                            timestamp.saveNewTimeStamp(timestamp.createTimeStamp(), context);
+                            // fetch data via async task
+                            task = (FetchAsyncTask) new FetchAsyncTask().execute();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        // 43200000 = 12hrs
                     }
-                    // 43200000 = 12hrs
-                }
-            }, 0, 43200000);
+                }, 0, 43200000);
+            } else {
+                Log.i(TAG, "device is not online");
+                Toast toast = Toast.makeText(context, "device is not online / flightmode", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
         } else {
-            Log.i(TAG, "device is not online");
-            Toast toast = Toast.makeText(context, "device is not online / flightmode", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
 
-
+            Log.i(TAG, CLASS + " time since last task is less than 12hrs" + "[ "+ timeSinceLastTask +" ]");
 
         }
     }

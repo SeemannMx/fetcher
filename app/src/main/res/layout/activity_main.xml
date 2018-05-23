@@ -356,8 +356,8 @@
             android:paddingRight="8dp"
             android:paddingLeft="8dp"
             android:textSize="16dp"
-            android:layout_marginTop="@dimen/mainPadding"
-            android:layout_marginBottom="26dp"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginBottom="@dimen/mainMargin"
             />
     </LinearLayout>
 </RelativeLayout>
