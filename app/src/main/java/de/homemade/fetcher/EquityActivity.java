@@ -107,47 +107,57 @@ public class EquityActivity extends AppCompatActivity {
     // create portfolio
     private void createPortfolio(){
 
+        // todo remove reducer in productive stage
+        double reducer = 107.45;
+
         // Gold in Gramm 1 + 100 + 25 + 50
-        portfolio.put("Gold", 176.00);
+        portfolio.put("Gold", 176.00            /reducer);
 
         // Silber in Gramm 1 + 100 + 25 + 250
-        portfolio.put("Silber", 376.00);
+        portfolio.put("Silber", 376.00          /reducer);
 
         // Palladium in Gramm 1 + 100 + 100 + 25
-        portfolio.put("Palladium", 226.00);
+        portfolio.put("Palladium", 226.00       /reducer);
 
         // Platin in Gramm 1 + 100 + 25 + 100 + 100
-        portfolio.put("Platin", 326.00);
+        portfolio.put("Platin", 326.00          /reducer);
 
         // Rhodium in Gramm 31.10
-        portfolio.put("Rhodium", 31.10);
+        portfolio.put("Rhodium", 31.10          /reducer);
 
         // Goldmark in Stueck 1 + 4 + 5
-        portfolio.put("Goldmark", 10.00);
+        portfolio.put("Goldmark", 10.00         /reducer);
 
         // Goldmuenze in Stueck
         // Fichte   1
         // Kiefer   1
         // Linde    3
-        portfolio.put("Goldmuenze", 5.00);
+        portfolio.put("Goldmuenze", 5.00        /reducer);
 
         // Silbermuenze in Stueck
         // Wiener Philharmoniker 20 + 20
         // Cook Island 1 + 20
-        portfolio.put("Silbermuenze", 61.00);
+        portfolio.put("Silbermuenze", 61.00     /reducer);
 
         // Palladiummuenze in Stueck
         // Cook Island 1
-        portfolio.put("Palladiummuenze", 1.00);
+        portfolio.put("Palladiummuenze", 1.00   /reducer);
 
         // Platinmuenze in Stueck
         // Noble 1
-        portfolio.put("Platinmuenze", 1.00);
+        portfolio.put("Platinmuenze", 1.00      /reducer);
 
-        purchasedValue = "37332,75 €";
-        dataPurchased.setText(purchasedValue);
-        tax = "3918,47 €";
-        dataTax.setText(tax);
+        // todo include purchased value in productive stage
+        // purchasedValue = "37332,75 €";
+        // dataPurchased.setText(purchasedValue);
+        // tax = "3918,47 €";
+        // dataTax.setText(tax);
+
+        // todo remove in productive stage
+        String fakevalue = "11.11 €";
+        dataPurchased.setText(fakevalue);
+        String fakeTax = "3.14€";
+        dataTax.setText(fakeTax);
 
         // Log portfolio
         Gson g = new Gson();
@@ -264,6 +274,9 @@ public class EquityActivity extends AppCompatActivity {
 
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
+
+            // dbHelper.deletePortfolioTable();
+            // dbHelper.deletePriceTable();
 
             dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
             dbHelper.insertDataIntoPortfolioTable("20000","11.05.1984");

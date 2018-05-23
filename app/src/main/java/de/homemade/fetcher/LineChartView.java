@@ -52,31 +52,11 @@ public class LineChartView {
                 Double value = cursor.getDouble(cursor.getColumnIndex(PORTFOLIO_VALUE));
                 Date date = dateFormat.parse(cursor.getString(cursor.getColumnIndex(DATE)));
                 seriesS.add(date,value);
-                Log.i( TAG, CLASS + " >>>>>>>>>> date: " + date + " value: " + value);
+                Log.i( TAG, CLASS + "\n date: " + date + " value: " + value);
             } catch (Exception e){
                 e.printStackTrace();
             }
-
         }
-
-        /*
-        ArrayList<Double> myList = new ArrayList<>();
-
-        myList.add(0, -1.0);
-        myList.add(1,4.0);
-        myList.add(2,6.0);
-        myList.add(3,-8.0);
-        myList.add(4,10.0);
-        myList.add(5, 12.0);
-
-        // populate the series
-        XYSeries series = new XYSeries("diagramm of things");
-
-        for(int i = 0;i < myList.size(); i++){
-            Double value = myList.get(i);
-            series.add(i,value);
-        }
-        */
 
         // create renderer
         XYSeriesRenderer renderer = new XYSeriesRenderer();
@@ -109,6 +89,8 @@ public class LineChartView {
 
         // show grid
         mRenderer.setShowGrid(true); // we show the grid
+
+        cursor.close();
 
         return ChartFactory.getLineChartView(context,dataset,mRenderer);
 

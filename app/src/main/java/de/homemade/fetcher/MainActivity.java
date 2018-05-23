@@ -3,6 +3,7 @@ package de.homemade.fetcher;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -32,6 +33,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_1;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_10;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_2;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_3;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_4;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_5;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
+import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,8 +109,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
-        dbHelper = new DatabaseHelper(context);
-        dbHelper.deletePriceTable();
+        dbHelper = DatabaseHelper.getInstance(context);
+        // dbHelper.deletePriceTable();
+        // dbHelper.deletePortfolioTable();
 
         initAllViews();
         fetchDataFromESG();
@@ -334,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
             goldMark = correctedGoldMark;
 
             // Barren Preis pro gramm
-            dataGold.setText(gold + " €");
+            dataGold.setText(gold  + " €");
             dataSilber.setText(silber + " €");
             dataPalladium.setText(palladium + " €");
             dataPlatin.setText(platin + " €");
@@ -386,5 +398,47 @@ public class MainActivity extends AppCompatActivity {
         private String setDot(String stringWithKomma){
             return stringWithKomma = stringWithKomma.replace(",",".");
         }
+    }
+
+    // get data from db table if any and set them in designated views
+    private void setDataFromTableIfAny(){
+
+        // db table is not empty or device is not online
+        if(!dbHelper.isTableEmpty(DatabaseHelper.TABLE_NAME) || !isOnline()){
+            // table is not empty
+            Cursor cursor = dbHelper.getAllDataFromDatabase(DatabaseHelper.TABLE_NAME);
+            cursor.moveToLast();
+
+            gold = cursor.getString(cursor.getColumnIndex(COLUMN_1));
+            silber = cursor.getString(cursor.getColumnIndex(COLUMN_2));
+            palladium = cursor.getString(cursor.getColumnIndex(COLUMN_3));
+            platin = cursor.getString(cursor.getColumnIndex(COLUMN_4));
+            rhodium = cursor.getString(cursor.getColumnIndex(COLUMN_5));
+
+            goldMark = cursor.getString(cursor.getColumnIndex(COLUMN_6));
+            silberMark = cursor.getString(cursor.getColumnIndex(COLUMN_8));
+            palladiumMunze = cursor.getString(cursor.getColumnIndex(COLUMN_9));
+            platinMunze = cursor.getString(cursor.getColumnIndex(COLUMN_10));
+
+            // goldmark title exist twice string needs to be corrected
+            // String correctedGoldMark = goldMark.substring(0, Math.min(goldMark.length(), 7));
+            // goldMark = correctedGoldMark;
+
+            // Barren Preis pro gramm
+            dataGold.setText(gold  + " €");
+            dataSilber.setText(silber  + " €");
+            dataPalladium.setText(palladium  + " €");
+            dataPlatin.setText(platin  + " €");
+            dataRhodium.setText(rhodium  + " €");
+
+            // Muenzen
+            dataGoldmark.setText(goldMark  + " €");
+            dataSilberMark.setText(silberMark  + " €");
+            dataPalladiummark.setText(palladiumMunze  + " €");
+            dataPlatinmark.setText(platinMunze  + " €");
+
+
+        }
+
     }
 }

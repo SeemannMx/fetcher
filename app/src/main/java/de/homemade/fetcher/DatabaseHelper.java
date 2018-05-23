@@ -73,10 +73,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        // drop table for teststage - remove in produktive stage
-        // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PORTFOLIO);
-
         sqLiteDatabase.execSQL("create table " + TABLE_NAME + "("
                 + COLUMN_0 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                 + COLUMN_1 + " TEXT,"
@@ -93,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 + ");");
 
-        Log.i(TAG,ACTIVITY_CLASS + " " + TABLE_NAME + " " + "created");
+        Log.i(TAG,ACTIVITY_CLASS + " " + TABLE_NAME + " " + "created !!!!!!!!!!!!!!!!!!");
 
         sqLiteDatabase.execSQL("create table " + TABLE_NAME_PORTFOLIO + "("
                 + ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
@@ -101,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + DATE + " TEXT"
                 + ");");
 
-        Log.i(TAG,ACTIVITY_CLASS + " " + TABLE_NAME_PORTFOLIO + " " + "created");
+        Log.i(TAG,ACTIVITY_CLASS + " " + TABLE_NAME_PORTFOLIO + " " + "created !!!!!!!!!!!!!!!!");
 
     }
 
@@ -114,9 +110,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     // @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PORTFOLIO);
 
         onCreate(sqLiteDatabase);
 
@@ -166,7 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         Log.i(TAG, ACTIVITY_CLASS+ " " + TABLE_NAME +
-                " DB on insterData " + reslutforLog + " isterted");
+                " DB on insterData " + reslutforLog + " inserted");
         return true;
     }
 
@@ -244,6 +237,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // delete data from price table
     public void deletePriceTable(){
+
+        if(!isTableEmpty(TABLE_NAME)) {
+
         Log.i(TAG, ACTIVITY_CLASS + " ENTER DELETE DB");
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -251,17 +247,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("delete from " + TABLE_NAME);
         Log.i(TAG,ACTIVITY_CLASS +  " EXIT DELETE DB");
+
+        } else {
+
+            Log.i(TAG, ACTIVITY_CLASS + " " + TABLE_NAME + " "+" Table is empty");
+
+        }
     }
 
     // delete data from portfolio table
     public void deletePortfolioTable(){
-        Log.i(TAG, ACTIVITY_CLASS + " ENTER DELETE DB");
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE_NAME_PORTFOLIO, null, null);
+        if(!isTableEmpty(TABLE_NAME_PORTFOLIO)) {
 
-        db.execSQL("delete from " + TABLE_NAME_PORTFOLIO);
-        Log.i(TAG,ACTIVITY_CLASS +  " EXIT DELETE DB");
+            Log.i(TAG, ACTIVITY_CLASS + " ENTER DELETE DB");
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            db.delete(TABLE_NAME_PORTFOLIO, null, null);
+
+            db.execSQL("delete from " + TABLE_NAME_PORTFOLIO);
+            Log.i(TAG, ACTIVITY_CLASS + " EXIT DELETE DB");
+        } else {
+
+            Log.i(TAG, ACTIVITY_CLASS + " " + TABLE_NAME_PORTFOLIO + " "+" Table is empty");
+
+        }
+    }
+
+    // check if table in db is empty
+    public boolean isTableEmpty(String tableName){
+        boolean result = false;
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            String count = "SELECT count(*) FROM " + tableName;
+
+            Cursor cursor = db.rawQuery(count, null);
+            cursor.moveToFirst();
+
+            int iCount = cursor.getInt(0);
+
+            if(iCount > 0 ){
+                result = false;
+                Log.i(TAG, ACTIVITY_CLASS + " ICount: " + iCount + " " + tableName);
+
+            } else {
+                result = true;
+            }
+
+            cursor.close();
+
+        return result;
     }
 
     // get all data from given colom
@@ -280,7 +315,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, coloums, selection,
                 null, null, null, null);
 
-        // if while block is useless !!!
         cursor.moveToFirst();
 
         // for log out put only
