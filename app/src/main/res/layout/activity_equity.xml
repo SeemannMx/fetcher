@@ -249,7 +249,6 @@
             android:textSize="16dp"
             android:layout_marginTop="@dimen/equityMargin"
             android:layout_marginBottom="@dimen/equityMargin"
-            android:elevation="@dimen/mainElevation"
             />
 
 

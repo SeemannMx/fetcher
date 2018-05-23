@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -415,16 +417,22 @@ public class EquityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.rotate);
+                // callImageButton.setAnimation(anim);
+                callImageButton.startAnimation(anim);
+
                 // ESG Rheinstetten
                 String phoneNr = "+4972429535177";
 
                 // Test Nummer
                 String testPhoneNr = "+491729083152";
 
+
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", testPhoneNr, null));
                 startActivity(intent);
 
                 Log.i(TAG, CLASS + " make phone call to " + testPhoneNr);
+
             }
         });
 
