@@ -433,21 +433,39 @@ public class EquityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Animation anim = AnimationUtils.loadAnimation(context, R.anim.rotate);
-                // callImageButton.setAnimation(anim);
-                callImageButton.startAnimation(anim);
+            Animation anim = AnimationUtils.loadAnimation(context, R.anim.rotate);
 
-                // ESG Rheinstetten
-                String phoneNr = "+4972429535177";
+            // listener to create order to arragene actions
+            anim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
 
-                // Test Nummer
-                String testPhoneNr = "+491729083152";
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                    // ESG Rheinstetten
+                    String phoneNr = "+4972429535177";
+
+                    // Test Nummer
+                    String testPhoneNr = "+491729083152";
 
 
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", testPhoneNr, null));
-                startActivity(intent);
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", testPhoneNr, null));
+                    startActivity(intent);
 
-                Log.i(TAG, CLASS + " make phone call to " + testPhoneNr);
+                    Log.i(TAG, CLASS + " make phone call to " + testPhoneNr);
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            callImageButton.startAnimation(anim);
 
             }
         });

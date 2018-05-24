@@ -34,6 +34,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_1;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_10;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_2;
@@ -481,6 +483,14 @@ public class MainActivity extends AppCompatActivity {
         dataStatus.setText(status);
 
         Log.i(TAG, CLASS + " status:             " + status);
+
+        if(status.trim().equals("CONNECTED")){
+            dataStatus.setTextColor(GREEN);
+
+        } else {
+            dataStatus.setTextColor(RED);
+
+        }
     }
 
     // get  / set last received data
@@ -489,6 +499,8 @@ public class MainActivity extends AppCompatActivity {
         String timeStampString = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(new Date(timeStampLong));
 
         Log.i(TAG, CLASS + " time / date:        " + timeStampString);
+
+        dataDateTime.setText(timeStampString);
 
     }
 }
