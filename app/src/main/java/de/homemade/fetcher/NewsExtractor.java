@@ -3,7 +3,9 @@ package de.homemade.fetcher;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.prof.rssparser.Article;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +13,8 @@ public class NewsExtractor {
 
     String TAG = "FETCHER ";
     String CLASS = "NEWS ";
+
+    String ue = "&#252;";
 
     // extract news from String
     public String extractNews(String newsString){
@@ -42,4 +46,24 @@ public class NewsExtractor {
         return refacoredNews;
     }
 
+    // converrt unicode literals to string in content
+    public ArrayList<Article> convertUnicodeToString(ArrayList<Article> list){
+
+        String date = "";
+        String content = "";
+
+        for(int i = 0; i < list.size(); i++){
+            date = String.valueOf(list.get(i) .getPubDate());
+            content = list.get(i) .getDescription();
+
+
+            content = content.replace(ue, "ue");
+
+            Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> date   : " + date);
+            Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> content: " + content);
+        }
+
+
+        return list;
+    }
 }

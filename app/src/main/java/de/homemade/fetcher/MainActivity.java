@@ -22,9 +22,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.prof.rssparser.Article;
-import com.prof.rssparser.Parser;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -32,7 +29,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -68,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
     String palladiumMunze = "";
     String platinMunze = "";
     String date = "";
-
-    String newsMain;
 
     RelativeLayout mainRelativLayout;
     ScrollView scrollView;
@@ -117,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
     FetchAsyncTask task;
     Timestamp timestamp;
-    Parser parser;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -128,13 +123,13 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
         timestamp = new Timestamp();
-        parser = new Parser();
+
 
         initAllViews();
         fetchDataFromESG();
         getEquity();
         setDataFromTableIfAny();
-        callRssFeed();
+
 
         setStatus(context);
         setDate(context);
@@ -250,12 +245,6 @@ public class MainActivity extends AppCompatActivity {
                 if (isOnline()) {
                     isValueEmpty();
                     Intent intent = new Intent(MainActivity.this, EquityActivity.class);
-
-                    if(newsMain == null){
-                        newsMain = "no news received ";
-                    }
-
-                    intent.putExtra("news", newsMain);
                     startActivity(intent);
 
                 } else {
@@ -455,35 +444,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // call rss feed
-    private void callRssFeed(){
-
-        // include RSS reader
-        String urlToRssFeed = "https://www.boerse-online.de/rss/maerkte";
-        parser.execute(urlToRssFeed);
-
-        Log.i(TAG,CLASS + " call rss feed " + urlToRssFeed);
-
-        parser.onFinish(new Parser.OnTaskCompleted() {
-            @Override
-            public void onTaskCompleted(ArrayList<Article> list) {
-
-                for(int i = 0; i < list.size(); i++){
-                    String date = String.valueOf(list.get(i) .getPubDate());
-                    String content = list.get(i) .getDescription();
-
-                    Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> date   : " + date);
-                    Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> content: " + content);
-                }
-            }
-
-            @Override
-            public void onError() {
-                Log.i(TAG,CLASS + " parser fail");
-            }
-        });
-
-    }
 
     // get data from db table if any and set them in designated views
     private void setDataFromTableIfAny(){

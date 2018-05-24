@@ -19,8 +19,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.prof.rssparser.Article;
+import com.prof.rssparser.Parser;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_1;
@@ -106,6 +110,8 @@ public class EquityActivity extends AppCompatActivity {
 
     ImageButton callImageButton;
 
+    Parser parser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +120,7 @@ public class EquityActivity extends AppCompatActivity {
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
         newsExtractor = new NewsExtractor();
-
+        parser = new Parser();
         portfolio = new HashMap<>();
 
         initAllViews();
@@ -124,7 +130,7 @@ public class EquityActivity extends AppCompatActivity {
         setContentinProzent();
         showDiagramm();
         makeCallToESG();
-        getNews();
+        callRssFeed();
 
     }
 
@@ -481,6 +487,33 @@ public class EquityActivity extends AppCompatActivity {
         Log.i(TAG,CLASS + " news equity " + newsEquity);
 
         newsText.setText(newsEquity);
+
+    }
+
+    // call rss feed
+    private void callRssFeed(){
+
+        // include RSS reader
+        String urlToRssFeed = "https://www.boerse-online.de/rss/maerkte";
+        parser.execute(urlToRssFeed);
+
+        Log.i(TAG,CLASS + " call rss feed " + urlToRssFeed);
+
+        parser.onFinish(new Parser.OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(ArrayList<Article> list) {
+                Date date;
+                String news = "";
+
+                newsExtractor.convertUnicodeToString(list);
+
+            }
+
+            @Override
+            public void onError() {
+                Log.i(TAG,CLASS + " parser fail");
+            }
+        });
 
     }
 }
