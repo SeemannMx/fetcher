@@ -480,15 +480,6 @@ public class EquityActivity extends AppCompatActivity {
 
     }
 
-    // get investment news
-    private void getNews(){
-
-        newsEquity = getIntent().getExtras().getString("news");
-        Log.i(TAG,CLASS + " news equity " + newsEquity);
-
-        newsText.setText(newsEquity);
-
-    }
 
     // call rss feed
     private void callRssFeed(){
@@ -506,7 +497,11 @@ public class EquityActivity extends AppCompatActivity {
                 String news = "";
 
                 // refactor all unicode to regular text
-                list = newsExtractor.convertUnicodeToString(list);
+                // list = newsExtractor.convertUnicodeToString(list);
+
+                // create the news String to show in view
+                newsEquity = newsExtractor.createNewsString(list);
+                newsText.setText(newsEquity);
 
             }
 

@@ -57,16 +57,47 @@ public class NewsExtractor {
             date = String.valueOf(list.get(i) .getPubDate());
             content = list.get(i) .getDescription();
 
+            // convert unicode
             content = content.replace(ue, "ue").replace(Ue,"Ue").
                                 replace(oe,"oe").replace(Oe, "oe").
                                 replace(Ae, "Ae").replace(ae,"ae").
                                 replace(ss,"ss").replace(quote, "''");
 
-            Log.i(TAG,CLASS + " \ndate   : " + date);
-            Log.i(TAG,CLASS + "content: " + content + "\n\n");
-        }
+            // set converted content in list
+            list.set(i, list.get(i)).setDescription(content);
 
+            // Log.i(TAG,CLASS + " \ndate   : " + date);
+            // Log.i(TAG,CLASS + "content: " + content + "\n\n");
+
+
+        }
 
         return list;
     }
+
+    // create news String
+    public String createNewsString(ArrayList<Article> list){
+        String news = "";
+
+        String date = "";
+        String content = "";
+        String newsPair = "";
+
+        list = convertUnicodeToString(list);
+
+        // Gson g = new Gson();
+        // Log.i(TAG,CLASS + "GSON LIST :" +  g.toJson(list));
+
+        for(int i = 0; i < list.size(); i++){
+            date = String.valueOf(list.get(i).getPubDate());
+            content = list.get(i).getDescription();
+            newsPair = date.concat( "\n- - - - - - - - - - - - - - - -\n").concat(content).concat("\n\n");
+            news = news.concat(newsPair);
+        }
+
+        Log.i(TAG, CLASS + " received / correted / formated news: \n" + news);
+
+        return news;
+    }
+
 }
