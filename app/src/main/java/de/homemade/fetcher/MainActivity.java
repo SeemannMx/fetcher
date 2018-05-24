@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     String platinMunze = "";
     String date = "";
 
+    String newsMain;
+
     RelativeLayout mainRelativLayout;
     ScrollView scrollView;
 
@@ -240,7 +242,14 @@ public class MainActivity extends AppCompatActivity {
                 if (isOnline()) {
                     isValueEmpty();
                     Intent intent = new Intent(MainActivity.this, EquityActivity.class);
+
+                    if(newsMain == null){
+                        newsMain = "no news received ";
+                    }
+
+                    intent.putExtra("news", newsMain);
                     startActivity(intent);
+
                 } else {
                     Log.i(TAG, "data NOT ready");
                     Toast toast = Toast.makeText(context, "data not ready", Toast.LENGTH_SHORT);
@@ -349,6 +358,20 @@ public class MainActivity extends AppCompatActivity {
                 silberMark = eSilberMunze.text();
                 palladiumMunze = ePalladiumMunze.text();
                 platinMunze = ePlatinMunze.text();
+
+                try {
+
+                    Document doc = Jsoup.connect("http://www.boerse-frankfurt.de/rohstoffe/nachrichten/").get();
+                    Elements links = doc.select("tbody");
+                    newsMain = links.text();
+
+                    // Log.i(TAG,CLASS + " News Link Text  " + links.text());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
 
 
             } catch (IOException e) {

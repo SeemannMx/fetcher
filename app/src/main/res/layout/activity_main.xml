@@ -221,7 +221,7 @@
                         android:layout_alignParentLeft="true"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/textField"
-                        android:text="Au Münzen: "
+                        android:text="Au coin: "
                         android:layout_weight="0.5"
                         android:textColor="@color/grey"
                         />
@@ -251,7 +251,7 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentLeft="true"
-                        android:text="Ag Münzen: "
+                        android:text="Ag coin: "
                         android:textColor="@color/grey"
                         />
 
@@ -288,7 +288,7 @@
                         android:layout_alignParentLeft="true"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/textField"
-                        android:text="Pd Münzen: "
+                        android:text="Pd coin: "
                         android:layout_weight="0.5"
                         android:textColor="@color/grey"
                         />
@@ -320,7 +320,7 @@
                         android:textSize="@dimen/textField"
                         android:gravity="center_vertical"
                         android:layout_alignParentLeft="true"
-                        android:text="Pt Münzen: "
+                        android:text="Pt coin: "
                         android:textColor="@color/grey"
                         />
 

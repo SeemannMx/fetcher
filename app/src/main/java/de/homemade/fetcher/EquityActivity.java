@@ -20,11 +20,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
@@ -76,7 +71,7 @@ public class EquityActivity extends AppCompatActivity {
     String platinPerKroegerRand;
     String rhodiumPerKroegerRand;
 
-    String news;
+    String newsEquity;
 
     String totalEquity = "";
 
@@ -127,6 +122,7 @@ public class EquityActivity extends AppCompatActivity {
         setContentinProzent();
         showDiagramm();
         makeCallToESG();
+        getNews();
 
     }
 
@@ -475,20 +471,8 @@ public class EquityActivity extends AppCompatActivity {
     // get investment news
     private void getNews(){
 
-        // fetch news from url
-        Document documentEgold = null;
-        try {
-
-            // todo from where to get news
-            documentEgold = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreis-goldmuenzen/").get();
-            Elements eGoldMark = documentEgold.select("[title=10000101-otc]");
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        newsEquity = getIntent().getExtras().getString("news");
+        Log.i(TAG,CLASS + " news equuity " + newsEquity);
 
 
     }
