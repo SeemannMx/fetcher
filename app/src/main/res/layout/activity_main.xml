@@ -338,6 +338,79 @@
 
                 </RelativeLayout>
             </LinearLayout>
+
+
+            <!-- view executed async task time / date -->
+            <LinearLayout
+                android:id="@+id/mainLayoutStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/mainMargin"
+                android:paddingLeft="@dimen/mainPadding"
+                android:paddingRight="@dimen/mainPadding">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/textField"
+                        android:text="last data received "
+                        android:layout_weight="0.5"
+                        android:textColor="@color/grey"
+                        />
+
+                    <TextView
+                        android:id="@+id/dataDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:text="00:01 10.05.1984"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/mainPadding"
+                        android:textColor="@color/grey"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentLeft="true"
+                        android:text="status "
+                        android:textColor="@color/grey"
+                        />
+
+                    <TextView
+                        android:id="@+id/dataStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/mainPadding"
+                        android:text="no connection"
+                        android:textSize="@dimen/textField"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/mainPadding"
+                        android:textColor="@color/grey"
+                        />
+
+                </RelativeLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

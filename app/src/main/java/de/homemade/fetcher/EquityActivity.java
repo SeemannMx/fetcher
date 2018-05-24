@@ -15,10 +15,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
@@ -70,6 +76,8 @@ public class EquityActivity extends AppCompatActivity {
     String platinPerKroegerRand;
     String rhodiumPerKroegerRand;
 
+    String news;
+
     String totalEquity = "";
 
     RelativeLayout equityRelativLayout;
@@ -95,6 +103,10 @@ public class EquityActivity extends AppCompatActivity {
     TextView equityPlatinProzent;
     TextView equityRhodiumText;
     TextView equityRhodiumProzent;
+
+    RelativeLayout layoutNews;
+    ScrollView scrollViewNews;
+    TextView newsText;
 
     ImageButton callImageButton;
 
@@ -213,10 +225,14 @@ public class EquityActivity extends AppCompatActivity {
         equityRhodiumText = findViewById(R.id.equityRhodiumText);
         equityRhodiumProzent = findViewById(R.id.equityRhodiumProzent);
 
-        // init status of views
-        layouTable.setClickable(false);
+        layoutNews =  findViewById(R.id.layoutNews);
+        scrollViewNews = findViewById(R.id.scrollViewNews);
+        newsText = findViewById(R.id.newsText);
 
         callImageButton = findViewById(R.id.callImageButton);
+
+        // init status of views
+        layouTable.setClickable(false);
 
     }
 
@@ -435,6 +451,27 @@ public class EquityActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    // get investment news
+    private void getNews(){
+
+        // fetch news from url
+        Document documentEgold = null;
+        try {
+
+            // todo from where to get news
+            documentEgold = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreis-goldmuenzen/").get();
+            Elements eGoldMark = documentEgold.select("[title=10000101-otc]");
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

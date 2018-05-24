@@ -229,7 +229,37 @@
                 />
         </LinearLayout>
 
+
+
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutNews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_below="@+id/layouTable"
+        android:layout_above="@+id/layoutBottom"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginTop="@dimen/equityMargin"
+        android:layout_marginBottom="@dimen/equityMargin"
+        android:alpha="0.5"
+        >
+
+        <ScrollView
+            android:id="@+id/scrollViewNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/newsText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="news news news news news news news news"/>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/layoutBottom"
@@ -238,6 +268,8 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true">
+
+
 
         <ImageButton
             android:id="@+id/callImageButton"

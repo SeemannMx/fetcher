@@ -43,7 +43,6 @@ import static de.homemade.fetcher.DatabaseHelper.COLUMN_5;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
-import static de.homemade.fetcher.DatabaseHelper.TABLE_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -99,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout bottomLine;
     Button getEquityButtom;
 
+    LinearLayout mainLayoutStatus;
+    TextView textDateTime;
+    TextView dataDateTime;
+    TextView textStatus;
+    TextView dataStatus;
+
     Context context;
     DatabaseHelper dbHelper;
     FetchAsyncTask task;
@@ -118,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
         fetchDataFromESG();
         getEquity();
         setDataFromTableIfAny();
+
+        setStatus(context);
+        setDate(context);
 
     }
 
@@ -160,6 +168,12 @@ public class MainActivity extends AppCompatActivity {
         bottomLine = findViewById(R.id.bottomLine);
         getEquityButtom = findViewById(R.id.getEquityButtom);
 
+        mainLayoutStatus = findViewById(R.id.mainLayoutStatus);
+        textDateTime = findViewById(R.id.textDateTime);
+        dataDateTime = findViewById(R.id.dataDateTime);
+        textStatus = findViewById(R.id.textStatus);
+        dataStatus = findViewById(R.id.dataStatus);
+
     }
 
 
@@ -171,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, CLASS + "  << time since last task " + "[ "+ timeSinceLastTask +" ] >>");
 
         // exceute task only if last task has been exceuted min 12hr before
-        if(timeSinceLastTask < 43200) {
+        if(true/*timeSinceLastTask < 43200*/) {
 
             if (isOnline()) {
                 // Start timer
@@ -214,8 +228,6 @@ public class MainActivity extends AppCompatActivity {
     // calculate equity by fetched data and portfolio
     private void getEquity() {
 
-
-        Log.i(TAG, " async task finished");
         getEquityButtom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,8 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 // refernce check if async task is finished
                 // task.getStatus() == AsyncTask.Status.FINISHED && task.getStatus() != AsyncTask.Status.PENDING
 
-                if (!dbHelper.isTableEmpty(TABLE_NAME) || isOnline()) {
-                    Log.i(TAG, " asynctask finished and data ready");
+                if (isOnline()) {
                     isValueEmpty();
                     Intent intent = new Intent(MainActivity.this, EquityActivity.class);
                     startActivity(intent);
@@ -455,5 +466,29 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG,CLASS + " database is empty or offline" );
 
         }
+    }
+
+    // get / set status of device
+    private void setStatus(Context context){
+
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        String status = netInfo.getDetailedState().toString();
+
+        dataStatus.setText(status);
+
+        Log.i(TAG, CLASS + " status:             " + status);
+    }
+
+    // get  / set last received data
+    private void setDate(Context context){
+        Long timeStampLong = (timestamp.callLastTimeStamp(context)) * 1000;
+        String timeStampString = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(new Date(timeStampLong));
+
+        Log.i(TAG, CLASS + " time / date:        " + timeStampString);
+
     }
 }
