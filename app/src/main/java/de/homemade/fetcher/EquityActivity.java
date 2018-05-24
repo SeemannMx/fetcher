@@ -48,6 +48,7 @@ public class EquityActivity extends AppCompatActivity {
     Context context;
     HashMap<String, Double > portfolio;
     DatabaseHelper dbHelper;
+    NewsExtractor newsExtractor;
 
     String gold = "";
     String silber = "";
@@ -71,7 +72,7 @@ public class EquityActivity extends AppCompatActivity {
     String platinPerKroegerRand;
     String rhodiumPerKroegerRand;
 
-    String newsEquity;
+    String newsEquity = "";
 
     String totalEquity = "";
 
@@ -112,6 +113,7 @@ public class EquityActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
+        newsExtractor = new NewsExtractor();
 
         portfolio = new HashMap<>();
 
@@ -401,7 +403,11 @@ public class EquityActivity extends AppCompatActivity {
                         ptProzentDouble +
                         rhdProzentDouble;
 
-        goldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * goldProzentDouble) / total)) + " %";
+        DecimalFormat df = new DecimalFormat("##.#");
+
+        goldProzentString = String.valueOf(df.format((100 * goldProzentDouble) / total)) + " %";
+
+        // goldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * goldProzentDouble) / total)) + " %";
         silberProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * silberProzentDouble) / total)) + " %";
         pldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * pldProzentDouble) / total)) + " %";
         ptProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * ptProzentDouble) / total)) + " %";
@@ -472,8 +478,9 @@ public class EquityActivity extends AppCompatActivity {
     private void getNews(){
 
         newsEquity = getIntent().getExtras().getString("news");
-        Log.i(TAG,CLASS + " news equuity " + newsEquity);
+        Log.i(TAG,CLASS + " news equity " + newsEquity);
 
+        newsText.setText(newsEquity);
 
     }
 }

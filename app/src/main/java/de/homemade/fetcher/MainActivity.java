@@ -22,6 +22,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prof.rssparser.Article;
+import com.prof.rssparser.Parser;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -29,6 +32,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -45,6 +49,7 @@ import static de.homemade.fetcher.DatabaseHelper.COLUMN_5;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_6;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_8;
 import static de.homemade.fetcher.DatabaseHelper.COLUMN_9;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
     FetchAsyncTask task;
     Timestamp timestamp;
+    Parser parser;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -122,11 +128,13 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
         timestamp = new Timestamp();
+        parser = new Parser();
 
         initAllViews();
         fetchDataFromESG();
         getEquity();
         setDataFromTableIfAny();
+        callRssFeed();
 
         setStatus(context);
         setDate(context);
@@ -359,6 +367,7 @@ public class MainActivity extends AppCompatActivity {
                 palladiumMunze = ePalladiumMunze.text();
                 platinMunze = ePlatinMunze.text();
 
+                /*
                 try {
 
                     Document doc = Jsoup.connect("http://www.boerse-frankfurt.de/rohstoffe/nachrichten/").get();
@@ -370,9 +379,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
-
+                */
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -446,6 +453,36 @@ public class MainActivity extends AppCompatActivity {
         private String setDot(String stringWithKomma){
             return stringWithKomma = stringWithKomma.replace(",",".");
         }
+    }
+
+    // call rss feed
+    private void callRssFeed(){
+
+        // include RSS reader
+        String urlToRssFeed = "https://www.boerse-online.de/rss/maerkte";
+        parser.execute(urlToRssFeed);
+
+        Log.i(TAG,CLASS + " call rss feed " + urlToRssFeed);
+
+        parser.onFinish(new Parser.OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(ArrayList<Article> list) {
+
+                for(int i = 0; i < list.size(); i++){
+                    String date = String.valueOf(list.get(i) .getPubDate());
+                    String content = list.get(i) .getDescription();
+
+                    Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> date   : " + date);
+                    Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> content: " + content);
+                }
+            }
+
+            @Override
+            public void onError() {
+                Log.i(TAG,CLASS + " parser fail");
+            }
+        });
+
     }
 
     // get data from db table if any and set them in designated views
