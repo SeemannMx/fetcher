@@ -505,7 +505,8 @@ public class EquityActivity extends AppCompatActivity {
                 Date date;
                 String news = "";
 
-                newsExtractor.convertUnicodeToString(list);
+                // refactor all unicode to regular text
+                list = newsExtractor.convertUnicodeToString(list);
 
             }
 

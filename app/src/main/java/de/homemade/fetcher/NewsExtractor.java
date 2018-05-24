@@ -15,6 +15,14 @@ public class NewsExtractor {
     String CLASS = "NEWS ";
 
     String ue = "&#252;";
+    String Ue = "&#220;";
+    String oe = "&#246;";
+    String Oe = " &#214;";
+    String ae = "&#228;";
+    String Ae = "&#196;";
+    String ss = "&#223;";
+    String quote = "&quot;";
+
 
     // extract news from String
     public String extractNews(String newsString){
@@ -22,7 +30,8 @@ public class NewsExtractor {
         String refacoredNews = "";
         newsString.replaceAll(".", "/");
 
-        Matcher matcher = Pattern.compile("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d").matcher(newsString);
+        // regEx to macht date in String
+        Matcher matcher = Pattern.compile("(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d").matcher(newsString);
         Log.i(TAG, CLASS + " dots exchanged with dash " + newsString);
 
         int count = 0;
@@ -34,14 +43,6 @@ public class NewsExtractor {
 
         Gson g = new Gson();
         refacoredNews = g.toJson(allMatches);
-
-        // Log.i(TAG,CLASS + "count " + count);
-        // Log.i(TAG,CLASS + "array " + refacoredNews);
-
-
-        String[] split = newsString.split(":");
-        String firstSubString = split[0];
-        String secondSubString = split[1];
 
         return refacoredNews;
     }
@@ -56,11 +57,13 @@ public class NewsExtractor {
             date = String.valueOf(list.get(i) .getPubDate());
             content = list.get(i) .getDescription();
 
+            content = content.replace(ue, "ue").replace(Ue,"Ue").
+                                replace(oe,"oe").replace(Oe, "oe").
+                                replace(Ae, "Ae").replace(ae,"ae").
+                                replace(ss,"ss").replace(quote, "''");
 
-            content = content.replace(ue, "ue");
-
-            Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> date   : " + date);
-            Log.i(TAG,CLASS + " >>>>>>>>>>>>>>>>>>>>>>>> content: " + content);
+            Log.i(TAG,CLASS + " \ndate   : " + date);
+            Log.i(TAG,CLASS + "content: " + content + "\n\n");
         }
 
 
