@@ -1,5 +1,6 @@
 package de.homemade.fetcher;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -76,6 +77,7 @@ public class NewsExtractor {
     }
 
     // create news String
+    @SuppressLint("ResourceAsColor")
     public String createNewsString(ArrayList<Article> list){
         String news = "";
 
@@ -89,9 +91,14 @@ public class NewsExtractor {
         // Log.i(TAG,CLASS + "GSON LIST :" +  g.toJson(list));
 
         for(int i = 0; i < list.size(); i++){
+
             date = String.valueOf(list.get(i).getPubDate());
             content = list.get(i).getDescription();
-            newsPair = date.concat( "\n- - - - - - - - - - - - - - - -\n").concat(content).concat("\n\n");
+
+            newsPair = date.concat( "\n- - - - - - - - - - - - " +
+                    "- - - - - - - - - - - - - - - - - - - - - - -" +
+                    "\n").concat(content).concat("\n\n");
+
             news = news.concat(newsPair);
         }
 

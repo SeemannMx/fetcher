@@ -124,12 +124,14 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = DatabaseHelper.getInstance(context);
         timestamp = new Timestamp();
 
+        // delete content of database tables
+        dbHelper.deletePriceTable();
+        dbHelper.deletePortfolioTable();
 
         initAllViews();
         fetchDataFromESG();
         getEquity();
         setDataFromTableIfAny();
-
 
         setStatus(context);
         setDate(context);

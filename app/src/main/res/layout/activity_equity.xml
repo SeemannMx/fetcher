@@ -242,7 +242,6 @@
         android:layout_above="@+id/layoutBottom"
         android:background="@drawable/rounded_corner"
         android:layout_marginTop="@dimen/equityMargin"
-        android:layout_marginBottom="@dimen/equityMargin"
         android:alpha="0.5"
         >
 
@@ -279,8 +278,8 @@
             android:paddingRight="8dp"
             android:paddingLeft="8dp"
             android:textSize="16dp"
-            android:layout_marginTop="@dimen/equityMargin"
-            android:layout_marginBottom="@dimen/equityMargin"
+            android:layout_marginTop="@dimen/equityButtonMargin"
+            android:layout_marginBottom="@dimen/equityButtonMargin"
             />
 
 

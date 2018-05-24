@@ -20,6 +20,7 @@
     <dimen name="equityMargin"> 24dp </dimen>
     <dimen name="equityTextSize"> 20dp </dimen>
     <dimen name="equityMiniMargin"> 8dp </dimen>
+    <dimen name="equityButtonMargin"> 16dp </dimen>
 
     <!-- diagramm activity -->
     <dimen name="diagrammTextPadding"> 8dp </dimen>

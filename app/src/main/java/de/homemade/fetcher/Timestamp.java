@@ -68,7 +68,7 @@ public class Timestamp {
 
         // apply changed to shared preferences
         editor.apply();
-        Log.e(TAG, CLASS + " WHAT IS THE TIME STAMP SAVED "+ time);
+        Log.i(TAG, CLASS + " WHAT IS THE TIME STAMP SAVED "+ time);
 
     }
 
