@@ -23,7 +23,9 @@ import com.prof.rssparser.Article;
 import com.prof.rssparser.Parser;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -111,6 +113,7 @@ public class EquityActivity extends AppCompatActivity {
     ImageButton callImageButton;
 
     Parser parser;
+    MockClass test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,7 @@ public class EquityActivity extends AppCompatActivity {
         newsExtractor = new NewsExtractor();
         parser = new Parser();
         portfolio = new HashMap<>();
+        test = new MockClass(dbHelper);
 
         initAllViews();
         createPortfolio();
@@ -315,13 +319,14 @@ public class EquityActivity extends AppCompatActivity {
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
 
+            Date today = Calendar.getInstance().getTime();
+            String date = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(today);
+
             // set test data
-            dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
-            dbHelper.insertDataIntoPortfolioTable("20000","11.05.1984");
-            dbHelper.insertDataIntoPortfolioTable("15000","12.05.1984");
-            dbHelper.insertDataIntoPortfolioTable("15000","13.05.1984");
-            dbHelper.insertDataIntoPortfolioTable("25000","14.05.1984");
-            dbHelper.insertDataIntoPortfolioTable("30000","15.05.1984");
+            dbHelper.insertDataIntoPortfolioTable(totalEquity,date);
+
+            // mock data
+            test.mockDataPortfolio();
 
             cursor.close();
 

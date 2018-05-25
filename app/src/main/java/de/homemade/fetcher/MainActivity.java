@@ -456,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(dbHelper.isTableEmpty(DatabaseHelper.TABLE_NAME)){
 
-            test.mockData();
+            test.mockDataPrice();
             Log.i(TAG,CLASS + " TEST data for db table mocked");
 
         }

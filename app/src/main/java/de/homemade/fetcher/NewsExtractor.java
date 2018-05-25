@@ -102,7 +102,7 @@ public class NewsExtractor {
             news = news.concat(newsPair);
         }
 
-        Log.i(TAG, CLASS + " received / correted / formated news: \n" + news);
+        // Log.i(TAG, CLASS + " received / correted / formated news: \n" + news);
 
         return news;
     }
