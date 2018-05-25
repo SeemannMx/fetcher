@@ -245,14 +245,17 @@ public class EquityActivity extends AppCompatActivity {
 
         Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
 
-        if(dbHelper.tableIsEmpty("price_table")) {
+        if(!dbHelper.tableIsEmpty("price_table")) {
 
-            cursor.moveToFirst();
+            // declare format
+            DecimalFormat df = new DecimalFormat("##.##");
+
+            cursor.moveToLast();
             // Value of Ingots
             double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
             double goldTresure = goldPerGramm * portfolio.get("Gold");
 
-            String tempGl = new DecimalFormat("##.##").format(goldTresure);
+            String tempGl = df.format(goldTresure);
             Log.i(TAG, "Gold Tresure:               " + tempGl);
 
             double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
@@ -266,20 +269,20 @@ public class EquityActivity extends AppCompatActivity {
             double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
             double platinTresure = platinPerGramm * portfolio.get("Platin");
 
-            String tempPL = new DecimalFormat("##.##").format(platinTresure);
+            String tempPL = df.format(platinTresure);
             Log.i(TAG, "Platin Tresure:             " + tempPL);
 
             double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
             double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
 
-            String tempRh = new DecimalFormat("##.##").format(rhodiumTresure);
+            String tempRh = df.format(rhodiumTresure);
             Log.i(TAG, "Rhodium Tresure:            " + tempRh);
 
             // Value of Coins
             double goldmarkPerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
             double goldmarkTresure = goldmarkPerPiece * portfolio.get("Goldmark");
 
-            String tempGlmrk = new DecimalFormat("##.##").format(goldmarkTresure);
+            String tempGlmrk = df.format(goldmarkTresure);
             Log.i(TAG, "Goldmark Tresure:           " + tempGlmrk);
 
             double goldmuenzePerPiece = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));
@@ -303,7 +306,7 @@ public class EquityActivity extends AppCompatActivity {
 
             double sumEquity = sumIgnots + sumCoins;
 
-            String tempTotalEquity = new DecimalFormat("##.##").format(sumEquity);
+            String tempTotalEquity = df.format(sumEquity);
 
             totalEquity = tempTotalEquity + " €";
             Log.i(TAG, "TOTAL EQUITY:               " + totalEquity);
@@ -312,6 +315,7 @@ public class EquityActivity extends AppCompatActivity {
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
 
+            // set test data
             dbHelper.insertDataIntoPortfolioTable(tempTotalEquity,"10.05.1984");
             dbHelper.insertDataIntoPortfolioTable("20000","11.05.1984");
             dbHelper.insertDataIntoPortfolioTable("15000","12.05.1984");
@@ -328,21 +332,6 @@ public class EquityActivity extends AppCompatActivity {
 
         }
     }
-
-
-    // calculate kroegerrand
-    private String calcKroegerRand(String valueProGramm){
-        String result = "";
-
-        valueProGramm = setDot(valueProGramm);
-        double valuePerGroger = Double.parseDouble(valueProGramm) * 31.10;
-
-        Log.i(TAG, "Krögerrand 31.10gr: " + valuePerGroger);
-
-        // return string in double digit format
-        return result = new DecimalFormat("##.##").format(valuePerGroger);
-    }
-
 
     // find and replace komme with dot
     private String setDot(String stringWithKomma){
@@ -361,16 +350,6 @@ public class EquityActivity extends AppCompatActivity {
         });
     }
 
-    // check if device has internet connection and if is filghtmode
-    public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
-
-
     // set color of first char in text
     private void setTextColor(){
 
@@ -388,36 +367,38 @@ public class EquityActivity extends AppCompatActivity {
         Cursor cursor = dbHelper.getAllDataFromDatabase(TABLE_NAME);
         cursor.moveToLast();
 
-        String goldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_1)); // gold
+        // get value
+        String goldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_1));   // gold
         Double goldProzentDouble = Double.parseDouble(goldProzentString);
 
         String silberProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_2)); // silber
         Double silberProzentDouble = Double.parseDouble(silberProzentString);
 
-        String pldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_3)); // palladium
+        String pldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_3));    // palladium
         Double pldProzentDouble = Double.parseDouble(pldProzentString);
 
-        String ptProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_4)); // platin
+        String ptProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_4));     // platin
         Double ptProzentDouble = Double.parseDouble(ptProzentString);
 
-        String rhdProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_5)); // rhodium
+        String rhdProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_5));    // rhodium
         Double rhdProzentDouble = Double.parseDouble(rhdProzentString);
 
+        // calculate total
         Double total =  goldProzentDouble +
                         silberProzentDouble +
                         pldProzentDouble +
                         ptProzentDouble +
                         rhdProzentDouble;
 
+        // declare format
         DecimalFormat df = new DecimalFormat("##.#");
 
+        // calculate prozent part from total
         goldProzentString = String.valueOf(df.format((100 * goldProzentDouble) / total)) + " %";
-
-        // goldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * goldProzentDouble) / total)) + " %";
-        silberProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * silberProzentDouble) / total)) + " %";
-        pldProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * pldProzentDouble) / total)) + " %";
-        ptProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * ptProzentDouble) / total)) + " %";
-        rhdProzentString = String.valueOf(new DecimalFormat("##.#").format((100 * rhdProzentDouble) / total)) + " %";
+        silberProzentString = String.valueOf(df.format((100 * silberProzentDouble) / total)) + " %";
+        pldProzentString = String.valueOf(df.format((100 * pldProzentDouble) / total)) + " %";
+        ptProzentString = String.valueOf(df.format((100 * ptProzentDouble) / total)) + " %";
+        rhdProzentString = String.valueOf(df.format((100 * rhdProzentDouble) / total)) + " %";
 
         Log.i(TAG,CLASS + "\n" +
                                 goldProzentString + " \n" +
@@ -426,11 +407,14 @@ public class EquityActivity extends AppCompatActivity {
                                 ptProzentString +  " \n" +
                                 rhdProzentString +  " \n");
 
+        // set in view
         equityGoldProzent.setText(goldProzentString);
         equitySilberProzent.setText(silberProzentString);
         equityPalladiumProzent.setText(pldProzentString);
         equityPlatinProzent.setText(ptProzentString);
         equityRhodiumProzent.setText(rhdProzentString);
+
+        cursor.close();
 
     }
 
@@ -447,7 +431,7 @@ public class EquityActivity extends AppCompatActivity {
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-
+                    // show animation an nothing else
                 }
 
                 @Override
@@ -456,14 +440,10 @@ public class EquityActivity extends AppCompatActivity {
                     // ESG Rheinstetten
                     String phoneNr = "+4972429535177";
 
-                    // Test Nummer
-                    String testPhoneNr = "+491729083152";
-
-
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", testPhoneNr, null));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNr, null));
                     startActivity(intent);
 
-                    Log.i(TAG, CLASS + " make phone call to " + testPhoneNr);
+                    Log.i(TAG, CLASS + " make phone call to " + phoneNr);
 
                 }
 
@@ -480,36 +460,63 @@ public class EquityActivity extends AppCompatActivity {
 
     }
 
-
     // call rss feed
     private void callRssFeed(){
 
-        // include RSS reader
-        String urlToRssFeed = "https://www.boerse-online.de/rss/maerkte";
-        parser.execute(urlToRssFeed);
+        if(isOnline()) {
+            // include RSS reader
+            String urlToRssFeed = "https://www.boerse-online.de/rss/maerkte";
+            parser.execute(urlToRssFeed);
 
-        Log.i(TAG,CLASS + " call rss feed " + urlToRssFeed);
+            Log.i(TAG, CLASS + " call rss feed " + urlToRssFeed);
 
-        parser.onFinish(new Parser.OnTaskCompleted() {
-            @Override
-            public void onTaskCompleted(ArrayList<Article> list) {
-                Date date;
-                String news = "";
+            parser.onFinish(new Parser.OnTaskCompleted() {
+                @Override
+                public void onTaskCompleted(ArrayList<Article> list) {
+                    Date date;
+                    String news = "";
 
-                // refactor all unicode to regular text
-                // list = newsExtractor.convertUnicodeToString(list);
+                    // refactor all unicode to regular text
+                    // list = newsExtractor.convertUnicodeToString(list);
 
-                // create the news String to show in view
-                newsEquity = newsExtractor.createNewsString(list);
-                newsText.setText(newsEquity);
+                    // create the news String to show in view
+                    newsEquity = newsExtractor.createNewsString(list);
+                    newsText.setText(newsEquity);
 
-            }
+                }
 
-            @Override
-            public void onError() {
-                Log.i(TAG,CLASS + " parser fail");
-            }
-        });
+                @Override
+                public void onError() {
+                    Log.i(TAG, CLASS + " parser fail");
+                }
+            });
 
+        } else {
+            Log.i(TAG, CLASS + " device is not online - no rss can be fetched");
+
+        }
+
+    }
+
+    // calculate kroegerrand
+    private String calcKroegerRand(String valueProGramm){
+        String result = "";
+
+        valueProGramm = setDot(valueProGramm);
+        double valuePerGroger = Double.parseDouble(valueProGramm) * 31.10;
+
+        Log.i(TAG, "Krögerrand 31.10gr: " + valuePerGroger);
+
+        // return string in double digit format
+        return result = new DecimalFormat("##.##").format(valuePerGroger);
+    }
+
+    // check if device has internet connection or if is filghtmode
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

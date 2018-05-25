@@ -405,22 +405,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean tableIsEmpty(String tableName){
         boolean result = true;
 
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
-
         cursor.moveToFirst();
-        if (cursor.getString(cursor.getColumnIndex(COLUMN_0)) != null) {
-            // table is not empty
 
-            Log.i(TAG,ACTIVITY_CLASS + "Tablename:             " + tableName);
-            Log.i(TAG,ACTIVITY_CLASS + "Info / PlatinMuneze:   " + cursor.getString(cursor.getColumnIndex(COLUMN_10)));
+            if (cursor.getCount() > 0) {
+                // table is not empty
+                Log.i(TAG,ACTIVITY_CLASS + "Tablename: " + tableName + " is empty");
 
-        } else {
-            // table is empty
-            result = false;
-        }
+            } else {
+                // table is not empty
+                result = false;
+                Log.i(TAG,ACTIVITY_CLASS + "Tablename: " + tableName + " is not empty");
+            }
         cursor.close();
+
         return result;
     }
 

@@ -109,10 +109,8 @@ public class DiagrammActivity extends AppCompatActivity {
     // prepera and log for diagramm
     private void prepareForDiagramm(){
         Intent intent = getIntent();
-        portfolio = (HashMap<String, Double>) intent.getSerializableExtra("portfolio");
-        Gson g = new Gson();
-        g.toJson(portfolio);
 
+        portfolio = (HashMap<String, Double>) intent.getSerializableExtra("portfolio");
         sumOfItems = new HashMap<String, Double>();
 
         // fill textviews and create new hashmap for pie chart
@@ -133,11 +131,10 @@ public class DiagrammActivity extends AppCompatActivity {
 
     // fill line chart from database
     private void fillLineChart(){
-        // get and set line chart diagramm
 
+        // get and set line chart diagramm
         LineChartView lcv = new LineChartView();
         chartView = lcv.lineDiagramm(context);
-        // chartLayout.addView(chartView);
         lineChartLayout.addView(chartView);
 
     }
@@ -199,9 +196,13 @@ public class DiagrammActivity extends AppCompatActivity {
         Double totalPldMuenze = portfolio.get("Palladiummuenze");   // 1
         Double totalPtMuenze = portfolio.get("Platinmuenze");       // 1
 
+
+        // declare format
+        DecimalFormat df = new DecimalFormat("##.##");
+
         double totalValue = 0;
 
-        // prepere database table
+        // prepere database table and get last received price
         Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
         cursor.moveToLast();
 
@@ -214,7 +215,7 @@ public class DiagrammActivity extends AppCompatActivity {
         sumOfItems.put("sumGold", result);
 
         // convert double in doubledigit number
-        String goldToView = String.valueOf(new DecimalFormat("##.##").format(result)) + " €";
+        String goldToView = String.valueOf(df.format(result)) + " €";
 
         // set data in view
         diagDataGold.setText(goldToView);
@@ -228,7 +229,7 @@ public class DiagrammActivity extends AppCompatActivity {
         sumOfItems.put("sumSilber", result);
 
         // convert double in doubledigit number
-        String silberToView = String.valueOf(new DecimalFormat("##.##").format(result)) + " €";
+        String silberToView = String.valueOf(df.format(result)) + " €";
 
         // sum of palladium
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
@@ -239,7 +240,7 @@ public class DiagrammActivity extends AppCompatActivity {
         sumOfItems.put("sumPalladium", result);
 
         // convert double in doubledigit number
-        String pldToView = String.valueOf(new DecimalFormat("##.##").format(result)) + " €";
+        String pldToView = String.valueOf(df.format(result)) + " €";
 
         // sum of platin
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
@@ -250,7 +251,7 @@ public class DiagrammActivity extends AppCompatActivity {
         sumOfItems.put("sumPlatin", result);
 
         // convert double in doubledigit number
-        String ptToView = String.valueOf(new DecimalFormat("##.##").format(result)) + " €";
+        String ptToView = String.valueOf(df.format(result)) + " €";
 
         // sum of rhodium
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
@@ -261,7 +262,7 @@ public class DiagrammActivity extends AppCompatActivity {
         sumOfItems.put("sumRhodium", result);
 
         // convert double in doubledigit number
-        String rhdToView = String.valueOf(new DecimalFormat("##.##").format(result)) + " €";
+        String rhdToView = String.valueOf(df.format(result)) + " €";
 
         // sum of coins
         presentPrice = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));
@@ -284,10 +285,10 @@ public class DiagrammActivity extends AppCompatActivity {
         sumOfItems.put("sumCoins", result);
 
         // convert double in doubledigit number
-        String coinToView = String.valueOf(new DecimalFormat("##.##").format(result)) + " €";
+        String coinToView = String.valueOf(df.format(result)) + " €";
 
         // convert total value in String
-        String totalValueString = String.valueOf(new DecimalFormat("##.##").format(totalValue)) + " €";
+        String totalValueString = String.valueOf(df.format(totalValue)) + " €";
 
         // set data in views
         diagDataGold.setText(goldToView);

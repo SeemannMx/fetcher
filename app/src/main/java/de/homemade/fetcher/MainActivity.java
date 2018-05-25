@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
     FetchAsyncTask task;
     Timestamp timestamp;
+    MockClass test;
 
 
 
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         // delete content of database tables
         dbHelper.deletePriceTable();
         dbHelper.deletePortfolioTable();
+
+        test = new MockClass(dbHelper);
 
         initAllViews();
         fetchDataFromESG();
@@ -231,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
@@ -244,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 // refernce check if async task is finished
                 // task.getStatus() == AsyncTask.Status.FINISHED && task.getStatus() != AsyncTask.Status.PENDING
 
-                if (isOnline()) {
+                if (true/*isOnline()*/) {
                     isValueEmpty();
                     Intent intent = new Intent(MainActivity.this, EquityActivity.class);
                     startActivity(intent);
@@ -450,69 +454,67 @@ public class MainActivity extends AppCompatActivity {
     // get data from db table if any and set them in designated views
     private void setDataFromTableIfAny(){
 
-        // db table is not empty or device is not online
-        if(!dbHelper.isTableEmpty(DatabaseHelper.TABLE_NAME) || !isOnline()){
-            // table is not empty
-            Cursor cursor = dbHelper.getAllDataFromDatabase(DatabaseHelper.TABLE_NAME);
-            cursor.moveToLast();
+        if(dbHelper.isTableEmpty(DatabaseHelper.TABLE_NAME)){
 
-            gold = cursor.getString(cursor.getColumnIndex(COLUMN_1));
-            silber = cursor.getString(cursor.getColumnIndex(COLUMN_2));
-            palladium = cursor.getString(cursor.getColumnIndex(COLUMN_3));
-            platin = cursor.getString(cursor.getColumnIndex(COLUMN_4));
-            rhodium = cursor.getString(cursor.getColumnIndex(COLUMN_5));
-
-            goldMark = cursor.getString(cursor.getColumnIndex(COLUMN_6));
-            silberMark = cursor.getString(cursor.getColumnIndex(COLUMN_8));
-            palladiumMunze = cursor.getString(cursor.getColumnIndex(COLUMN_9));
-            platinMunze = cursor.getString(cursor.getColumnIndex(COLUMN_10));
-
-            // goldmark title exist twice string needs to be corrected
-            // String correctedGoldMark = goldMark.substring(0, Math.min(goldMark.length(), 7));
-            // goldMark = correctedGoldMark;
-
-            // Barren Preis pro gramm
-            dataGold.setText(gold  + " €");
-            dataSilber.setText(silber  + " €");
-            dataPalladium.setText(palladium  + " €");
-            dataPlatin.setText(platin  + " €");
-            dataRhodium.setText(rhodium  + " €");
-
-            // Muenzen
-            dataGoldmark.setText(goldMark  + " €");
-            dataSilberMark.setText(silberMark  + " €");
-            dataPalladiummark.setText(palladiumMunze  + " €");
-            dataPlatinmark.setText(platinMunze  + " €");
-
-
-        } else {
-
-            Log.i(TAG,CLASS + " database is empty or offline" );
+            test.mockData();
+            Log.i(TAG,CLASS + " TEST data for db table mocked");
 
         }
+
+        // table is not empty
+        Cursor cursor = dbHelper.getAllDataFromDatabase(DatabaseHelper.TABLE_NAME);
+        cursor.moveToLast();
+
+        gold = cursor.getString(cursor.getColumnIndex(COLUMN_1));
+        silber = cursor.getString(cursor.getColumnIndex(COLUMN_2));
+        palladium = cursor.getString(cursor.getColumnIndex(COLUMN_3));
+        platin = cursor.getString(cursor.getColumnIndex(COLUMN_4));
+        rhodium = cursor.getString(cursor.getColumnIndex(COLUMN_5));
+
+        goldMark = cursor.getString(cursor.getColumnIndex(COLUMN_6));
+        silberMark = cursor.getString(cursor.getColumnIndex(COLUMN_8));
+        palladiumMunze = cursor.getString(cursor.getColumnIndex(COLUMN_9));
+        platinMunze = cursor.getString(cursor.getColumnIndex(COLUMN_10));
+
+        // goldmark title exist twice string needs to be corrected
+        // String correctedGoldMark = goldMark.substring(0, Math.min(goldMark.length(), 7));
+        // goldMark = correctedGoldMark;
+
+        // Barren Preis pro gramm
+        dataGold.setText(gold  + " €");
+        dataSilber.setText(silber  + " €");
+        dataPalladium.setText(palladium  + " €");
+        dataPlatin.setText(platin  + " €");
+        dataRhodium.setText(rhodium  + " €");
+
+        // Muenzen
+        dataGoldmark.setText(goldMark  + " €");
+        dataSilberMark.setText(silberMark  + " €");
+        dataPalladiummark.setText(palladiumMunze  + " €");
+        dataPlatinmark.setText(platinMunze  + " €");
+
+        cursor.close();
+
     }
 
     // get / set status of device
     private void setStatus(Context context){
 
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(context.CONNECTIVITY_SERVICE);
+        String status = "";
 
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-
-        String status = netInfo.getDetailedState().toString();
-
-        dataStatus.setText(status);
-
-        Log.i(TAG, CLASS + " status:             " + status);
-
-        if(status.trim().equals("CONNECTED")){
+        if(isOnline()){
+            status = "online";
             dataStatus.setTextColor(GREEN);
 
         } else {
+            status = "offline";
             dataStatus.setTextColor(RED);
 
         }
+        Log.i(TAG, CLASS + " status:             " + status);
+
+        dataStatus.setText(status);
+
     }
 
     // get  / set last received data
@@ -525,4 +527,5 @@ public class MainActivity extends AppCompatActivity {
         dataDateTime.setText(timeStampString);
 
     }
+
 }
