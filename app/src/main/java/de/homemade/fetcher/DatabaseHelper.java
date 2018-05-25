@@ -410,14 +410,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
         cursor.moveToFirst();
 
-            if (cursor.getCount() > 0) {
-                // table is not empty
-                Log.i(TAG,ACTIVITY_CLASS + "Tablename: " + tableName + " is empty");
-
-            } else {
+            if (cursor.getCount() > 0 || cursor.getCount() == 0 ) {
                 // table is not empty
                 result = false;
-                Log.i(TAG,ACTIVITY_CLASS + "Tablename: " + tableName + " is not empty");
+                Log.i(TAG,ACTIVITY_CLASS + "Tablename: " + tableName + " is not empty " + cursor.getCount() + " x");
+
+            } else {
+                // table is empty
+                result = true;
+                Log.i(TAG,ACTIVITY_CLASS + "Tablename: " + tableName + " is empty " + cursor.getCount() + " x");
             }
         cursor.close();
 
