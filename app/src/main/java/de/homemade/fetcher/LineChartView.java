@@ -50,8 +50,14 @@ public class LineChartView {
 
             try{
                 Double value = cursor.getDouble(cursor.getColumnIndex(PORTFOLIO_VALUE));
+
+                String dateAsString = cursor.getString(cursor.getColumnIndex(DATE));
+                Log.i( TAG, CLASS + " TEMP XXXXXXX DATE : " +  dateAsString);
+
                 Date date = dateFormat.parse(cursor.getString(cursor.getColumnIndex(DATE)));
+
                 seriesS.add(date,value);
+
                 Log.i( TAG, CLASS + "\n date: " + date + " value: " + value);
             } catch (Exception e){
                 e.printStackTrace();

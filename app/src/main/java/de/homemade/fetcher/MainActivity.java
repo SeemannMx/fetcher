@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, CLASS + "  << time since last task " + "[ "+ timeSinceLastTask +" ] >>");
 
         // exceute task only if last task has been exceuted min 12hr before
-        if(true/*timeSinceLastTask < 43200*/) {
+        if(true/*timeSinceLastTask > 43200*/) {
 
             if (isOnline()) {
                 // Start timer

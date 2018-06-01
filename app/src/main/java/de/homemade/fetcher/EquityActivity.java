@@ -245,11 +245,11 @@ public class EquityActivity extends AppCompatActivity {
     }
 
     // get total sum of Equity
-    private void getSumOfEquity(){
+    private void getSumOfEquity() {
 
         Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
 
-        if(!dbHelper.tableIsEmpty("price_table")) {
+        if (!dbHelper.tableIsEmpty("price_table")) {
 
             // declare format
             DecimalFormat df = new DecimalFormat("##.##");
@@ -320,10 +320,10 @@ public class EquityActivity extends AppCompatActivity {
             layouTable.setClickable(true);
 
             Date today = Calendar.getInstance().getTime();
-            String date = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(today);
+            String date = new SimpleDateFormat("dd.MM.yyyy").format(today);
 
             // set test data
-            dbHelper.insertDataIntoPortfolioTable(totalEquity,date);
+            dbHelper.insertDataIntoPortfolioTable(totalEquity, date);
 
             // mock data
             test.mockDataPortfolio();
@@ -334,8 +334,8 @@ public class EquityActivity extends AppCompatActivity {
         } else {
             Log.i(TAG, CLASS + " Database is empty");
             layouTable.setClickable(false);
-
         }
+
     }
 
     // find and replace komme with dot
@@ -432,7 +432,7 @@ public class EquityActivity extends AppCompatActivity {
 
             Animation anim = AnimationUtils.loadAnimation(context, R.anim.rotate);
 
-            // listener to create order to arragene actions
+            // listener to create order on actions for animation
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
