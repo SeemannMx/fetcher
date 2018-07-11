@@ -130,8 +130,8 @@ public class EquityActivity extends AppCompatActivity {
         initAllViews();
         createPortfolio();
         getSumOfEquity();
-        setTextColor();
         setContentinProzent();
+        setTextColor();
         showDiagramm();
         makeCallToESG();
         callRssFeed();
@@ -327,12 +327,11 @@ public class EquityActivity extends AppCompatActivity {
             // set test data
             dbHelper.insertDataIntoPortfolioTable(totalEquity, date);
 
-            cursor.close();
-
         } else {
             Log.i(TAG, CLASS + " Database is empty");
             layouTable.setClickable(false);
         }
+        cursor.close();
 
     }
 
@@ -414,8 +413,10 @@ public class EquityActivity extends AppCompatActivity {
                     portfolio.get("Platinmuenze") * ptMz;
 
             // calculate total value from value
-            Double totalValue = portfolio.get("Gold") * au + portfolio.get("Silber") * ag +
-                    portfolio.get("Palladium") * pld + portfolio.get("Platin") * pt +
+            Double totalValue = portfolio.get("Gold") * au +
+                    portfolio.get("Silber") * ag +
+                    portfolio.get("Palladium") * pld +
+                    portfolio.get("Platin") * pt +
                     portfolio.get("Rhodium") * rhd;
 
 

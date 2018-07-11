@@ -24,7 +24,6 @@ public class DiagrammBuilder {
         this.context = context;
     }
 
-
     public GraphicalView testDiagramm(Context context){
 
         GraphicalView chartView;
@@ -78,7 +77,6 @@ public class DiagrammBuilder {
         mRenderer.setShowGrid(true); // we show the grid
 
         return chartView = ChartFactory.getLineChartView(context,dataset,mRenderer);
-
 
     }
 

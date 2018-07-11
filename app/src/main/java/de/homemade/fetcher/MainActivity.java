@@ -128,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = DatabaseHelper.getInstance(context);
         timestamp = new Timestamp();
 
-
         // Todo delete content of database tables in teststage
         dbHelper.deletePriceTable();
         dbHelper.deletePortfolioTable();
@@ -155,10 +154,12 @@ public class MainActivity extends AppCompatActivity {
     public void onRestart(){
         super.onRestart();
         INIT_FLAG = false;
+
         // Todo delete content of database tables in teststage
         dbHelper.deletePriceTable();
         dbHelper.deletePortfolioTable();
     }
+
     // initalize all views
     private void initAllViews(){
 
@@ -490,7 +491,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 
     // get data from db table if any and set them in designated views
     private void setDataFromTableIfAny(){

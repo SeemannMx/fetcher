@@ -16,9 +16,6 @@ public class MockClass {
     // mock data for test case
     public MockClass(DatabaseHelper dbHelper) {
         this.dbHelper = dbHelper;
-
-
-
     }
 
     // instert mock data in database table price_list
