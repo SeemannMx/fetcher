@@ -249,7 +249,7 @@ public class EquityActivity extends AppCompatActivity {
 
         Cursor cursor = dbHelper.getAllDataFromDatabase("price_table");
 
-        if (!dbHelper.tableIsEmpty("price_table")) {
+        if (!dbHelper.tableIsEmpty("price_table") && cursor.getCount() > 0) {
 
             // declare format
             DecimalFormat df = new DecimalFormat("##.##");
@@ -315,12 +315,11 @@ public class EquityActivity extends AppCompatActivity {
             totalEquity = tempTotalEquity + " €";
             Log.i(TAG, "TOTAL EQUITY:               " + totalEquity);
 
-
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
 
-            // mock data
-            test.mockDataPortfolio();
+            // mock data Todo test data
+            // test.mockDataPortfolio();
 
             Date today = Calendar.getInstance().getTime();
             String date = new SimpleDateFormat("dd.MM.yyyy").format(today);
@@ -329,7 +328,6 @@ public class EquityActivity extends AppCompatActivity {
             dbHelper.insertDataIntoPortfolioTable(totalEquity, date);
 
             cursor.close();
-
 
         } else {
             Log.i(TAG, CLASS + " Database is empty");
@@ -370,54 +368,77 @@ public class EquityActivity extends AppCompatActivity {
     private void setContentinProzent(){
 
         Cursor cursor = dbHelper.getAllDataFromDatabase(TABLE_NAME);
-        cursor.moveToLast();
-
-        // get value
-        String goldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_1));   // gold
-        Double goldProzentDouble = Double.parseDouble(goldProzentString);
-
-        String silberProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_2)); // silber
-        Double silberProzentDouble = Double.parseDouble(silberProzentString);
-
-        String pldProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_3));    // palladium
-        Double pldProzentDouble = Double.parseDouble(pldProzentString);
-
-        String ptProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_4));     // platin
-        Double ptProzentDouble = Double.parseDouble(ptProzentString);
-
-        String rhdProzentString = cursor.getString(cursor.getColumnIndex(COLUMN_5));    // rhodium
-        Double rhdProzentDouble = Double.parseDouble(rhdProzentString);
-
-        // calculate total
-        Double total =  goldProzentDouble +
-                        silberProzentDouble +
-                        pldProzentDouble +
-                        ptProzentDouble +
-                        rhdProzentDouble;
-
         // declare format
         DecimalFormat df = new DecimalFormat("##.#");
 
-        // calculate prozent part from total
-        goldProzentString = String.valueOf(df.format((100 * goldProzentDouble) / total)) + " %";
-        silberProzentString = String.valueOf(df.format((100 * silberProzentDouble) / total)) + " %";
-        pldProzentString = String.valueOf(df.format((100 * pldProzentDouble) / total)) + " %";
-        ptProzentString = String.valueOf(df.format((100 * ptProzentDouble) / total)) + " %";
-        rhdProzentString = String.valueOf(df.format((100 * rhdProzentDouble) / total)) + " %";
+        if( cursor.getCount() > 0) {
 
-        Log.i(TAG,CLASS + "\n" +
-                                goldProzentString + " \n" +
-                                silberProzentString +  " \n" +
-                                pldProzentString +  " \n" +
-                                ptProzentString +  " \n" +
-                                rhdProzentString +  " \n");
+            cursor.moveToLast();
 
-        // set in view
-        equityGoldProzent.setText(goldProzentString);
-        equitySilberProzent.setText(silberProzentString);
-        equityPalladiumProzent.setText(pldProzentString);
-        equityPlatinProzent.setText(ptProzentString);
-        equityRhodiumProzent.setText(rhdProzentString);
+            // calculate total value from weight
+            Double total = portfolio.get("Gold") + portfolio.get("Silber") +
+                    portfolio.get("Palladium") + portfolio.get("Platin") +
+                    portfolio.get("Rhodium");
+
+            // get value
+            Double au = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));   // gold
+            Double countAu = portfolio.get("Gold");
+            String goldProzentString = String.valueOf(df.format((100 * countAu) / total));
+
+            Double ag = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2))); // silber
+            Double countAg = portfolio.get("Silber");
+            String silberProzentString = String.valueOf(df.format((100 * countAg) / total));
+
+            Double pld = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));    // palladium
+            Double countPld = portfolio.get("Palladium");
+            String pldProzentString = String.valueOf(df.format((100 * countPld) / total));
+
+            Double pt = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));     // platin
+            Double countPt = portfolio.get("Platin");
+            String ptProzentString = String.valueOf(df.format((100 * countPt) / total));
+
+            Double rhd = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));    // rhodium
+            Double countRh = portfolio.get("Rhodium");
+            String rhdProzentString = String.valueOf(df.format((100 * countRh) / total));
+
+            Double auMk = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_6)));    // goldmark
+            Double auMz = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_7)));    // goldmuenze
+            Double agMz = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_8)));    // silbermuenze
+            Double pldMz = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_9)));   // pallidiummuenze
+            Double ptMz = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_10)));   // platinmuenze
+
+            Double coins = portfolio.get("Goldmark") * auMk +
+                    portfolio.get("Goldmuenze") * auMz +
+                    portfolio.get("Silbermuenze") * agMz+
+                    portfolio.get("Palladiummuenze") * pldMz+
+                    portfolio.get("Platinmuenze") * ptMz;
+
+            // calculate total value from value
+            Double totalValue = portfolio.get("Gold") * au + portfolio.get("Silber") * ag +
+                    portfolio.get("Palladium") * pld + portfolio.get("Platin") * pt +
+                    portfolio.get("Rhodium") * rhd;
+
+
+            Log.i(TAG, CLASS + "\n" +
+                    goldProzentString + " \n" +
+                    silberProzentString + " \n" +
+                    pldProzentString + " \n" +
+                    ptProzentString + " \n" +
+                    rhdProzentString + " \n");
+
+            Double t1 = total;
+            Double t2 = countAu + countAg + countPld + countPt + countRh;
+            Double t3 = totalValue + coins;
+            Log.i(TAG, CLASS + t1 + " = " + t2 + " = " + " " + t3 + " = " + coins);
+
+            // set in view
+            equityGoldProzent.setText(goldProzentString);
+            equitySilberProzent.setText(silberProzentString);
+            equityPalladiumProzent.setText(pldProzentString);
+            equityPlatinProzent.setText(ptProzentString);
+            equityRhodiumProzent.setText(rhdProzentString);
+
+        }
 
         cursor.close();
 
@@ -501,19 +522,6 @@ public class EquityActivity extends AppCompatActivity {
 
         }
 
-    }
-
-    // calculate kroegerrand
-    private String calcKroegerRand(String valueProGramm){
-        String result = "";
-
-        valueProGramm = setDot(valueProGramm);
-        double valuePerGroger = Double.parseDouble(valueProGramm) * 31.10;
-
-        Log.i(TAG, "Krögerrand 31.10gr: " + valuePerGroger);
-
-        // return string in double digit format
-        return result = new DecimalFormat("##.##").format(valuePerGroger);
     }
 
     // check if device has internet connection or if is filghtmode

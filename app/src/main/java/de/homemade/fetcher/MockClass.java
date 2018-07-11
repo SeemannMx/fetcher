@@ -47,7 +47,6 @@ public class MockClass {
     // mock data in database table portfolio
     public void mockDataPortfolio(){
 
-
         dbHelper.insertDataIntoPortfolioTable("20000","11.05.1984");
         dbHelper.insertDataIntoPortfolioTable("15000","12.05.1984");
         dbHelper.insertDataIntoPortfolioTable("15000","13.05.1984");

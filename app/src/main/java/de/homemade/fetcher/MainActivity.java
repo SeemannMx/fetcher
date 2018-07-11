@@ -155,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
     public void onRestart(){
         super.onRestart();
         INIT_FLAG = false;
+        // Todo delete content of database tables in teststage
+        dbHelper.deletePriceTable();
+        dbHelper.deletePortfolioTable();
     }
     // initalize all views
     private void initAllViews(){
@@ -379,19 +382,6 @@ public class MainActivity extends AppCompatActivity {
                 palladiumMunze = ePalladiumMunze.text();
                 platinMunze = ePlatinMunze.text();
 
-                /*
-                try {
-
-                    Document doc = Jsoup.connect("http://www.boerse-frankfurt.de/rohstoffe/nachrichten/").get();
-                    Elements links = doc.select("tbody");
-                    newsMain = links.text();
-
-                    // Log.i(TAG,CLASS + " News Link Text  " + links.text());
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                */
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -466,10 +456,17 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
 
             }
+
         }
         // find and replace komme with dot
         private String setDot(String stringWithKomma){
-            return stringWithKomma = stringWithKomma.replace(",",".");
+
+            stringWithKomma = stringWithKomma.replace(",",".");
+
+            double value = Double.parseDouble(stringWithKomma) / 31.1;
+            stringWithKomma = String.valueOf(value);
+
+            return stringWithKomma;
         }
 
         // fill integer list from converted string list
@@ -483,7 +480,7 @@ public class MainActivity extends AppCompatActivity {
             stringList.add(3,pl);
             stringList.add(4,rh);
 
-            stringList = calculator.convertToKroegerRand(stringList);
+            stringList = calculator.convert(stringList);
 
             gold = stringList.get(0);
             silber = stringList.get(1);
