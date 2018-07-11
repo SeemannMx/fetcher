@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:paddingBottom="@dimen/equityMiniPadding"
-                android:text="Au"
+                android:text="@string/Gold"
                />
             <TextView
                 android:id="@+id/equityGoldProzent"
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:paddingBottom="@dimen/equityMiniPadding"
-                android:text="Ag"
+                android:text="@string/Silber"
                 />
             <TextView
                 android:id="@+id/equitySilberProzent"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:paddingBottom="@dimen/equityMiniPadding"
-                android:text="Pd"
+                android:text="@string/Palladium"
                 />
             <TextView
                 android:id="@+id/equityPalladiumProzent"
@@ -194,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:paddingBottom="@dimen/equityMiniPadding"
-                android:text="Pt"
+                android:text="@string/Platin"
                 />
             <TextView
                 android:id="@+id/equityPlatinProzent"
@@ -217,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:paddingBottom="@dimen/equityMiniPadding"
-                android:text="Rh"
+                android:text="@string/Rhodium"
                 />
             <TextView
                 android:id="@+id/equityRhodiumProzent"

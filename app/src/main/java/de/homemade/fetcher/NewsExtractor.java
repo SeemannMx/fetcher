@@ -15,6 +15,7 @@ public class NewsExtractor {
     String TAG = "FETCHER ";
     String CLASS = "NEWS ";
 
+    // replace umlauts
     String ue = "&#252;";
     String Ue = "&#220;";
     String oe = "&#246;";

@@ -143,7 +143,7 @@ public class EquityActivity extends AppCompatActivity {
     private void createPortfolio(){
 
         // todo remove reducer in productive stage
-        double reducer = 107.45;
+        double reducer = 1;
 
         // Gold in Gramm 1 + 100 + 25 + 50
         portfolio.put("Gold", 176.00            /reducer);
@@ -183,16 +183,16 @@ public class EquityActivity extends AppCompatActivity {
         portfolio.put("Platinmuenze", 1.00      /reducer);
 
         // todo include purchased value in productive stage
-        // purchasedValue = "37332,75 €";
-        // dataPurchased.setText(purchasedValue);
-        // tax = "3918,47 €";
-        // dataTax.setText(tax);
+        purchasedValue = "37332,75 €";
+        dataPurchased.setText(purchasedValue);
+        tax = "3918,47 €";
+        dataTax.setText(tax);
 
         // todo remove in productive stage
-        String fakevalue = "11.11 €";
-        dataPurchased.setText(fakevalue);
-        String fakeTax = "3.14€";
-        dataTax.setText(fakeTax);
+        // String fakevalue = "11.11 €";
+        // dataPurchased.setText(fakevalue);
+        // String fakeTax = "3.14€";
+        // dataTax.setText(fakeTax);
 
         // Log portfolio
         Gson g = new Gson();
@@ -319,14 +319,14 @@ public class EquityActivity extends AppCompatActivity {
             dataPresentValue.setText(totalEquity);
             layouTable.setClickable(true);
 
+            // mock data
+            test.mockDataPortfolio();
+
             Date today = Calendar.getInstance().getTime();
             String date = new SimpleDateFormat("dd.MM.yyyy").format(today);
 
             // set test data
             dbHelper.insertDataIntoPortfolioTable(totalEquity, date);
-
-            // mock data
-            test.mockDataPortfolio();
 
             cursor.close();
 
@@ -340,7 +340,7 @@ public class EquityActivity extends AppCompatActivity {
 
     // find and replace komme with dot
     private String setDot(String stringWithKomma){
-        return stringWithKomma = stringWithKomma.replace(",",".");
+        return stringWithKomma.replace(",",".");
     }
 
     // shift to diagramm activoty on click of table

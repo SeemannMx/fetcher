@@ -4,11 +4,11 @@
     <string name="costs">Fetcher</string>
     <string name="total">Fetcher</string>
 
-    <string name="Gold">Gold</string>
-    <string name="Silber">Silber</string>
-    <string name="Palladium">Palladium</string>
-    <string name="Platin">Platin</string>
-    <string name="Rhodium">Rhodium</string>
+    <string name="Gold">Au</string>
+    <string name="Silber">Ag</string>
+    <string name="Palladium">Pld</string>
+    <string name="Platin">Pl</string>
+    <string name="Rhodium">Rh</string>
 
     <string name="Coins">Coins</string>
 </resources>

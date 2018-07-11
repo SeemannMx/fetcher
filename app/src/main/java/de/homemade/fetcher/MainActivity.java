@@ -29,6 +29,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     Timestamp timestamp;
     MockClass test;
 
+    boolean INIT_FLAG;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -121,11 +123,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        INIT_FLAG = true;
         context = getApplicationContext();
         dbHelper = DatabaseHelper.getInstance(context);
         timestamp = new Timestamp();
 
-        // delete content of database tables
+
+        // Todo delete content of database tables in teststage
         dbHelper.deletePriceTable();
         dbHelper.deletePortfolioTable();
 
@@ -141,6 +145,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        INIT_FLAG = false;
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        INIT_FLAG = false;
+    }
     // initalize all views
     private void initAllViews(){
 
@@ -303,6 +318,8 @@ public class MainActivity extends AppCompatActivity {
     public class FetchAsyncTask extends AsyncTask {
 
         Activity activity;
+        ArrayList<String> stringList;
+        Calculator calculator;
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -391,12 +408,15 @@ public class MainActivity extends AppCompatActivity {
             String correctedGoldMark = goldMark.substring(0, Math.min(goldMark.length(), 7));
             goldMark = correctedGoldMark;
 
+            // Todo include converted new prices in decimal format
+            convertDataToKroegerRand(gold,silber,palladium,platin,rhodium);
+
             // Barren Preis pro gramm
-            dataGold.setText(gold  + " €");
-            dataSilber.setText(silber + " €");
-            dataPalladium.setText(palladium + " €");
-            dataPlatin.setText(platin + " €");
-            dataRhodium.setText(rhodium + " €");
+            dataGold.setText(gold + "€");
+            dataSilber.setText(silber + "€");
+            dataPalladium.setText(palladium + "€");
+            dataPlatin.setText(platin + "€");
+            dataRhodium.setText(rhodium + "€");
 
             // Muenzen
             dataGoldmark.setText(goldMark + " €");
@@ -439,14 +459,38 @@ public class MainActivity extends AppCompatActivity {
                     setDot(platinMunze),
                     date);
 
-            Toast toast = Toast.makeText(context, "async task completed", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            if(INIT_FLAG) {
 
+                Toast toast = Toast.makeText(context, "async task completed", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+
+            }
         }
         // find and replace komme with dot
         private String setDot(String stringWithKomma){
             return stringWithKomma = stringWithKomma.replace(",",".");
+        }
+
+        // fill integer list from converted string list
+        private void convertDataToKroegerRand(String au, String ag, String pld, String pl, String rh){
+            calculator = new Calculator();
+            stringList = new ArrayList<String>();
+
+            stringList.add(0,au);
+            stringList.add(1,ag);
+            stringList.add(2,pld);
+            stringList.add(3,pl);
+            stringList.add(4,rh);
+
+            stringList = calculator.convertToKroegerRand(stringList);
+
+            gold = stringList.get(0);
+            silber = stringList.get(1);
+            palladium = stringList.get(2);
+            platin = stringList.get(3);
+            rhodium = stringList.get(4);
+
         }
     }
 

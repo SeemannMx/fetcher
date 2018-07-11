@@ -9,7 +9,7 @@
     <dimen name="textField"> 12sp </dimen>
     <dimen name="imageView"> 60dp </dimen>
     <dimen name="textView"> 80dp </dimen>
-    <dimen name="marginRight"> 32dp </dimen>
+    <dimen name="marginRight"> 24dp </dimen>
     <dimen name="marginLeft"> 12dp </dimen>
     <dimen name="mainPadding"> 24dp </dimen>
     <dimen name="mainMargin"> 24dp </dimen>
