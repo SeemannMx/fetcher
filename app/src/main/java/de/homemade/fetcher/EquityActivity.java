@@ -256,27 +256,30 @@ public class EquityActivity extends AppCompatActivity {
 
             cursor.moveToLast();
             // Value of Ingots
-            double goldPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)));
+            double goldPerGramm = (Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_1)))) / 31.1;
             double goldTresure = goldPerGramm * portfolio.get("Gold");
+
+            Log.i(TAG, "Price Per Gramm:               " + goldPerGramm);
+            Log.i(TAG, "Gold in Gramm:               " + portfolio.get("Gold"));
 
             String tempGl = df.format(goldTresure);
             Log.i(TAG, "Gold Tresure:               " + tempGl);
 
-            double silberPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)));
+            double silberPerGramm = (Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_2)))) / 31.1;
             double silberTresure = silberPerGramm * portfolio.get("Silber");
             Log.i(TAG, "Silber Tresure:             " + silberTresure);
 
-            double palladiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3)));
+            double palladiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_3))) / 31.1;
             double palladiumTresure = palladiumPerGramm * portfolio.get("Palladium");
             Log.i(TAG, "Palladium Tresure:          " + palladiumTresure);
 
-            double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4)));
+            double platinPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_4))) / 31.1;
             double platinTresure = platinPerGramm * portfolio.get("Platin");
 
             String tempPL = df.format(platinTresure);
             Log.i(TAG, "Platin Tresure:             " + tempPL);
 
-            double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5)));
+            double rhodiumPerGramm = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_5))) / 31.1;
             double rhodiumTresure = rhodiumPerGramm * portfolio.get("Rhodium");
 
             String tempRh = df.format(rhodiumTresure);
@@ -433,11 +436,11 @@ public class EquityActivity extends AppCompatActivity {
             Log.i(TAG, CLASS + t1 + " = " + t2 + " = " + " " + t3 + " = " + coins);
 
             // set in view
-            equityGoldProzent.setText(goldProzentString);
-            equitySilberProzent.setText(silberProzentString);
-            equityPalladiumProzent.setText(pldProzentString);
-            equityPlatinProzent.setText(ptProzentString);
-            equityRhodiumProzent.setText(rhdProzentString);
+            equityGoldProzent.setText(goldProzentString + "%");
+            equitySilberProzent.setText(silberProzentString + "%");
+            equityPalladiumProzent.setText(pldProzentString + "%");
+            equityPlatinProzent.setText(ptProzentString + "%");
+            equityRhodiumProzent.setText(rhdProzentString + "%");
 
         }
 

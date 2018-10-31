@@ -33,7 +33,8 @@ public class NewsExtractor {
         newsString.replaceAll(".", "/");
 
         // regEx to macht date in String
-        Matcher matcher = Pattern.compile("(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d").matcher(newsString);
+        Matcher matcher = Pattern.compile("(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d")
+                .matcher(newsString);
         Log.i(TAG, CLASS + " dots exchanged with dash " + newsString);
 
         int count = 0;

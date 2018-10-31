@@ -334,10 +334,13 @@ public class MainActivity extends AppCompatActivity {
 
                 // 1g handelsfaehiges Gold
                 Elements eGold = document.select("[title=00001000-mail]");
+                Log.i(TAG, CLASS + "eGold " + eGold.text());
 
                 // 1 x Goldmark
                 Document documentEgold = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreis-goldmuenzen/").get();
                 Elements eGoldMark = documentEgold.select("[title=10000101-otc]");
+                Log.i(TAG, CLASS + "eGoldMark " + eGoldMark.text());
+
 
                 // 1 x Goldmunze !!not valid
                 // Document documentEgoldmuenze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreis-goldmuenzen/").get();
@@ -346,42 +349,53 @@ public class MainActivity extends AppCompatActivity {
                 // 1g handelsfaehiges Silber
                 Document documentEsilber = Jsoup.connect("https://www.scheideanstalt.de/silber-ankaufskurse/").get();
                 Elements eSilber = documentEsilber.select("[title=10201714-otc]");
+                Log.i(TAG, CLASS + "eAg " + eSilber.text());
+
 
                 // 1 x Silbermuenze 1oz = 31,10gr (Feinunze) <span title=10202339-otc">13,75</span>
                 Document documentEsilberMunzen = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-silbermuenzen/").get();
                 Elements eSilberMunze = documentEsilberMunzen.select("[title=10202339-otc]");
+                Log.i(TAG, CLASS + "eAgMz " + eSilberMunze.text());
+
 
                 // 1g Palladium
                 Document documentEpalladium = Jsoup.connect("https://www.scheideanstalt.de/palladium-ankaufskurse/").get();
                 Elements ePalladium = documentEpalladium.select("[title=00001300-mail]");
+                Log.i(TAG, CLASS + "ePld " + ePalladium.text());
+
 
                 // 1 x Palladium Muenze 1oz = 31,10gr (Feinunze)
-                Document documentEpalladiumMunze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-palladiummuenzen/").get();
-                Elements ePalladiumMunze = documentEpalladiumMunze.select("[title=04020120-otc]");
+                // Document documentEpalladiumMunze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-palladiummuenzen/").get();
+                // Elements ePalladiumMunze = documentEpalladiumMunze.select("[title=04020120-otc]");
 
                 // 1 x Platin
-                Document documentEplatin = Jsoup.connect("https://www.scheideanstalt.de/platin-ankaufskurse/").get();
-                Elements ePlatin = documentEplatin.select("[title=00001200-otc]");
+                // Document documentEplatin = Jsoup.connect("https://www.scheideanstalt.de/platin-ankaufskurse/").get();
+                // Elements ePlatin = documentEplatin.select("[title=10201752-mail]");
+                // Log.i(TAG, CLASS + "ePlt " + ePlatin.text());
+
 
                 // 1 x Platin Muenze 1oz = 31,10gr (Feinunze)
-                Document documentEplatinMunze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-platinmuenzen/").get();
-                Elements ePlatinMunze = documentEplatinMunze.select("[title=10000068-otc]");
+                // Document documentEplatinMunze = Jsoup.connect("https://www.scheideanstalt.de/ankaufspreise-platinmuenzen/").get();
+                // Elements ePlatinMunze = documentEplatinMunze.select("[title=10000068-otc]");
 
                 // 1g Rhodium 1oz = 31,10gr (Feinunze)
-                Document documentErhodium = Jsoup.connect("https://www.scheideanstalt.de/rhodium-ankaufskurse/").get();
-                Elements eRhodium = documentErhodium.select("[title=00001600-mail]");
+                // Document documentErhodium = Jsoup.connect("https://www.scheideanstalt.de/rhodium-ankaufskurse/").get();
+                // Elements eRhodium = documentErhodium.select("[title=00001600-mail]");
+                // Log.i(TAG, CLASS + "eRH " + eRhodium.text());
 
+
+                // stand 30.10.2018
                 gold = eGold.text();
                 silber = eSilber.text();
                 palladium = ePalladium.text();
-                platin = ePlatin.text();
-                rhodium = eRhodium.text();
+                platin = "23,17";
+                rhodium = "57,74";
 
-                goldMark = eGoldMark.text();
-                goldMunze = "150.00";
+                goldMark = "412,65";
+                goldMunze = "150,00";
                 silberMark = eSilberMunze.text();
-                palladiumMunze = ePalladiumMunze.text();
-                platinMunze = ePlatinMunze.text();
+                palladiumMunze = "31,12";
+                platinMunze = "23,17";
 
 
             } catch (IOException e) {
@@ -415,6 +429,7 @@ public class MainActivity extends AppCompatActivity {
             dataPalladiummark.setText(palladiumMunze + " €");
             dataPlatinmark.setText(platinMunze + " €");
 
+            /*
             Log.i(TAG, CLASS + " \n" +
                     "Gold:          " + gold + " " + "\n" +
                     "Silber:        " + silber + " " + "\n" +
@@ -426,6 +441,7 @@ public class MainActivity extends AppCompatActivity {
                     "Silbermark:    " + silberMark + " " + "\n" +
                     "Palladiummark: " + palladiumMunze + " " + "\n" +
                     "Platinmark:    " + platinMunze);
+            */
 
             // Create an instance of SimpleDateFormat used for formatting
             // the string representation of date (month/day/year)
@@ -462,16 +478,25 @@ public class MainActivity extends AppCompatActivity {
         // find and replace komme with dot
         private String setDot(String stringWithKomma){
 
-            stringWithKomma = stringWithKomma.replace(",",".");
+            // Log.i(TAG, CLASS + " set Dot method in " + stringWithKomma);
 
-            double value = Double.parseDouble(stringWithKomma) / 31.1;
-            stringWithKomma = String.valueOf(value);
+            if(stringWithKomma.contains(",")){
+                stringWithKomma = stringWithKomma.replace(",",".");
 
+                double value = Double.parseDouble(stringWithKomma) / 31.1;
+                stringWithKomma = String.valueOf(value);
+
+                // Log.i(TAG, CLASS + " set Dot method out " + stringWithKomma);
+            }
             return stringWithKomma;
         }
 
         // fill integer list from converted string list
         private void convertDataToKroegerRand(String au, String ag, String pld, String pl, String rh){
+
+            Log.i(TAG, CLASS + "convert Au " + au);
+
+
             calculator = new Calculator();
             stringList = new ArrayList<String>();
 
@@ -482,6 +507,8 @@ public class MainActivity extends AppCompatActivity {
             stringList.add(4,rh);
 
             stringList = calculator.convert(stringList);
+
+            Log.i(TAG, CLASS + "convert Au " + stringList.get(0));
 
             gold = stringList.get(0);
             silber = stringList.get(1);
